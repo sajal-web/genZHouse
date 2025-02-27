@@ -3,7 +3,17 @@
     <style name="Base.Theme.GenZHouse" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
 
     <style name="Theme.GenZHouse" parent="Base.Theme.GenZHouse" />
+
+
+    <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
+        <item name="windowSplashScreenAnimationDuration">200</item>
+        <item name="postSplashScreenTheme">@style/Base.Theme.GenZHouse</item>
+    </style>
+
 </resources>

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorSecondary"
+    tools:context=".ui.welcome.WelcomeActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/welcomeSmallText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="Hey there,"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/welcomeMainText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:text="Welcome to\nGenZHouse!"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/welcomeSmallText" />
+
+            <ImageView
+                android:id="@+id/illustrationImage"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/housing_illustration"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/welcomeMainText"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/roolLookingIllustrator"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="60dp"
+                android:layout_marginBottom="-30dp"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/room_searching_illustator"
+                app:layout_constraintBottom_toTopOf="@id/mainCard"
+                app:layout_constraintTop_toBottomOf="@id/welcomeMainText" />
+
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/mainCard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="12dp"
+                app:cardElevation="0dp"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="@color/colorSecondary"
+                app:cardCornerRadius="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/roolLookingIllustrator">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:paddingBottom="32dp">
+
+                    <TextView
+                        android:id="@+id/questionText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
+                        android:text="What are you looking up for?"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/subtitleText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="4dp"
+                        android:text="Start with this search, can be changed later"
+                        android:textColor="@android:color/darker_gray"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/questionText" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/homeSearchCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginEnd="24dp"
+                        app:cardBackgroundColor="@android:color/white"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintTop_toBottomOf="@id/subtitleText">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp">
+
+                            <ImageView
+                                android:id="@+id/homeSearchIcon"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/home_search_icon"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/homeSearchTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="Home Search"
+                                android:textColor="@android:color/black"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toEndOf="@id/homeSearchIcon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/homeSearchSubtitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="Buy, Rent, PG &amp; Commercial"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="13sp"
+                                app:layout_constraintStart_toEndOf="@id/homeSearchIcon"
+                                app:layout_constraintTop_toBottomOf="@id/homeSearchTitle" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/payOnCreditCard"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        app:cardBackgroundColor="@android:color/white"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="2dp"
+                        app:layout_constraintTop_toBottomOf="@id/homeSearchCard">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp">
+
+                            <ImageView
+                                android:id="@+id/payOnCreditIcon"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/payOnCreditTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="Pay on Credit"
+                                android:textColor="@android:color/black"
+                                android:textSize="16sp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toEndOf="@id/payOnCreditIcon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/payOnCreditSubtitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="Pay rent, education fees &amp; more with Credit Card"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="14sp"
+                                app:layout_constraintStart_toEndOf="@id/payOnCreditIcon"
+                                app:layout_constraintTop_toBottomOf="@id/payOnCreditTitle" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/sellRentCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:cardBackgroundColor="@android:color/white"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintTop_toBottomOf="@id/payOnCreditCard">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
+                            android:padding="12dp">
+
+                            <ImageView
+                                android:id="@+id/sellRentIcon"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/sell_rent_icon"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/sellRentTitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="Sell / Rent your Property"
+                                android:textColor="@android:color/black"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toEndOf="@id/sellRentIcon"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/freeTag"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:paddingStart="8dp"
+                                android:paddingTop="2dp"
+                                android:paddingEnd="8dp"
+                                android:paddingBottom="2dp"
+                                android:text="FREE"
+                                android:background="@color/red"
+                                android:textColor="@android:color/white"
+                                android:textSize="10sp"
+                                android:textStyle="bold"
+                                app:layout_constraintBottom_toBottomOf="@id/sellRentTitle"
+                                app:layout_constraintStart_toEndOf="@id/sellRentTitle"
+                                app:layout_constraintTop_toTopOf="@id/sellRentTitle" />
+
+                            <TextView
+                                android:id="@+id/sellRentSubtitle"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="16dp"
+                                android:text="Get verified enquiries in 24 hours"
+                                android:textColor="@android:color/darker_gray"
+                                android:textSize="13sp"
+                                app:layout_constraintStart_toEndOf="@id/sellRentIcon"
+                                app:layout_constraintTop_toBottomOf="@id/sellRentTitle" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
