@@ -10,16 +10,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.App.SplashScreen"
+        android:theme="@style/Base.Theme.GenZHouse"
         tools:targetApi="31">
         <activity
+            android:name=".ui.sellrentproperty.SellRentProperty"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.App.SplashScreen"
             android:exported="false" />
         <activity
             android:name=".ui.welcome.WelcomeActivity"
-            android:theme="@style/Theme.App.SplashScreen"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.App.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

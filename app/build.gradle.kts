@@ -6,7 +6,9 @@ plugins {
 android {
     namespace = "com.example.genzhouse"
     compileSdk = 35
-
+    buildFeatures {
+        viewBinding = true
+    }
     defaultConfig {
         applicationId = "com.example.genzhouse"
         minSdk = 24
