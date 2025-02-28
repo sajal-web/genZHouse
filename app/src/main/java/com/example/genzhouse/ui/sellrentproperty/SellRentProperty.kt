@@ -1,5 +1,6 @@
 package com.example.genzhouse.ui.sellrentproperty
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -8,6 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.genzhouse.R
 import com.example.genzhouse.databinding.ActivitySellRentPropertyBinding
 import com.example.genzhouse.databinding.ActivityWelcomeBinding
+import com.example.genzhouse.ui.propertydetails.PropertyDetails
 
 class SellRentProperty : AppCompatActivity() {
     lateinit var activitySellRentPropertyBinding: ActivitySellRentPropertyBinding
@@ -40,6 +42,10 @@ class SellRentProperty : AppCompatActivity() {
 
         activitySellRentPropertyBinding.backButton.setOnClickListener{
             onBackPressedDispatcher.onBackPressed()
+        }
+
+        activitySellRentPropertyBinding.nextButton.setOnClickListener {
+            startActivity(Intent(this,PropertyDetails::class.java))
         }
     }
 }
