@@ -3,59 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.propertydetails.PropertyDetails"
-    android:background="#FFFFFF">
+    tools:context=".ui.propertydetails.PropertyDetails">
 
     <!-- Toolbar with back button and title -->
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#5E35B1"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:id="@+id/backButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/arrow_back"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Property Details"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+        android:background="?attr/colorPrimary"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Property Details"
+        app:titleTextColor="@android:color/white"
+        app:navigationIcon="@drawable/arrow_back"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <!-- Progress indicator -->
         <FrameLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_gravity="end|center_vertical">
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:progress="30"
-                android:progressTint="#FFA500" />
-
-            <TextView
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:text="30%"
-                android:textColor="#FFFFFF"
-                android:textSize="12sp" />
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progressBar"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:progress="30"
+                    app:trackColor="@color/white"
+                    app:trackThickness="4dp"
+                    app:indicatorColor="@color/green"
+                    app:trackCornerRadius="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30%"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@id/progressBar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="8dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </FrameLayout>
-    </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <!-- Main Content -->
     <ScrollView
@@ -75,118 +77,162 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Property Type"
-                android:textColor="#757575"
-                android:textSize="14sp" />
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <LinearLayout
+                android:id="@+id/properyLayout"
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
+                android:layout_height="100dp"
+                android:padding="5dp"
+                android:background="@color/white"
                 android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <!-- Apartment -->
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardApartment"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:background="#F3EEFB"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    android:backgroundTint="@color/colorSecondary"
+                android:background="@drawable/card_selected_background"
+                android:clickable="true"
+                android:focusable="true">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_apartment"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Apartment"
-                        android:textColor="#5E35B1"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_apartment"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Apartment"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- Independent Floor -->
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardIndependentFloor"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:elevation="1dp">
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:background="@drawable/card_selected_background"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_floor"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Independent\nFloor"
-                        android:textAlignment="center"
-                        android:textColor="#757575"
-                        android:textSize="11sp" />
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_floor"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Independent\nFloor"
+                            android:textAlignment="center"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- Independent House -->
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardIndependent"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:elevation="1dp">
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:background="@drawable/card_selected_background"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_house" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Independent\nHouse"
-                        android:textAlignment="center"
-                        android:textColor="#757575"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_house" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Independent\nHouse"
+                            android:textAlignment="center"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- Villa -->
-                <LinearLayout
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cardVilla"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:elevation="1dp">
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:background="@drawable/card_selected_background"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_villa" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="12dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Villa"
-                        android:textColor="#757575"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_villa" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Villa"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
             <!-- Building/Project/Society Section -->
@@ -194,57 +240,57 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Building/ Project/ Society (Mandatory)"
-                android:textColor="#757575"
-                android:textSize="14sp" />
+                android:text="Building/ Project/ Society (Optional)"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/buildingEditText"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@null"
-                android:hint="ABS Green Valley, Kaikhali"
-                android:inputType="text"
-                android:padding="8dp"
-                android:textSize="14sp" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E0E0E0" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/buildingEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Building / Project / Society"
+                    android:inputType="text"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Locality Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Enter Locality"
-                android:textColor="#757575"
-                android:textSize="14sp" />
+                android:text="Locality"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-            <EditText
-                android:id="@+id/localityEditText"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:background="@null"
-                android:hint="Kaikhali"
-                android:inputType="text"
-                android:padding="8dp"
-                android:textSize="14sp" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E0E0E0" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/localityEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Locality"
+                    android:inputType="text"
+                    android:textSize="14sp" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="Locality is updated as per building information in our database"
-                android:textColor="#9E9E9E"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="12sp" />
 
             <!-- BHK Section -->
@@ -253,115 +299,315 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="BHK"
-                android:textColor="#757575"
-                android:textSize="14sp" />
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-            <LinearLayout
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                android:scrollbars="none"
+                android:fillViewport="true">
 
-                <!-- 1 -->
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:background="#F3EEFB"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp">
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
 
-                    <TextView
+                    <!-- 1 RK -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/oneRk"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1"
-                        android:textColor="#5E35B1"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                <!-- 1 BHK -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:elevation="1dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
 
-                    <TextView
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1 RK"
+                                android:textColor="?attr/colorOnSurface"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 1 BHK -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/oneBhk"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1 BHK"
-                        android:textColor="#757575"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                <!-- 1.5 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:elevation="1dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
 
-                    <TextView
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1 BHK"
+                                android:textColor="?attr/colorOnSurface"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 1.5 BHK -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/onepfiveBhk"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="1.5"
-                        android:textColor="#757575"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                <!-- 2 BHK -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:elevation="1dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
 
-                    <TextView
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1.5 BHK"
+                                android:textColor="?attr/colorOnSurface"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 2 BHK -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/twoBhk"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2 BHK"
-                        android:textColor="#757575"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        android:clickable="true"
+                        android:focusable="true">
 
-                <!-- 2.5 -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="0dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    android:elevation="1dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
 
-                    <TextView
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2 BHK"
+                                android:textColor="?attr/colorOnSurface"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 2.5 BHK -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/twopfiveBhk"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2.5"
-                        android:textColor="#757575"
-                        android:textSize="14sp" />
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2.5 BHK"
+                                android:textColor="?attr/colorOnSurface"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 3 BHK -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/threeBhk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3 BHK"
+                                android:textColor="?attr/colorOnSurface"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 3.5 BHK -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/threepfiveBhk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3.5 BHK"
+                                android:textColor="?attr/colorOnSurface"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 4 BHK -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/fourBhk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="4 BHK"
+                                android:textColor="?attr/colorOnSurface"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 4.5 BHK -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/fourpfiveBhk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="4.5 BHK"
+                                android:textColor="?attr/colorOnSurface"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 5 BHK -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/fiveBhk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="8dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="12dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="5 BHK"
+                                android:textColor="?attr/colorOnSurface"
+                                android:textSize="14sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
                 </LinearLayout>
-            </LinearLayout>
+            </HorizontalScrollView>
+
 
             <!-- Built Up Area Section -->
             <TextView
@@ -369,39 +615,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Built Up Area"
-                android:textColor="#757575"
-                android:textSize="14sp" />
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                <EditText
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/areaEditText"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="455"
+                    android:hint="Area (in sq. ft.)"
                     android:inputType="number"
-                    android:padding="8dp"
                     android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Sq. ft."
-                    android:textColor="#757575"
-                    android:textSize="14sp" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#E0E0E0" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Furnish Type Section -->
             <TextView
@@ -409,8 +640,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Furnish Type"
-                android:textColor="#757575"
-                android:textSize="14sp" />
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -419,103 +651,136 @@
                 android:orientation="horizontal">
 
                 <!-- Fully Furnished -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/fullyFurnished"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:background="#F3EEFB"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="12dp">
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:background="@drawable/card_selected_background"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Fully Furnished"
-                        android:textColor="#5E35B1"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:src="@drawable/ic_fully_furnished"
+                            android:layout_marginEnd="5dp"
+                            android:layout_height="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fully Furnished"
+                            android:textColor="@color/black"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- Semi Furnished -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/semiFurnished"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="12dp"
-                    android:elevation="1dp">
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:background="@drawable/card_selected_background"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Semi Furnished"
-                        android:textColor="#757575"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:src="@drawable/ic_semi_furnished"
+                            android:layout_height="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Semi Furnished"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
                 <!-- Unfurnished -->
-                <LinearLayout
-                    android:layout_width="0dp"
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/unfurnished"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="#FFFFFF"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="12dp"
-                    android:elevation="1dp">
+                    android:layout_marginEnd="8dp"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="0dp"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:background="@drawable/card_selected_background"
+                    android:clickable="true"
+                    android:focusable="true">
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="12dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Unfurnished"
-                        android:textColor="#757575"
-                        android:textSize="12sp" />
-                </LinearLayout>
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:src="@drawable/ic_unfurnished"
+                            android:layout_height="20dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:text="Unfurnished"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
 
             <!-- Share listing checkbox -->
-            <CheckBox
+            <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/shareCheckBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Share listing information with agents"
-                android:textColor="#757575"
+                android:textColor="?attr/colorOnSurface"
                 android:textSize="14sp" />
 
         </LinearLayout>
     </ScrollView>
 
     <!-- Next Button -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/nextButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:backgroundTint="#4CAF50"
+        android:backgroundTint="?attr/colorPrimary"
         android:padding="12dp"
         android:text="Next: Add Price Details"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="@android:color/white"
+        app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
