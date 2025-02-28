@@ -10,7 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.genzhouse.MainActivity
 import com.example.genzhouse.R
 import com.example.genzhouse.databinding.ActivityWelcomeBinding
-import com.example.genzhouse.ui.sellrentproperty.SellRentProperty
+import com.example.genzhouse.ui.welcome.sellrentproperty.SellRentProperty
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 

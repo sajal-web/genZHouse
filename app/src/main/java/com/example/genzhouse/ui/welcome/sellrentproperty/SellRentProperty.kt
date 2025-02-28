@@ -1,4 +1,4 @@
-package com.example.genzhouse.ui.sellrentproperty
+package com.example.genzhouse.ui.welcome.sellrentproperty
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.genzhouse.R
 import com.example.genzhouse.databinding.ActivitySellRentPropertyBinding
 import com.example.genzhouse.databinding.ActivityWelcomeBinding
-import com.example.genzhouse.ui.propertydetails.PropertyDetails
+import com.example.genzhouse.ui.welcome.propertydetails.PropertyDetails
 
 class SellRentProperty : AppCompatActivity() {
     lateinit var activitySellRentPropertyBinding: ActivitySellRentPropertyBinding
@@ -45,7 +45,7 @@ class SellRentProperty : AppCompatActivity() {
         }
 
         activitySellRentPropertyBinding.nextButton.setOnClickListener {
-            startActivity(Intent(this,PropertyDetails::class.java))
+            startActivity(Intent(this, PropertyDetails::class.java))
         }
     }
 }

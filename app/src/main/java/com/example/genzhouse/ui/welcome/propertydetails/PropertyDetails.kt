@@ -1,11 +1,13 @@
-package com.example.genzhouse.ui.propertydetails
+package com.example.genzhouse.ui.welcome.propertydetails
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.genzhouse.R
 import com.example.genzhouse.databinding.ActivityPropertyDetailsBinding
+import com.example.genzhouse.ui.welcome.pricedetails.PriceDetails
 import com.google.android.material.card.MaterialCardView
 
 class PropertyDetails : AppCompatActivity() {
@@ -28,6 +30,10 @@ class PropertyDetails : AppCompatActivity() {
         setupFurnishTypeCards()
         // Set default selection
         selectCard(binding.cardIndependent, CardType.PROPERTY)
+
+        binding.nextButton.setOnClickListener{
+            startActivity(Intent(this,PriceDetails::class.java))
+        }
     }
 
     private fun initToolbar() {
