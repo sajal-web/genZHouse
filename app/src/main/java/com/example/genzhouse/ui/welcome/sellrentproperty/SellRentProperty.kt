@@ -12,7 +12,7 @@ import com.example.genzhouse.databinding.ActivityWelcomeBinding
 import com.example.genzhouse.ui.welcome.propertydetails.PropertyDetails
 
 class SellRentProperty : AppCompatActivity() {
-    lateinit var activitySellRentPropertyBinding: ActivitySellRentPropertyBinding
+    private lateinit var activitySellRentPropertyBinding: ActivitySellRentPropertyBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activitySellRentPropertyBinding = ActivitySellRentPropertyBinding.inflate(layoutInflater)

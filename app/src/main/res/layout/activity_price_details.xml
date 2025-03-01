@@ -16,7 +16,47 @@
         app:title="Price Details"
         app:titleTextColor="@android:color/white"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <!-- Progress indicator -->
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_gravity="end|center_vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:id="@+id/progressBar"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:progress="30"
+                    app:trackColor="@color/white"
+                    app:trackThickness="4dp"
+                    app:indicatorColor="@color/green"
+                    app:trackCornerRadius="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30%"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toEndOf="@id/progressBar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginStart="8dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </FrameLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
 
     <!-- Main Content Card -->
     <androidx.cardview.widget.CardView
@@ -50,8 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                app:boxStrokeColor="@color/black"
-                app:hintEnabled="true">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/monthlyRentEditText"
@@ -63,6 +102,34 @@
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <!-- Available From -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Available From"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/availableFromLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/availableFromEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Select date"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:longClickable="false"
+                    android:drawableEnd="@drawable/ic_calender"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+            </com.google.android.material.textfield.TextInputLayout>
             <!-- Security Deposit -->
             <TextView
                 android:layout_width="wrap_content"
@@ -92,7 +159,6 @@
                     android:background="@drawable/card_selected_background"
                     app:strokeWidth="0dp"
                     app:cardElevation="0dp"
-                    app:strokeColor="@color/grey"
                     android:clickable="true"
                     android:focusable="true">
 
@@ -114,8 +180,10 @@
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
                     app:cardCornerRadius="8dp"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/black"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:background="@drawable/card_selected_background"
+                    app:strokeWidth="0dp"
+                    app:cardElevation="0dp"
                     android:clickable="true"
                     android:focusable="true">
 
@@ -131,14 +199,16 @@
 
                 <!-- 2 Months -->
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/twoMonthsDepositCard"
+                    android:id="@+id/towMonthDepositCard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
                     app:cardCornerRadius="8dp"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/black"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:background="@drawable/card_selected_background"
+                    app:strokeWidth="0dp"
+                    app:cardElevation="0dp"
                     android:clickable="true"
                     android:focusable="true">
 
@@ -160,8 +230,10 @@
                     android:layout_columnWeight="1"
                     android:layout_rowWeight="1"
                     app:cardCornerRadius="8dp"
-                    app:strokeWidth="2dp"
-                    app:strokeColor="@color/black"
+                    android:backgroundTint="@color/colorSecondary"
+                    android:background="@drawable/card_selected_background"
+                    app:strokeWidth="0dp"
+                    app:cardElevation="0dp"
                     android:clickable="true"
                     android:focusable="true">
 
@@ -178,12 +250,12 @@
 
             <!-- Custom Deposit Amount (Initially Hidden) -->
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/customAmountEdittext"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="8dp"
-                app:boxStrokeColor="@color/black"
-                app:hintEnabled="true"
-                android:visibility="gone">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -194,26 +266,6 @@
                     android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <!-- Custom Deposit Amount (Initially Hidden) -->
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/customDepositInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:boxStrokeColor="@color/black"
-                app:hintEnabled="true"
-                android:visibility="gone">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/customDepositAmount"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Enter custom amount"
-                    android:inputType="number"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-            </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
