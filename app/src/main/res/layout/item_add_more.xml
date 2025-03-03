@@ -1,0 +1,17 @@
+<!-- res/layout/item_add_more.xml -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/dotted_border"
+    android:foreground="?attr/selectableItemBackgroundBorderless">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="+ Add Photo"
+        android:textColor="@color/colorPrimary"
+        android:textSize="12sp" />
+</FrameLayout>

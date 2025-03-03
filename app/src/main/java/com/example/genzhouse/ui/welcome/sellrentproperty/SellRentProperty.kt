@@ -9,7 +9,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.genzhouse.R
 import com.example.genzhouse.databinding.ActivitySellRentPropertyBinding
 import com.example.genzhouse.databinding.ActivityWelcomeBinding
-import com.example.genzhouse.ui.welcome.propertydetails.PropertyDetails
+import com.example.genzhouse.ui.welcome.sellrentproperty.propertydetails.PropertyDetails
 
 class SellRentProperty : AppCompatActivity() {
     private lateinit var activitySellRentPropertyBinding: ActivitySellRentPropertyBinding

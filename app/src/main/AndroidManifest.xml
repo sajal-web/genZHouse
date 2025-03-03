@@ -13,10 +13,19 @@
         android:theme="@style/Base.Theme.GenZHouse"
         tools:targetApi="31">
         <activity
-            android:name=".ui.welcome.pricedetails.PriceDetails"
+            android:name=".ui.welcome.sellrentproperty.uploadlisting.UploadProperty"
             android:exported="false" />
         <activity
-            android:name=".ui.welcome.propertydetails.PropertyDetails"
+            android:name=".ui.welcome.homesearch.CitySelection"
+            android:exported="false" />
+        <activity
+            android:name=".ui.welcome.homesearch.ChooseCategory"
+            android:exported="false" />
+        <activity
+            android:name=".ui.welcome.sellrentproperty.pricedetails.PriceDetails"
+            android:exported="false" />
+        <activity
+            android:name=".ui.welcome.sellrentproperty.propertydetails.PropertyDetails"
             android:exported="false" />
         <activity
             android:name=".ui.welcome.sellrentproperty.SellRentProperty"

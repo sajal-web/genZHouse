@@ -1,6 +1,7 @@
-package com.example.genzhouse.ui.welcome.pricedetails
+package com.example.genzhouse.ui.welcome.sellrentproperty.pricedetails
 
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.genzhouse.R
 import com.example.genzhouse.databinding.ActivityPriceDetailsBinding
+import com.example.genzhouse.ui.welcome.sellrentproperty.uploadlisting.UploadProperty
 import com.google.android.material.card.MaterialCardView
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -25,6 +27,9 @@ class PriceDetails : AppCompatActivity() {
         binding = ActivityPriceDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initToolbar()
+        binding.postPropertyButton.setOnClickListener{
+            startActivity(Intent(this,UploadProperty::class.java))
+        }
         setupCardClickListeners()
         setupDatePicker()
     }
