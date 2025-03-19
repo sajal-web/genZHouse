@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.genzhouse.MainActivity
 import com.example.genzhouse.R
 import com.example.genzhouse.databinding.ActivityWelcomeBinding
+import com.example.genzhouse.ui.loginregistration.LoginActivity
 import com.example.genzhouse.ui.welcome.homesearch.ChooseCategory
 import com.example.genzhouse.ui.welcome.sellrentproperty.SellRentProperty
 import kotlinx.coroutines.delay
@@ -32,7 +33,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         welcomeBinding.sellRentCard.setOnClickListener {
             startActivity(Intent(this,
-                SellRentProperty::class.java
+                LoginActivity::class.java
             ))
         }
         welcomeBinding.homeSearchCard.setOnClickListener{

@@ -93,6 +93,30 @@
                 android:text="New to Housing? Let's start"
                 android:textColor="#000000"
                 android:textSize="14sp" />
+
+            <!-- Name Input -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:boxCornerRadiusBottomEnd="8dp"
+                app:boxCornerRadiusBottomStart="8dp"
+                app:boxCornerRadiusTopEnd="8dp"
+                app:boxCornerRadiusTopStart="8dp"
+                app:boxStrokeWidth="1dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:hint="Your Name"
+                    android:inputType="textPersonName"
+                    android:padding="8dp"
+                    android:textColorHint="#AAAAAA" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
             <!-- User Type Tabs -->
             <RadioGroup
                 android:id="@+id/radioRole"
@@ -232,183 +256,7 @@
                     app:cornerRadius="8dp" />
                 </LinearLayout>
 
-                <!-- Phone Number Input -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:orientation="horizontal">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/countryCodeButton"
-                        style="@style/Widget.MaterialComponents.Button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:backgroundTint="#F5F5F5"
-                        android:text="+91"
-                        android:textColor="#000000"
-                        app:backgroundTint="#F5F5F5"
-                        app:cornerRadius="8dp"
-                        app:icon="@drawable/ic_dropdown"
-                        app:iconGravity="end"
-                        app:iconPadding="4dp"
-                        app:iconTint="#000000" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        app:boxCornerRadiusBottomEnd="8dp"
-                        app:boxCornerRadiusBottomStart="8dp"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:boxStrokeWidth="1dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/phoneNumberInput"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Enter phone number"
-                            android:inputType="phone"
-                            android:textColorHint="#AAAAAA" />
-                    </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Enter OTP"/>
-                    <!-- OTP Input Section -->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="8dp"
-                        android:gravity="center">
-
-                        <!-- OTP Digit 1 -->
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="48dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            app:boxCornerRadiusBottomEnd="8dp"
-                            app:boxCornerRadiusBottomStart="8dp"
-                            app:boxCornerRadiusTopEnd="8dp"
-                            app:boxCornerRadiusTopStart="8dp"
-                            app:boxStrokeWidth="1dp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/otpDigit1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="number"
-                                android:maxLength="1"
-                                android:gravity="center"
-                                android:textColorHint="#AAAAAA" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <!-- OTP Digit 2 -->
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="48dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            app:boxCornerRadiusBottomEnd="8dp"
-                            app:boxCornerRadiusBottomStart="8dp"
-                            app:boxCornerRadiusTopEnd="8dp"
-                            app:boxCornerRadiusTopStart="8dp"
-                            app:boxStrokeWidth="1dp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/otpDigit2"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="number"
-                                android:maxLength="1"
-                                android:gravity="center"
-                                android:textColorHint="#AAAAAA" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <!-- OTP Digit 3 -->
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="48dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            app:boxCornerRadiusBottomEnd="8dp"
-                            app:boxCornerRadiusBottomStart="8dp"
-                            app:boxCornerRadiusTopEnd="8dp"
-                            app:boxCornerRadiusTopStart="8dp"
-                            app:boxStrokeWidth="1dp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/otpDigit3"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="number"
-                                android:maxLength="1"
-                                android:gravity="center"
-                                android:textColorHint="#AAAAAA" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <!-- OTP Digit 4 -->
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="48dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            app:boxCornerRadiusBottomEnd="8dp"
-                            app:boxCornerRadiusBottomStart="8dp"
-                            app:boxCornerRadiusTopEnd="8dp"
-                            app:boxCornerRadiusTopStart="8dp"
-                            app:boxStrokeWidth="1dp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/otpDigit4"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="number"
-                                android:maxLength="1"
-                                android:gravity="center"
-                                android:textColorHint="#AAAAAA" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
-                    </LinearLayout>
-                </LinearLayout>
-
-
-
-
-
-                <!-- Name Input -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:boxCornerRadiusBottomEnd="8dp"
-                    app:boxCornerRadiusBottomStart="8dp"
-                    app:boxCornerRadiusTopEnd="8dp"
-                    app:boxCornerRadiusTopStart="8dp"
-                    app:boxStrokeWidth="1dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/nameInput"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:hint="Your Name"
-                        android:inputType="textPersonName"
-                        android:padding="8dp"
-                        android:textColorHint="#AAAAAA" />
-                </com.google.android.material.textfield.TextInputLayout>
 
                 <!-- Location Input -->
                 <com.google.android.material.card.MaterialCardView
@@ -562,6 +410,7 @@
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="24dp"
                 android:backgroundTint="@color/colorSecondary"
                 app:backgroundTint="@color/colorSecondary"
@@ -576,7 +425,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="14dp"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:padding="8dp">

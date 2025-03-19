@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.genzhouse.R
 import com.example.genzhouse.databinding.ActivityChooseCategoryBinding
+import com.example.genzhouse.ui.homepage.RoomDetails
 
 class ChooseCategory : AppCompatActivity() {
     lateinit var binding: ActivityChooseCategoryBinding
@@ -17,7 +18,7 @@ class ChooseCategory : AppCompatActivity() {
         setContentView(binding.root)
         initToolbar()
         binding.pgCard.setOnClickListener{
-            startActivity(Intent(this,CitySelection::class.java))
+            startActivity(Intent(this,RoomDetails::class.java))
         }
         binding.rentCard.setOnClickListener{
             startActivity(Intent(this,CitySelection::class.java))
