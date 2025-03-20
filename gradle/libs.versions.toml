@@ -1,5 +1,5 @@
 [versions]
-agp = "8.9.0"
+agp = "8.7.3"
 firebaseBom = "33.10.0"
 kotlin = "2.1.0"
 coreKtx = "1.15.0"
@@ -15,6 +15,7 @@ glide = "5.0.0-rc01"
 swiperefreshlayout = "1.1.0"
 gms = "4.4.2"
 browser = "1.8.0"
+playServicesLocation = "21.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -32,6 +33,7 @@ androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscree
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 androidx-browser = { group = "androidx.browser", name = "browser", version.ref = "browser" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
