@@ -1,16 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.google.gms)
 }
 
 android {
-    namespace = "com.example.genzhouse"
+    namespace = "com.application.genzhouse"
     compileSdk = 35
     buildFeatures {
         viewBinding = true
     }
     defaultConfig {
-        applicationId = "com.example.genzhouse"
+        applicationId = "com.application.genzhouse"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
@@ -46,11 +47,15 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.glide)
     implementation(libs.androidx.swiperefreshlayout)
+    implementation(libs.androidx.browser)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
     // splash
     implementation(libs.androidx.core.splashscreen)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    implementation(libs.firebase.auth)
 
 }

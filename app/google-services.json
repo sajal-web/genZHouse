@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "449936300270",
+    "project_id": "genzhouse",
+    "storage_bucket": "genzhouse.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:449936300270:android:20fc406bb594fcd75a3bff",
+        "android_client_info": {
+          "package_name": "com.application.genzhouse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAlMOXtzQ0MDeiho3j1OJHXD-e30YIc2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

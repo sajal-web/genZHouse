@@ -8,22 +8,15 @@
     android:background="#FFFFFF">
 
     <!-- Toolbar -->
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Log In"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-    </androidx.appcompat.widget.Toolbar>
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:title="Log In"
+        app:titleTextColor="@android:color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- Main Content -->
     <ScrollView
@@ -36,12 +29,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="20dp"
             android:padding="16dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New to Housing? Log In to Add Your Property Free!"
+                android:text="@string/new_to_housing_log_in_to_add_your_property_free"
                 android:textColor="#000000"
                 android:textStyle="bold"
                 android:textSize="16sp" />
@@ -50,7 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="An OTP message(sms) will be sent to your entered mobile number for verification."
+                android:text="@string/an_otp_message_sms_will_be_sent_to_your_entered_mobile_number_for_verification"
                 android:textColor="#757575"
                 android:textSize="14sp" />
 
@@ -153,6 +145,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Enter phone number"
+                            android:maxLength="10"
                             android:inputType="phone"
                             android:textColorHint="#AAAAAA" />
                     </com.google.android.material.textfield.TextInputLayout>
@@ -194,7 +187,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="Call on 08045811281 to get help with your property listing"
+                    android:text="Call on +91 8509957714 to get help with your property listing"
                     android:textColor="#000000"
                     android:textSize="12sp" />
             </LinearLayout>

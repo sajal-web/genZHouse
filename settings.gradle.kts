@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "genZHouse"
+rootProject.name = "GenZHouse"
 include(":app")
