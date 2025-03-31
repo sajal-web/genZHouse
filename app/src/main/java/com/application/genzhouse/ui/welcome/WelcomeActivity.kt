@@ -8,6 +8,7 @@ import com.application.genzhouse.databinding.ActivityWelcomeBinding
 import com.application.genzhouse.ui.loginregistration.LoginActivity
 import com.application.genzhouse.ui.welcome.homesearch.ChooseCategory
 import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentProperty
+import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.OwnerDashBordActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -62,7 +63,7 @@ class WelcomeActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         if (auth.currentUser != null) {
-            startActivity(Intent(this, SellRentProperty::class.java))
+            startActivity(Intent(this, OwnerDashBordActivity::class.java))
             finish()
         }
     }

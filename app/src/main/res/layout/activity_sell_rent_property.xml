@@ -137,7 +137,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Broker/Builder"
+                    android:text="Broker"
                     android:padding="12dp"/>
             </RadioGroup>
             <!-- Dynamic Form Content - Second Screen -->
@@ -203,7 +203,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="You're looking to..."
+                    android:text="You're uploading for..."
                     android:textColor="#757575"
                     android:textSize="14sp" />
 
@@ -215,7 +215,7 @@
                     android:orientation="horizontal">
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/rentButton"
+                        android:id="@+id/btnRoom"
                         style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -228,7 +228,7 @@
                     app:cornerRadius="8dp"/>
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/sellButton"
+                        android:id="@+id/btnMess"
                         style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -242,7 +242,7 @@
                     app:cornerRadius="8dp" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/pgButton"
+                        android:id="@+id/btnPG"
                         style="@style/Widget.MaterialComponents.Button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -274,6 +274,7 @@
                         android:padding="12dp">
 
                         <ImageView
+                            android:id="@+id/btnSearch"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:contentDescription="Search"

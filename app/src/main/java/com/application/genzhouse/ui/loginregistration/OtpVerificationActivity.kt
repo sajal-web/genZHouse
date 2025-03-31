@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.application.genzhouse.MainActivity
 import com.application.genzhouse.R
 import com.application.genzhouse.databinding.ActivityOtpVerificationBinding
+import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentProperty
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuth
@@ -104,7 +105,7 @@ class OtpVerificationActivity : AppCompatActivity() {
                     ).show()
 
                     // Navigate to the main activity
-                    startActivity(Intent(this, MainActivity::class.java))
+                    startActivity(Intent(this, SellRentProperty::class.java))
                     finish()
                 } else {
                     Log.w("TAG", "signInWithCredential:failure", task.exception)

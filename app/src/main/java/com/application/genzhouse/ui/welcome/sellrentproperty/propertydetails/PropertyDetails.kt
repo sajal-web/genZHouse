@@ -28,11 +28,54 @@ class PropertyDetails : AppCompatActivity() {
         setupPropertyTypeCards()
         setupBhkCards()
         setupFurnishTypeCards()
-        // Set default selection
-        selectCard(binding.cardIndependent, CardType.PROPERTY)
+        initOnClick()
+    }
 
-        binding.nextButton.setOnClickListener{
-            startActivity(Intent(this, PriceDetails::class.java))
+    private fun initOnClick() {
+        binding.nextButton.setOnClickListener {
+            // Get all the input values
+            val building = binding.buildingEditText.text.toString().trim()
+            val locality = binding.localityEditText.text.toString().trim()
+            val area = binding.areaEditText.text.toString().trim()
+
+            // Get selected card values
+            val furnishedType = getSelectedCardText(CardType.FURNISH)
+            val bhkType = getSelectedCardText(CardType.BHK)
+            val propertyType = getSelectedCardText(CardType.PROPERTY)
+
+            // Validate required fields
+            if (building.isEmpty() || locality.isEmpty() || area.isEmpty() ||
+                furnishedType == null || bhkType == null || propertyType == null) {
+                Toast.makeText(this, "Please fill all fields and make selections", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Create intent and put all extras
+            val intent = Intent(this, PriceDetails::class.java).apply {
+                // From previous activity
+                putExtra("NAME", intent.getStringExtra("NAME"))
+                putExtra("ROLE", intent.getStringExtra("ROLE"))
+                putExtra("ROOM_TYPE", intent.getStringExtra("ROOM_TYPE"))
+                putExtra("LOCATION", intent.getStringExtra("LOCATION"))
+
+                // New fields from this activity
+                putExtra("BUILDING", building)
+                putExtra("LOCALITY", locality)
+                putExtra("AREA", area.toDoubleOrNull() ?: 0.0)
+                putExtra("FURNISHED_TYPE", furnishedType)
+                putExtra("BHK", bhkType)
+                putExtra("PROPERTY_TYPE", propertyType)
+            }
+
+            startActivity(intent)
+        }
+
+    }
+
+    // Helper function to get text from selected card
+    private fun getSelectedCardText(type: CardType): String? {
+        return selectedCards[type.key]?.let { card ->
+            findTextViewInCard(card)?.text?.toString()
         }
     }
 

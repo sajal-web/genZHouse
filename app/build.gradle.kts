@@ -48,6 +48,7 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.androidx.swiperefreshlayout)
     implementation(libs.androidx.browser)
+    implementation(libs.androidx.work.runtime.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -61,5 +62,21 @@ dependencies {
     // location
     implementation(libs.play.services.location)
 
+    // Retrofit for network call
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    // OkHttp logging interceptor
+    implementation(libs.logging.interceptor)
+
+    // coroutines
+    implementation(libs.kotlinx.coroutines.android)
+
+    // Viewmodel LiveData
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+
+    // Recyclerview
+    implementation(libs.androidx.recyclerview)
 
 }

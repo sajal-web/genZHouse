@@ -1,0 +1,31 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android" android:height="20dp" android:viewportHeight="490" android:viewportWidth="490" android:width="20dp">
+      
+    <path android:fillColor="#704324" android:pathData="M240,440h35v40h-35z"/>
+      
+    <path android:fillColor="#704324" android:pathData="M415,440h35v40h-35z"/>
+      
+    <path android:fillColor="#A26234" android:pathData="M465,350l0,90l-15,0l-35,0l-140,0l-35,0l-15,0l0,-90z"/>
+      
+    <path android:fillColor="#A26234" android:pathData="M225,265h240v85h-240z"/>
+      
+    <path android:fillColor="#704324" android:pathData="M480,230l0,35l-15,0l-240,0l-20,0l0,-35l85,0z"/>
+      
+    <path android:fillColor="#E7ECED" android:pathData="M10,375h140v105h-140z"/>
+      
+    <path android:fillColor="#AFB6BB" android:pathData="M10,10h140v365h-140z"/>
+      
+    <path android:fillColor="#AFB6BB" android:pathData="M290,10l0,220l-85,0l0,35l20,0l0,85l0,90l15,0l0,40l-0.3,0l-89.7,0l0,-105l0,-365z"/>
+      
+    <path android:fillColor="#231F20" android:pathData="M480,220H300V10c0,-5.52 -4.48,-10 -10,-10H10C4.48,0 0,4.48 0,10v470c0,5.52 4.48,10 10,10h265c5.52,0 10,-4.48 10,-10v-30h120v30c0,5.52 4.48,10 10,10h35c5.52,0 10,-4.48 10,-10v-30h5c5.52,0 10,-4.48 10,-10V275h5c5.52,0 10,-4.48 10,-10v-35C490,224.48 485.52,220 480,220zM470,255H215v-15h255V255zM455,340H235v-65h220V340zM140,20v345H20V20H140zM20,470v-85h120v85H20zM160,20h120v200h-75c-5.52,0 -10,4.48 -10,10v35c0,5.52 4.48,10 10,10h10v165c0,5.52 4.48,10 10,10h5v20h-70V20zM265,470h-15v-20h15V470zM440,470h-15v-20h15V470zM235,430v-70h220v70H235z"/>
+      
+    <path android:fillColor="#231F20" android:pathData="M330,295h30v20h-30z"/>
+      
+    <path android:fillColor="#231F20" android:pathData="M330,380h30v20h-30z"/>
+      
+    <path android:fillColor="#231F20" android:pathData="M180,160h20v40h-20z"/>
+      
+    <path android:fillColor="#231F20" android:pathData="M100,160h20v40h-20z"/>
+      
+    <path android:fillColor="#231F20" android:pathData="M65,415h30v20h-30z"/>
+    
+</vector>

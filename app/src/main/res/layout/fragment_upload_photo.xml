@@ -131,7 +131,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_margin="16dp"
-        android:text="Continue"
+        android:text="Add Room"
         android:textAllCaps="false"
         android:textColor="@color/white"
         app:backgroundTint="@color/colorPrimary"

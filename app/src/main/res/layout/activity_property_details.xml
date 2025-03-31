@@ -158,7 +158,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Independent\nFloor"
+                            android:text="Independent Floor"
                             android:textAlignment="center"
                             android:textColor="?attr/colorOnSurface"
                             android:textSize="11sp" />
@@ -194,7 +194,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:text="Independent\nHouse"
+                            android:text="Independent House"
                             android:textAlignment="center"
                             android:textColor="?attr/colorOnSurface"
                             android:textSize="11sp" />

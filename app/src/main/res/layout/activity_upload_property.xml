@@ -4,302 +4,138 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.welcome.sellrentproperty.uploadlisting.UploadProperty"
-    android:background="@android:color/transparent">
+    tools:context=".ui.welcome.sellrentproperty.uploadlisting.UploadPhoto">
 
-    <!-- ScrollView to enable scrolling -->
-    <ScrollView
+    <!-- Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        app:navigationIcon="@drawable/arrow_back"
+        app:title="Upload Photos"
+        app:titleTextColor="@android:color/white"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Main Content Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/mainCard"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddRoom"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:padding="16dp">
 
-            <!-- Toolbar -->
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:navigationIcon="@drawable/arrow_back"
-                app:title="Upload Photos"
-                app:titleTextColor="@android:color/white"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <!-- Congratulations Card -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/congratulationsCard"
+            <!-- Congratulations Message -->
+            <LinearLayout
+                android:id="@+id/congratsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar">
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_check_circle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Congratulations! Your listing is under review."
+                    android:textColor="#333333" />
+            </LinearLayout>
+
+            <!-- Photos Grid -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/photosGridRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/white"
+                android:padding="8dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                app:layout_constraintBottom_toTopOf="@+id/tipsLayout"
+                app:layout_constraintTop_toBottomOf="@+id/congratsLayout" />
+
+            <!-- Tips Section -->
+            <LinearLayout
+                android:id="@+id/tipsLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <!-- Tip 1 -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="16dp">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
 
                     <ImageView
-                        android:id="@+id/checkIcon"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_check_circle"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_check_circle" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
-                        android:text="Congratulations! Your listing is under review."
+                        android:text="At least 8 photos will increase property quality score by 15%"
                         android:textColor="#333333"
-                        android:textSize="14sp"
-                        app:layout_constraintBottom_toBottomOf="@id/checkIcon"
-                        app:layout_constraintStart_toEndOf="@id/checkIcon"
-                        app:layout_constraintTop_toTopOf="@id/checkIcon" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        android:textSize="12sp" />
+                </LinearLayout>
 
-            <!-- Upload from Gallery Card -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/uploadFromGalleryCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="16dp"
-                app:cardBackgroundColor="@color/colorSecondary"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:layout_constraintTop_toBottomOf="@id/congratulationsCard">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:background="@drawable/dotted_border"
-                    android:padding="24dp"
-                    android:layout_height="wrap_content">
-
-
-                    <!-- Photos Grid -->
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/photosGridRecyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:visibility="gone"
-                        android:background="@color/white"
-                        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                        app:spanCount="2"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-
-
-                    <ImageView
-                        android:id="@+id/galleryIcon"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
-                        android:src="@drawable/ic_image_gallery"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnUploadFromGallery"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:padding="12dp"
-                        android:text="Upload from gallery"
-                        android:textAllCaps="false"
-                        app:cornerRadius="8dp"
-                        app:layout_constraintTop_toBottomOf="@id/galleryIcon" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- OR Divider -->
-            <TextView
-                android:id="@+id/orDivider"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="8dp"
-                android:text="OR"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/uploadFromGalleryCard" />
-
-            <!-- Take Live Photos Card -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/takeLivePhotosCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="16dp"
-                app:cardBackgroundColor="@color/colorSecondary"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0dp"
-                app:layout_constraintTop_toBottomOf="@id/orDivider">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
+                <!-- Tip 2 -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/dotted_border"
-                    android:padding="24dp">
-
-                    <ImageView
-                        android:id="@+id/cameraIllustration"
-                        android:layout_width="160dp"
-                        android:layout_height="100dp"
-                        android:src="@drawable/ic_camera_illustration"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnTakeLivePhotos"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:padding="12dp"
-                        android:text="Click live photos"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/white"
-                        app:cornerRadius="8dp"
-                        app:layout_constraintTop_toBottomOf="@id/cameraIllustration" />
-
-                    <TextView
-                        android:id="@+id/pleaseBeInsideText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Please be inside the property"
-                        android:textColor="#666666"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/btnTakeLivePhotos" />
-
-                    <TextView
-                        android:id="@+id/andGetText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="And get"
-                        android:textColor="#666666"
-                        android:textSize="12sp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/pleaseBeInsideText" />
-
-                    <TextView
-                        android:id="@+id/verifiedBadge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Verified"
-                        android:textColor="#4CAF50"
-                        android:padding="2dp"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@id/andGetText"
-                        app:layout_constraintStart_toEndOf="@id/andGetText"
-                        app:layout_constraintTop_toTopOf="@id/andGetText" />
-
-                    <TextView
-                        android:id="@+id/listing"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="on your listing"
-                        android:textColor="#666666"
-                        android:textSize="12sp"
-                        app:layout_constraintBottom_toBottomOf="@id/verifiedBadge"
-                        app:layout_constraintStart_toEndOf="@id/verifiedBadge"
-                        app:layout_constraintTop_toTopOf="@id/verifiedBadge" />
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
 
                     <ImageView
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:layout_marginStart="4dp"
-                        android:src="@drawable/ic_info"
-                        app:layout_constraintBottom_toBottomOf="@id/listing"
-                        app:layout_constraintStart_toEndOf="@id/listing"
-                        app:layout_constraintTop_toTopOf="@id/listing" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
+                        android:src="@drawable/ic_check_circle" />
 
-            <!-- Warning Message -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/warningMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginHorizontal="16dp"
-                app:layout_constraintTop_toBottomOf="@id/takeLivePhotosCard">
-
-                <ImageView
-                    android:id="@+id/warningIcon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_warning"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/warningText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="No photos added. You will get 80% lesser enquiries."
-                    android:textColor="#F44336"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/warningIcon"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/warningIcon"
-                    app:layout_constraintTop_toTopOf="@id/warningIcon" />
-
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/warningMinPhotoMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginHorizontal="16dp"
-                app:layout_constraintTop_toBottomOf="@id/warningMessage">
-
-                <ImageView
-                    android:id="@+id/warningMinPhotoIcon"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_warning"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/warningMinPhotoText"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Please add at least 5 images."
-                    android:textColor="#F44336"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@id/warningMinPhotoIcon"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/warningMinPhotoIcon"
-                    app:layout_constraintTop_toTopOf="@id/warningMinPhotoIcon" />
-
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Hall, Bedroom, Kitchen and Bathroom photos will get more points in quality score"
+                        android:textColor="#333333"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Continue Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddRoom"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_margin="16dp"
+        android:text="Add Room"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/colorPrimary"
+        app:cornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
