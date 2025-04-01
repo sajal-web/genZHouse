@@ -62,9 +62,9 @@ class WelcomeActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-        if (auth.currentUser != null) {
-            startActivity(Intent(this, OwnerDashBordActivity::class.java))
-            finish()
-        }
+//        if (auth.currentUser != null) {
+//            startActivity(Intent(this, ChooseCategory::class.java))
+//            finish()
+//        }
     }
 }

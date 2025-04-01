@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.application.genzhouse.databinding.ActivityChooseCategoryBinding
-import com.application.genzhouse.ui.homepage.RoomDetails
+import com.application.genzhouse.ui.userhomepage.RoomDetails
 
 class ChooseCategory : AppCompatActivity() {
     lateinit var binding: ActivityChooseCategoryBinding

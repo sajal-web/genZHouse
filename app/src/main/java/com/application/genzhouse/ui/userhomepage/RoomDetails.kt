@@ -1,4 +1,4 @@
-package com.application.genzhouse.ui.homepage
+package com.application.genzhouse.ui.userhomepage
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

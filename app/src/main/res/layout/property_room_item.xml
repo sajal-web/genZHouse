@@ -123,7 +123,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/price_text"
+                    android:id="@+id/tvRent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="₹ 6,500/ Month"
@@ -174,7 +174,7 @@
 
             <!-- Property Type -->
             <TextView
-                android:id="@+id/property_type_text"
+                android:id="@+id/tvRoomType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -185,7 +185,7 @@
 
             <!-- Location -->
             <TextView
-                android:id="@+id/location_text"
+                android:id="@+id/tvLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
@@ -202,7 +202,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/area_text"
+                    android:id="@+id/tvArea"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="500 sq.ft."
@@ -220,7 +220,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/furnishing_text"
+                    android:id="@+id/tvFurnished"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Semi Furnished"
@@ -279,7 +279,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/owner_name_text"
+                        android:id="@+id/tvOwnerName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Raju Da"

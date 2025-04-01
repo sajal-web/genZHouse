@@ -24,10 +24,10 @@
             android:name=".ui.loginregistration.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.homepage.RoomDetails"
+            android:name=".ui.userhomepage.RoomDetails"
             android:exported="false" />
         <activity
-            android:name=".ui.homepage.RoomListing"
+            android:name=".ui.userhomepage.RoomListing"
             android:exported="false" />
         <activity
             android:name=".ui.welcome.sellrentproperty.ownerdashbord.OwnerDashBordActivity"
