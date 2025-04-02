@@ -59,4 +59,30 @@ class RoomRepository {
             Resource.Error("Network Error: ${e.message ?: "Unknown error occurred"}")
         }
     }
+
+    suspend fun getUserRooms(user_id: String,token: String): Resource<List<Room>> {
+        return try {
+            val response = apiService.getUserRooms(user_id,"Bearer $token")
+            if (response.isSuccessful && response.body()?.success == true) {
+                Resource.Success(response.body()?.data ?: emptyList())
+            } else {
+                // Parse error response
+                val errorBody = response.errorBody()?.string()
+                val errorResponse = try {
+                    Gson().fromJson(errorBody, ErrorResponse::class.java)
+                } catch (e: Exception) {
+                    ErrorResponse(false, "Unknown error occurred")
+                }
+
+                when (response.code()) {
+                    401 -> Resource.Error("Unauthorized: ${errorResponse.message}")
+                    else -> Resource.Error("Error: ${errorResponse.message}")
+                }
+            }
+        } catch (e: Exception) {
+            Resource.Error("Network Error: ${e.message ?: "Unknown error occurred"}")
+        }
+    }
+
+
 }

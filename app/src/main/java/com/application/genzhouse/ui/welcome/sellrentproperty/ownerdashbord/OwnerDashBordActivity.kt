@@ -34,7 +34,7 @@ class OwnerDashBordActivity : AppCompatActivity() {
     private fun fetchRooms() {
         (application as MyApp).getCurrentToken { token ->
             if (!token.isNullOrEmpty()) {
-                viewModel.loadRooms(token)
+                viewModel.loadUserRooms("1",token.toString())
             } else {
                 Toast.makeText(this, "Failed to retrieve token", Toast.LENGTH_SHORT).show()
             }
@@ -45,7 +45,7 @@ class OwnerDashBordActivity : AppCompatActivity() {
     private fun setupSwipeRefresh() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             (application as MyApp).getCurrentToken { token ->
-                viewModel.loadRooms(token.toString())
+                viewModel.loadUserRooms("1",token.toString())
             }
         }
     }
