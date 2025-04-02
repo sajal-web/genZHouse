@@ -2,6 +2,8 @@ package com.application.genzhouse.ui.welcome.sellrentproperty.uploadlisting
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.widget.Toast
@@ -15,12 +17,20 @@ import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.Owner
 import com.application.genzhouse.ui.welcome.sellrentproperty.uploadlisting.adapter.PhotoAdapter
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.AddRoomViewModel
+import com.google.firebase.storage.FirebaseStorage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
+import java.io.ByteArrayOutputStream
 
 class UploadProperty : AppCompatActivity() {
     private lateinit var photosGridRecyclerView: RecyclerView
     private lateinit var progressDialog: CustomProgressDialog
     private lateinit var viewModel: AddRoomViewModel
     private lateinit var photoAdapter: PhotoAdapter
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
     private val photos = mutableListOf<Uri>()
     lateinit var binding: ActivityUploadPropertyBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +50,7 @@ class UploadProperty : AppCompatActivity() {
                 is Resource.Loading -> {
                     // Show loading indicator
                     progressDialog.show()
+                    progressDialog.setMessage("Adding Room...")
                 }
 
                 is Resource.Success -> {
@@ -62,9 +73,16 @@ class UploadProperty : AppCompatActivity() {
 
     private fun initOnClick() {
         binding.btnAddRoom.setOnClickListener {
-            val request = createAddRoomRequestFromUI()
-            val token = getStoredFirebaseToken()
-            viewModel.addRoom(token.toString(), request)
+            progressDialog.show()
+            progressDialog.setMessage("Uploading Images...")
+            val token = getStoredFirebaseToken().toString()
+
+            if (photos.isNotEmpty()) {
+                uploadImagesToFirebase(photos) { uploadedImageUrls ->
+                    val updatedRequest = createAddRoomRequestFromUI(uploadedImageUrls)
+                    viewModel.addRoom(token, updatedRequest) // Update API with images
+                }
+            }
         }
     }
 
@@ -100,8 +118,7 @@ class UploadProperty : AppCompatActivity() {
         private const val PICK_IMAGE_REQUEST = 100
     }
 
-    private fun createAddRoomRequestFromUI(): AddRoomRequest {
-        // Get all data from previous activities
+    private fun createAddRoomRequestFromUI(imageUrls: List<String>): AddRoomRequest {
         val name = intent.getStringExtra("NAME") ?: ""
         val role = intent.getStringExtra("ROLE") ?: ""
         val roomType = intent.getStringExtra("ROOM_TYPE") ?: ""
@@ -116,20 +133,11 @@ class UploadProperty : AppCompatActivity() {
         val monthlyRent = intent.getDoubleExtra("MONTHLY_RENT", 0.0)
         val securityDeposit = intent.getDoubleExtra("SECURITY_DEPOSIT", 0.0)
 
-        // Convert uploaded images to URIs (you'll need to implement upload logic)
-        val imageUris = photos.map { uri ->
-            // Here you would upload each image to your server and get the URL
-            // For now, we'll just use the URI string
-            uri.toString()
-        }
-
         return AddRoomRequest(
-            user_id = 1, // You should get this from your auth system
+            user_id = 1,
             room_type = roomType,
             owner_name = name,
-
-
-            owner_mobile = "2222222223", // You should collect this somewhere
+            owner_mobile = "2222222223",
             location = "$building, $locality, $location",
             property_type = propertyType,
             society_building_project = building,
@@ -140,12 +148,53 @@ class UploadProperty : AppCompatActivity() {
             monthly_rent = monthlyRent,
             available_from = availableFrom,
             security_deposit = securityDeposit,
-            room_images = imageUris
+            room_images = imageUrls // Store Firebase URLs instead of local URIs
         )
     }
+
 
     fun getStoredFirebaseToken(): String? {
         val sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
         return sharedPref.getString("firebase_token", null)
     }
+
+    private fun uploadImagesToFirebase(images: List<Uri>, callback: (List<String>) -> Unit) {
+        val storageRef = FirebaseStorage.getInstance().reference.child("room_images")
+        val uploadedImageUrls = mutableListOf<String>()
+
+        coroutineScope.launch(Dispatchers.IO) {  // Run in background
+            for (imageUri in images) {
+                val imageRef = storageRef.child("${System.currentTimeMillis()}.jpg")
+
+                try {
+                    val uploadTask = imageRef.putFile(imageUri).await()
+                    val uri = imageRef.downloadUrl.await()
+
+                    withContext(Dispatchers.Main) {  // Switch back to Main Thread
+                        uploadedImageUrls.add(uri.toString())
+                        if (uploadedImageUrls.size == images.size) {
+                            callback(uploadedImageUrls)
+                        }
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(this@UploadProperty, "Image upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+    }
+
+
+    fun compressImage(context: Context, imageUri: Uri): ByteArray {
+        val inputStream = context.contentResolver.openInputStream(imageUri)
+        val bitmap = BitmapFactory.decodeStream(inputStream)
+
+        val outputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream) // 70% quality compression
+
+        return outputStream.toByteArray()
+    }
+
+
 }

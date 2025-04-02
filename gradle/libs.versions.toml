@@ -26,6 +26,7 @@ recyclerview = "1.4.0"
 viewbinding = "7.0.0"
 compiler = "5.0.0-rc01"
 workRuntimeKtx = "2.10.0"
+firebaseStorageKtx = "21.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -54,6 +55,7 @@ androidx-recyclerview = { group = "androidx.recyclerview", name = "recyclerview"
 androidx-viewbinding = { group = "androidx.viewbinding", name = "viewbinding", version.ref = "viewbinding" }
 compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "compiler" }
 androidx-work-runtime-ktx = { group = "androidx.work", name = "work-runtime-ktx", version.ref = "workRuntimeKtx" }
+firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

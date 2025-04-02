@@ -23,6 +23,7 @@
                 android:id="@+id/ivRoomImage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:scaleType="fitCenter"
                 android:src="@drawable/app_logo" />
 
             <!-- Gradient overlay for better text visibility -->
