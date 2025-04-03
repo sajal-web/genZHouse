@@ -5,8 +5,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.application.genzhouse.data.model.UserRequest
 import com.application.genzhouse.databinding.ActivityLoginBinding
 import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentProperty
+import com.application.genzhouse.utils.Resource
+import com.application.genzhouse.viewmodel.CreateUserViewModel
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -19,6 +23,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var activityLoginBinding: ActivityLoginBinding
     private lateinit var phNumber: String
     private lateinit var name : String
+    private lateinit var viewModel: CreateUserViewModel
     private lateinit var progressDialog: CustomProgressDialog
     private val auth = FirebaseAuth.getInstance()
 
@@ -26,16 +31,36 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityLoginBinding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(activityLoginBinding.root)
-
+        viewModel = ViewModelProvider(this)[CreateUserViewModel::class.java]
         // Initialize the custom progress dialog
         progressDialog = CustomProgressDialog(this)
 
         initUI()
         onClick()
+
+        viewModel.createUserResult.observe(this) { result ->
+            when(result) {
+                is Resource.Loading -> {
+                    progressDialog.show()
+                }
+                is Resource.Success -> {
+                }
+                is Resource.Error -> {
+                    Toast.makeText(this, result.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
     }
 
     private fun initUI() {
         // Any additional UI initialization
+    }
+
+    private fun createUserRequest() : UserRequest {
+        val number = activityLoginBinding.phoneNumberInput.text.toString().trim()
+        return UserRequest(userType = "",name = name, phoneNumber = number)
+
     }
 
     private fun onClick() {
@@ -46,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
                 progressDialog.setMessage("Sending OTP...")
                 progressDialog.show()
                 sendOtp("+91$number")
+                viewModel.createUser(createUserRequest())
             } else {
                 Toast.makeText(this, "Please enter a valid 10-digit phone number", Toast.LENGTH_SHORT).show()
             }
