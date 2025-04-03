@@ -27,14 +27,25 @@ class OwnerDashBordActivity : AppCompatActivity() {
         setupRecyclerView()
         setupViewModel()
         setupSwipeRefresh()
-
+        getUserDetails()
         fetchRooms()
 
     }
+    private fun getUserDetails(): Pair<Int?, String?> {
+        val sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
+        val name = sharedPreferences.getString("name", null)
+        val phoneNumber = sharedPreferences.getString("phoneNumber", null)
+        val userId = sharedPreferences.getInt("user_id",0)
+        return Pair(userId,phoneNumber)
+    }
+
     private fun fetchRooms() {
         (application as MyApp).getCurrentToken { token ->
+            val userId = getUserDetails().first
             if (!token.isNullOrEmpty()) {
-                viewModel.loadUserRooms("1",token.toString())
+                if (userId != null) {
+                    viewModel.loadUserRooms(userId,token.toString())
+                }
             } else {
                 Toast.makeText(this, "Failed to retrieve token", Toast.LENGTH_SHORT).show()
             }
@@ -45,7 +56,7 @@ class OwnerDashBordActivity : AppCompatActivity() {
     private fun setupSwipeRefresh() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             (application as MyApp).getCurrentToken { token ->
-                viewModel.loadUserRooms("1",token.toString())
+                getUserDetails().first?.let { viewModel.loadUserRooms(it,token.toString()) }
             }
         }
     }

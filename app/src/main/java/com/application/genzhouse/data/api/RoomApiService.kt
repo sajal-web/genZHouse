@@ -21,7 +21,7 @@ interface RoomApiService {
 
     @GET("api/user-rooms")
     suspend fun getUserRooms(
-        @Header("user_id") userId: String,
+        @Header("user_id") userId: Int,
         @Header("Authorization") token: String
     ): Response<RoomListResponse>
 

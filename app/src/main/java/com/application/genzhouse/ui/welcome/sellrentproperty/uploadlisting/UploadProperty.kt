@@ -119,8 +119,8 @@ class UploadProperty : AppCompatActivity() {
     }
 
     private fun createAddRoomRequestFromUI(imageUrls: List<String>): AddRoomRequest {
-        val name = intent.getStringExtra("NAME") ?: ""
-        val role = intent.getStringExtra("ROLE") ?: ""
+        val name = getSharedPreferences("UserProfile", MODE_PRIVATE).getString("name", null) ?: ""
+        val number = getSharedPreferences("UserProfile", MODE_PRIVATE).getString("phoneNumber", null) ?: ""
         val roomType = intent.getStringExtra("ROOM_TYPE") ?: ""
         val location = intent.getStringExtra("LOCATION") ?: ""
         val building = intent.getStringExtra("BUILDING") ?: ""
@@ -134,10 +134,10 @@ class UploadProperty : AppCompatActivity() {
         val securityDeposit = intent.getDoubleExtra("SECURITY_DEPOSIT", 0.0)
 
         return AddRoomRequest(
-            user_id = 1,
+            user_id = getSharedPreferences("UserProfile", MODE_PRIVATE).getInt("user_id",0),
             room_type = roomType,
             owner_name = name,
-            owner_mobile = "2222222223",
+            owner_mobile = number,
             location = "$building, $locality, $location",
             property_type = propertyType,
             society_building_project = building,

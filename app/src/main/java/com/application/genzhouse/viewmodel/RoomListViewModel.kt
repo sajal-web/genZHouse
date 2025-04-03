@@ -24,7 +24,7 @@ class RoomListViewModel(
         }
     }
 
-    fun loadUserRooms(user_id: String,token: String) {
+    fun loadUserRooms(user_id: Int,token: String) {
         viewModelScope.launch {
             _rooms.value = Resource.Loading
             val result = repository.getUserRooms(user_id,token)

@@ -60,7 +60,7 @@ class RoomRepository {
         }
     }
 
-    suspend fun getUserRooms(user_id: String,token: String): Resource<List<Room>> {
+    suspend fun getUserRooms(user_id: Int,token: String): Resource<List<Room>> {
         return try {
             val response = apiService.getUserRooms(user_id,"Bearer $token")
             if (response.isSuccessful && response.body()?.success == true) {

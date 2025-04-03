@@ -86,7 +86,7 @@ class SellRentProperty : AppCompatActivity() {
         }
 
         activitySellRentPropertyBinding.nextButton.setOnClickListener {
-            val name = intent.getStringExtra("name")
+            val name = getSharedPreferences("UserProfile", MODE_PRIVATE).getString("name", null)
             val currentLocation = activitySellRentPropertyBinding.locationTextView.text.toString()
 
             if (role.isEmpty()) {

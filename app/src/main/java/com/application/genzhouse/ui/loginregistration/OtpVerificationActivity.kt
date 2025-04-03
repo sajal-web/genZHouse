@@ -8,10 +8,15 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.application.genzhouse.MainActivity
 import com.application.genzhouse.R
+import com.application.genzhouse.data.model.UserRequest
 import com.application.genzhouse.databinding.ActivityOtpVerificationBinding
 import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentProperty
+import com.application.genzhouse.utils.Resource
+import com.application.genzhouse.viewmodel.CreateUserViewModel
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuth
@@ -30,12 +35,13 @@ class OtpVerificationActivity : AppCompatActivity() {
     private lateinit var name : String
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var phoneNumber: String
+    private lateinit var viewmodel: CreateUserViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityOtpVerificationBinding = ActivityOtpVerificationBinding.inflate(layoutInflater)
         setContentView(activityOtpVerificationBinding.root)
-
+        viewmodel = ViewModelProvider(this)[CreateUserViewModel::class.java]
         // Initialize progress dialog
         progressDialog = CustomProgressDialog(this)
 
@@ -101,19 +107,11 @@ class OtpVerificationActivity : AppCompatActivity() {
 
                 if (task.isSuccessful) {
                     Log.d("TAG", "signInWithCredential:success")
-                    Toast.makeText(
-                        this,
-                        "Authentication successful!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(this, "Authentication successful!", Toast.LENGTH_SHORT).show()
 
-                    // Navigate to the main activity
-                    val intent = Intent(this@OtpVerificationActivity, SellRentProperty::class.java).apply {
-                        putExtra("phoneNumber", phoneNumber)
-                        putExtra("name",name )
-                    }
-                    startActivity(intent)
-                    finish()
+                    // ✅ Call API to register the user in backend
+                    registerUserInBackend(name, phoneNumber)
+
                 } else {
                     Log.w("TAG", "signInWithCredential:failure", task.exception)
                     val errorMessage = if (task.exception is FirebaseAuthInvalidCredentialsException) {
@@ -125,6 +123,53 @@ class OtpVerificationActivity : AppCompatActivity() {
                 }
             }
     }
+
+    private fun registerUserInBackend(name: String, phoneNumber: String) {
+        progressDialog.setMessage("Registering user...")
+        progressDialog.show()
+
+        val request = UserRequest(name = name, phoneNumber = phoneNumber)
+
+        viewmodel.createUser(request)
+
+        viewmodel.createUserResult.observe(this, Observer { result ->
+            progressDialog.dismiss()
+            when (result) {
+                is Resource.Success -> {
+                    Log.d("TAG", "User registered successfully")
+                    saveUserDetails(result.data.data.userId, result.data.data.name, result.data.data.phoneNumber)
+                    Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show()
+
+                    // ✅ Navigate to next activity after successful user creation
+                    val intent = Intent(this@OtpVerificationActivity, SellRentProperty::class.java).apply {
+                        putExtra("phoneNumber", phoneNumber)
+                    }
+                    startActivity(intent)
+                    finish()
+                }
+                is Resource.Error -> {
+                    Log.e("TAG", "Error: ${result.message}")
+                    Toast.makeText(this, "Failed to register user: ${result.message}", Toast.LENGTH_SHORT).show()
+                }
+                is Resource.Loading -> {
+                    progressDialog.setMessage("Registering user...")
+                    progressDialog.show()
+                }
+            }
+        })
+    }
+
+    private fun saveUserDetails(user_id: Int, name: String, phoneNumber: String) {
+        val sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("name", name)
+        editor.putString("phoneNumber", phoneNumber)
+        editor.putInt("user_id", user_id)
+        editor.apply()
+    }
+
+
+
 
     private fun resendVerificationCode() {
         progressDialog.setMessage("Resending OTP...")
