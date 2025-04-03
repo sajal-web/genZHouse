@@ -27,6 +27,7 @@ class OtpVerificationActivity : AppCompatActivity() {
     private lateinit var progressDialog: CustomProgressDialog
     private val auth = FirebaseAuth.getInstance()
     private lateinit var OTP: String
+    private lateinit var name : String
     private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
     private lateinit var phoneNumber: String
 
@@ -45,7 +46,9 @@ class OtpVerificationActivity : AppCompatActivity() {
     private fun initUI() {
         // Get OTP, resend token, and phone number from intent
         OTP = intent.getStringExtra("OTP").toString()
+
         resendToken = intent.getParcelableExtra("resendToken")!!
+        name = intent.getStringExtra("name")!!
         phoneNumber = intent.getStringExtra("phoneNumber")!!
 
         // Set the phone number in the UI
@@ -105,7 +108,11 @@ class OtpVerificationActivity : AppCompatActivity() {
                     ).show()
 
                     // Navigate to the main activity
-                    startActivity(Intent(this, SellRentProperty::class.java))
+                    val intent = Intent(this@OtpVerificationActivity, SellRentProperty::class.java).apply {
+                        putExtra("phoneNumber", phoneNumber)
+                        putExtra("name",name )
+                    }
+                    startActivity(intent)
                     finish()
                 } else {
                     Log.w("TAG", "signInWithCredential:failure", task.exception)

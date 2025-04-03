@@ -86,13 +86,8 @@ class SellRentProperty : AppCompatActivity() {
         }
 
         activitySellRentPropertyBinding.nextButton.setOnClickListener {
-            val name = activitySellRentPropertyBinding.nameInput.text.toString().trim()
+            val name = intent.getStringExtra("name")
             val currentLocation = activitySellRentPropertyBinding.locationTextView.text.toString()
-
-            if (name.isEmpty()) {
-                Toast.makeText(this, "Please enter your name", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
 
             if (role.isEmpty()) {
                 Toast.makeText(this, "Please select your role", Toast.LENGTH_SHORT).show()

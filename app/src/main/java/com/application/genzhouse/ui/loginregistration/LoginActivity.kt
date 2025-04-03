@@ -18,6 +18,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var activityLoginBinding: ActivityLoginBinding
     private lateinit var phNumber: String
+    private lateinit var name : String
     private lateinit var progressDialog: CustomProgressDialog
     private val auth = FirebaseAuth.getInstance()
 
@@ -39,8 +40,9 @@ class LoginActivity : AppCompatActivity() {
 
     private fun onClick() {
         activityLoginBinding.sendOtpBtn.setOnClickListener {
-            val number = activityLoginBinding.phoneNumberInput.text.toString()
-            if (number.isNotEmpty() && number.length == 10) {
+            val number = activityLoginBinding.phoneNumberInput.text.toString().trim()
+            name = activityLoginBinding.nameInput.text.toString().trim()
+            if (number.isNotEmpty() && number.length == 10 && name.isNotEmpty()) {
                 progressDialog.setMessage("Sending OTP...")
                 progressDialog.show()
                 sendOtp("+91$number")
@@ -91,6 +93,7 @@ class LoginActivity : AppCompatActivity() {
                 putExtra("OTP", verificationId)
                 putExtra("resendToken", token)
                 putExtra("phoneNumber", phNumber)
+                putExtra("name",name )
             }
             startActivity(intent)
         }

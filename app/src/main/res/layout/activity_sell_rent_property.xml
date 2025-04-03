@@ -94,27 +94,7 @@
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
-            <!-- Name Input -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:boxCornerRadiusBottomEnd="8dp"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusTopStart="8dp"
-                app:boxStrokeWidth="1dp">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nameInput"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:hint="Your Name"
-                    android:inputType="textPersonName"
-                    android:padding="8dp"
-                    android:textColorHint="#AAAAAA" />
-            </com.google.android.material.textfield.TextInputLayout>
 
 
             <!-- User Type Tabs -->
