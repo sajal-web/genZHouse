@@ -56,8 +56,11 @@ class UploadProperty : AppCompatActivity() {
 
                 is Resource.Success -> {
                     progressDialog.dismiss()
-                    startActivity(Intent(this, OwnerDashBordActivity::class.java))
-                    finish()
+                    incrementTotalRooms()
+                    val intent = Intent(this, OwnerDashBordActivity::class.java).apply {
+                        flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    }
+                    startActivity(intent)
                     // Handle success
                     Toast.makeText(this, "Room added successfully!", Toast.LENGTH_SHORT).show()
                     // Navigate back or to details screen
@@ -121,6 +124,21 @@ class UploadProperty : AppCompatActivity() {
         }
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
     }
+
+    private fun incrementTotalRooms() {
+        val sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
+        val currentTotalRooms = sharedPreferences.getInt("total_rooms", 0) // Default 0 if not set
+        val newTotalRooms = currentTotalRooms + 1 // Increment count
+
+        val editor = sharedPreferences.edit()
+        editor.putInt("total_rooms", newTotalRooms) // Save updated value
+        editor.apply()
+
+        Toast.makeText(this, "Total rooms updated: $newTotalRooms", Toast.LENGTH_SHORT).show()
+    }
+
+
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

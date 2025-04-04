@@ -1,7 +1,10 @@
 package com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -21,20 +24,12 @@ class OwnerDashBordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOwnerDashBordBinding
     private lateinit var viewModel: RoomListViewModel
     private lateinit var adapter: RoomAdapter
+    private var backPressedOnce = false
     private lateinit var progressDialog: CustomProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOwnerDashBordBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        // Initialize the custom progress dialog
-        // 1. Handle back button press (modern API)
-        val onBackPressedCallback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                navigateToWelcomeActivity()
-            }
-        }
-        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
-
         progressDialog = CustomProgressDialog(this)
         setupRecyclerView()
         setupViewModel()
@@ -46,12 +41,30 @@ class OwnerDashBordActivity : AppCompatActivity() {
     }
 
     private fun initOnClick() {
+        // Handle double back press (Toast first, then Dialog)
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (backPressedOnce) {
+                    showExitConfirmationDialog() // Show confirmation dialog
+                } else {
+                    backPressedOnce = true
+                    Toast.makeText(this@OwnerDashBordActivity, "Press again to exit", Toast.LENGTH_SHORT).show()
+
+                    // Reset `backPressedOnce` after 2 seconds
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        backPressedOnce = false
+                    }, 2000)
+                }
+            }
+        })
+
         binding.apply {
             fabAddProperty.setOnClickListener {
                 startActivity(Intent(this@OwnerDashBordActivity, SellRentProperty::class.java))
 //                finish()
             }
         }
+
     }
 
     private fun getUserDetails(): Pair<Int?, String?> {
@@ -60,6 +73,20 @@ class OwnerDashBordActivity : AppCompatActivity() {
         val phoneNumber = sharedPreferences.getString("phoneNumber", null)
         val userId = sharedPreferences.getInt("user_id",0)
         return Pair(userId,phoneNumber)
+    }
+
+    private fun showExitConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Exit Application")
+            .setMessage("Are you sure you want to exit?")
+            .setPositiveButton("Yes") { dialog, _ ->
+                dialog.dismiss()
+                finishAffinity() // Clears the entire activity stack and exits the app
+            }
+            .setNegativeButton("No") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
     }
 
     private fun fetchRooms() {
@@ -131,10 +158,5 @@ class OwnerDashBordActivity : AppCompatActivity() {
             adapter = this@OwnerDashBordActivity.adapter
             layoutManager = LinearLayoutManager(this@OwnerDashBordActivity)
         }
-    }
-    private fun navigateToWelcomeActivity() {
-        startActivity(Intent(this, WelcomeActivity::class.java))
-        finish()
-
     }
 }

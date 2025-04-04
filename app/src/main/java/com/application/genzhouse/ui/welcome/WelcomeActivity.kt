@@ -62,7 +62,6 @@ class WelcomeActivity : AppCompatActivity() {
                                 OwnerDashBordActivity::class.java
                             )
                         )
-                        finish()
                     }
                 } else {
                     startActivity(
