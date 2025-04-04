@@ -13,11 +13,11 @@ import androidx.core.app.ActivityCompat
 import com.application.genzhouse.MyApp
 import com.application.genzhouse.R
 import com.application.genzhouse.databinding.ActivitySellRentPropertyBinding
-import com.application.genzhouse.ui.welcome.sellrentproperty.propertydetails.PropertyDetails
+import com.application.genzhouse.ui.welcome.sellrentproperty.propertydetails.PropertyDetailsForm
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
-class SellRentProperty : AppCompatActivity() {
+class SellRentPropertyForm : AppCompatActivity() {
     private lateinit var activitySellRentPropertyBinding: ActivitySellRentPropertyBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var isLocationDialogShown = false
@@ -106,7 +106,7 @@ class SellRentProperty : AppCompatActivity() {
             (application as MyApp).getCurrentToken { token ->
                 if (token != null) {
                     // Proceed with the authenticated action
-                    val intent = Intent(this, PropertyDetails::class.java).apply {
+                    val intent = Intent(this, PropertyDetailsForm::class.java).apply {
                         putExtra("NAME", name)
                         putExtra("ROLE", role)
                         putExtra("ROOM_TYPE", selectedRoomType)

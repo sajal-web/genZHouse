@@ -5,12 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.application.genzhouse.data.model.UserRequest
 import com.application.genzhouse.databinding.ActivityLoginBinding
-import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentProperty
-import com.application.genzhouse.utils.Resource
-import com.application.genzhouse.viewmodel.CreateUserViewModel
+import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentPropertyForm
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -109,7 +105,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     Log.d("TAG", "signInWithCredential:success")
                     Toast.makeText(this, "Authentication successful", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, SellRentProperty::class.java))
+                    startActivity(Intent(this, SellRentPropertyForm::class.java))
                     finish()
                 } else {
                     Log.w("TAG", "signInWithCredential:failure", task.exception)
@@ -126,7 +122,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         if (auth.currentUser != null) {
-            startActivity(Intent(this, SellRentProperty::class.java))
+            startActivity(Intent(this, SellRentPropertyForm::class.java))
             finish()
         }
     }

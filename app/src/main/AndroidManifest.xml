@@ -45,10 +45,10 @@
             android:name=".ui.welcome.sellrentproperty.pricedetails.PriceDetails"
             android:exported="false" />
         <activity
-            android:name=".ui.welcome.sellrentproperty.propertydetails.PropertyDetails"
+            android:name=".ui.welcome.sellrentproperty.propertydetails.PropertyDetailsForm"
             android:exported="false" />
         <activity
-            android:name=".ui.welcome.sellrentproperty.SellRentProperty"
+            android:name=".ui.welcome.sellrentproperty.SellRentPropertyForm"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

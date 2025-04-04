@@ -10,7 +10,7 @@ import com.application.genzhouse.databinding.ActivityPropertyDetailsBinding
 import com.application.genzhouse.ui.welcome.sellrentproperty.pricedetails.PriceDetails
 import com.google.android.material.card.MaterialCardView
 
-class PropertyDetails : AppCompatActivity() {
+class PropertyDetailsForm : AppCompatActivity() {
     private lateinit var binding: ActivityPropertyDetailsBinding
     // Store selected cards with their types
     private val selectedCards = mutableMapOf<String, MaterialCardView?>()

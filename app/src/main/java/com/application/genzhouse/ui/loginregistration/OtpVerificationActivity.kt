@@ -10,11 +10,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.application.genzhouse.MainActivity
 import com.application.genzhouse.R
 import com.application.genzhouse.data.model.UserRequest
 import com.application.genzhouse.databinding.ActivityOtpVerificationBinding
-import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentProperty
+import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentPropertyForm
 import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.OwnerDashBordActivity
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.CreateUserViewModel
@@ -142,7 +141,7 @@ class OtpVerificationActivity : AppCompatActivity() {
                     Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(
                         this@OtpVerificationActivity,
-                        if (result.data.data.totalRooms == 0) SellRentProperty::class.java
+                        if (result.data.data.totalRooms == 0) SellRentPropertyForm::class.java
                         else OwnerDashBordActivity::class.java
                     ).apply {
                         putExtra("phoneNumber", phoneNumber)
