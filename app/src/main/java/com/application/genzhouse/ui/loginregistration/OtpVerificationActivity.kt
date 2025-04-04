@@ -15,6 +15,7 @@ import com.application.genzhouse.R
 import com.application.genzhouse.data.model.UserRequest
 import com.application.genzhouse.databinding.ActivityOtpVerificationBinding
 import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentProperty
+import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.OwnerDashBordActivity
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.CreateUserViewModel
 import com.google.firebase.FirebaseException
@@ -137,12 +138,15 @@ class OtpVerificationActivity : AppCompatActivity() {
             when (result) {
                 is Resource.Success -> {
                     Log.d("TAG", "User registered successfully")
-                    saveUserDetails(result.data.data.userId, result.data.data.name, result.data.data.phoneNumber)
+                    saveUserDetails(result.data.data.userId, result.data.data.name, result.data.data.phoneNumber,result.data.data.totalRooms)
                     Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show()
-
-                    // ✅ Navigate to next activity after successful user creation
-                    val intent = Intent(this@OtpVerificationActivity, SellRentProperty::class.java).apply {
+                    val intent = Intent(
+                        this@OtpVerificationActivity,
+                        if (result.data.data.totalRooms == 0) SellRentProperty::class.java
+                        else OwnerDashBordActivity::class.java
+                    ).apply {
                         putExtra("phoneNumber", phoneNumber)
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                     }
                     startActivity(intent)
                     finish()
@@ -159,12 +163,13 @@ class OtpVerificationActivity : AppCompatActivity() {
         })
     }
 
-    private fun saveUserDetails(user_id: Int, name: String, phoneNumber: String) {
+    private fun saveUserDetails(user_id: Int, name: String, phoneNumber: String, totalRooms: Int) {
         val sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("name", name)
         editor.putString("phoneNumber", phoneNumber)
         editor.putInt("user_id", user_id)
+        editor.putInt("total_rooms",totalRooms)
         editor.apply()
     }
 

@@ -38,6 +38,7 @@ class UploadProperty : AppCompatActivity() {
         binding = ActivityUploadPropertyBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initOnClick()
+        initToolBar()
         // Initialize the custom progress dialog
         progressDialog = CustomProgressDialog(this)
         viewModel = ViewModelProvider(this)[AddRoomViewModel::class.java]
@@ -56,6 +57,7 @@ class UploadProperty : AppCompatActivity() {
                 is Resource.Success -> {
                     progressDialog.dismiss()
                     startActivity(Intent(this, OwnerDashBordActivity::class.java))
+                    finish()
                     // Handle success
                     Toast.makeText(this, "Room added successfully!", Toast.LENGTH_SHORT).show()
                     // Navigate back or to details screen
@@ -71,16 +73,42 @@ class UploadProperty : AppCompatActivity() {
 
     }
 
+    private fun initToolBar() {
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+    }
+
     private fun initOnClick() {
         binding.btnAddRoom.setOnClickListener {
-            progressDialog.show()
-            progressDialog.setMessage("Uploading Images...")
-            val token = getStoredFirebaseToken().toString()
+            // First check if user has selected between 3 to 8 images
+            when {
+                photos.size < 3 -> {
+                    Toast.makeText(
+                        this,
+                        "Please add at least 3 images of the property",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return@setOnClickListener
+                }
+                photos.size > 8 -> {
+                    Toast.makeText(
+                        this,
+                        "You can upload maximum 8 images only",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return@setOnClickListener
+                }
+                else -> {
+                    // Proceed with upload if validation passes
+                    progressDialog.show()
+                    progressDialog.setMessage("Uploading Images...")
+                    val token = getStoredFirebaseToken().toString()
 
-            if (photos.isNotEmpty()) {
-                uploadImagesToFirebase(photos) { uploadedImageUrls ->
-                    val updatedRequest = createAddRoomRequestFromUI(uploadedImageUrls)
-                    viewModel.addRoom(token, updatedRequest) // Update API with images
+                    uploadImagesToFirebase(photos) { uploadedImageUrls ->
+                        val updatedRequest = createAddRoomRequestFromUI(uploadedImageUrls)
+                        viewModel.addRoom(token, updatedRequest) // Update API with images
+                    }
                 }
             }
         }
@@ -162,38 +190,63 @@ class UploadProperty : AppCompatActivity() {
         val storageRef = FirebaseStorage.getInstance().reference.child("room_images")
         val uploadedImageUrls = mutableListOf<String>()
 
-        coroutineScope.launch(Dispatchers.IO) {  // Run in background
-            for (imageUri in images) {
-                val imageRef = storageRef.child("${System.currentTimeMillis()}.jpg")
-
+        coroutineScope.launch(Dispatchers.IO) {
+            images.forEach { imageUri ->
                 try {
-                    val uploadTask = imageRef.putFile(imageUri).await()
-                    val uri = imageRef.downloadUrl.await()
+                    // Compress the image before upload
+                    val compressedImage = compressImage(this@UploadProperty, imageUri)
+                    val imageRef = storageRef.child("${System.currentTimeMillis()}.jpg")
 
-                    withContext(Dispatchers.Main) {  // Switch back to Main Thread
-                        uploadedImageUrls.add(uri.toString())
+                    // Upload the compressed byte array instead of the original file
+                    val uploadTask = imageRef.putBytes(compressedImage).await()
+                    val downloadUrl = imageRef.downloadUrl.await()
+
+                    withContext(Dispatchers.Main) {
+                        uploadedImageUrls.add(downloadUrl.toString())
+
+                        // Update progress for each image
+                        progressDialog.setMessage("Uploading ${uploadedImageUrls.size}/${images.size} images...")
+
                         if (uploadedImageUrls.size == images.size) {
+                            progressDialog.dismiss()
                             callback(uploadedImageUrls)
                         }
                     }
                 } catch (e: Exception) {
                     withContext(Dispatchers.Main) {
-                        Toast.makeText(this@UploadProperty, "Image upload failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                        progressDialog.dismiss()
+                        Toast.makeText(
+                            this@UploadProperty,
+                            "Image upload failed: ${e.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }
         }
     }
 
+    // Optimized compressImage function with additional checks
+    private fun compressImage(context: Context, imageUri: Uri): ByteArray {
+        return try {
+            context.contentResolver.openInputStream(imageUri)?.use { inputStream ->
+                val options = BitmapFactory.Options().apply {
+                    inSampleSize = 2 // Downsample by factor of 2
+                }
 
-    fun compressImage(context: Context, imageUri: Uri): ByteArray {
-        val inputStream = context.contentResolver.openInputStream(imageUri)
-        val bitmap = BitmapFactory.decodeStream(inputStream)
+                val bitmap = BitmapFactory.decodeStream(inputStream, null, options)
+                    ?: throw Exception("Failed to decode image")
 
-        val outputStream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream) // 70% quality compression
-
-        return outputStream.toByteArray()
+                ByteArrayOutputStream().use { outputStream ->
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream)
+                    outputStream.toByteArray().also {
+                        bitmap.recycle() // Recycle bitmap to free memory
+                    }
+                }
+            } ?: throw Exception("Could not open image stream")
+        } catch (e: Exception) {
+            throw Exception("Image compression failed: ${e.message}")
+        }
     }
 
 

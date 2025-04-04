@@ -89,10 +89,8 @@ class RoomListing : AppCompatActivity() {
 
     private fun fetchRooms() {
         (application as MyApp).getCurrentToken { token ->
-            if (!token.isNullOrEmpty()) {
-                viewModel.loadRooms(token)
-            } else {
-                Toast.makeText(this, "Failed to retrieve token", Toast.LENGTH_SHORT).show()
+            (application as MyApp).getCurrentToken { token ->
+                viewModel.loadRooms(token.toString())
             }
         }
     }

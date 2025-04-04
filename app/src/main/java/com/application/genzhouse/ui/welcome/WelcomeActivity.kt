@@ -44,12 +44,34 @@ class WelcomeActivity : AppCompatActivity() {
     private fun onClick() {
         welcomeBinding.apply {
             sellRentCard.setOnClickListener {
-                startActivity(
-                    Intent(
-                        this@WelcomeActivity,
-                        LoginActivity::class.java
+
+                val uploadedRoomCount =
+                    getSharedPreferences("UserProfile", MODE_PRIVATE).getInt("total_rooms", 0)
+                if (auth.currentUser != null) {
+                    if (uploadedRoomCount == 0) {
+                        startActivity(
+                            Intent(
+                                this@WelcomeActivity,
+                                LoginActivity::class.java
+                            )
+                        )
+                    }else{
+                        startActivity(
+                            Intent(
+                                this@WelcomeActivity,
+                                OwnerDashBordActivity::class.java
+                            )
+                        )
+                        finish()
+                    }
+                } else {
+                    startActivity(
+                        Intent(
+                            this@WelcomeActivity,
+                            LoginActivity::class.java
+                        )
                     )
-                )
+                }
             }
             homeSearchCard.setOnClickListener {
                 startActivity(
@@ -62,9 +84,6 @@ class WelcomeActivity : AppCompatActivity() {
     }
     override fun onStart() {
         super.onStart()
-//        if (auth.currentUser != null) {
-//            startActivity(Intent(this, ChooseCategory::class.java))
-//            finish()
-//        }
+
     }
 }

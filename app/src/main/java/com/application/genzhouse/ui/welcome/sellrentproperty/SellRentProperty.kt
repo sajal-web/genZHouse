@@ -46,6 +46,9 @@ class SellRentProperty : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         initUI()
         checkLocationPermission()
+        activitySellRentPropertyBinding.backButton.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onResume() {

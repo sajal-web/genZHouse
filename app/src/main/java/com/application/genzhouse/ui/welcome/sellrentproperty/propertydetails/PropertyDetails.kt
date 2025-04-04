@@ -144,26 +144,8 @@ class PropertyDetails : AppCompatActivity() {
 
         // Update the selected card
         selectedCards[type.key] = card
-
-        // Show toast with the selected card's text
-        showSelectionToast(card, type)
     }
 
-    private fun showSelectionToast(card: MaterialCardView, type: CardType) {
-        // Find the TextView within the card
-        val textView = findTextViewInCard(card)
-        val text = textView?.text?.toString() ?: "Unknown selection"
-
-        // Create a message based on the selection type
-        val message = when (type) {
-            CardType.PROPERTY -> "Property type selected: $text"
-            CardType.BHK -> "BHK type selected: $text"
-            CardType.FURNISH -> "Furnishing type selected: $text"
-        }
-
-        // Show the toast
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
 
     private fun findTextViewInCard(card: MaterialCardView): TextView? {
         // Find the first TextView child of the card

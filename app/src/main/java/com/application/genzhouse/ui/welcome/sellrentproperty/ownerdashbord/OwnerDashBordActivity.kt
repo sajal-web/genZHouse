@@ -1,14 +1,18 @@
 package com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.application.genzhouse.MyApp
 import com.application.genzhouse.databinding.ActivityOwnerDashBordBinding
 import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
+import com.application.genzhouse.ui.welcome.WelcomeActivity
+import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentProperty
 import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.adapter.RoomAdapter
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.RoomListViewModel
@@ -23,14 +27,33 @@ class OwnerDashBordActivity : AppCompatActivity() {
         binding = ActivityOwnerDashBordBinding.inflate(layoutInflater)
         setContentView(binding.root)
         // Initialize the custom progress dialog
+        // 1. Handle back button press (modern API)
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                navigateToWelcomeActivity()
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+
         progressDialog = CustomProgressDialog(this)
         setupRecyclerView()
         setupViewModel()
         setupSwipeRefresh()
         getUserDetails()
         fetchRooms()
+        initOnClick()
 
     }
+
+    private fun initOnClick() {
+        binding.apply {
+            fabAddProperty.setOnClickListener {
+                startActivity(Intent(this@OwnerDashBordActivity, SellRentProperty::class.java))
+//                finish()
+            }
+        }
+    }
+
     private fun getUserDetails(): Pair<Int?, String?> {
         val sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
         val name = sharedPreferences.getString("name", null)
@@ -108,5 +131,10 @@ class OwnerDashBordActivity : AppCompatActivity() {
             adapter = this@OwnerDashBordActivity.adapter
             layoutManager = LinearLayoutManager(this@OwnerDashBordActivity)
         }
+    }
+    private fun navigateToWelcomeActivity() {
+        startActivity(Intent(this, WelcomeActivity::class.java))
+        finish()
+
     }
 }

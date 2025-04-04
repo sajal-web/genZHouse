@@ -16,7 +16,7 @@ data class UserData(
     @SerializedName("user_id") val userId: Int,
     @SerializedName("name") val name: String,
     @SerializedName("phone_number") val phoneNumber: String,
-    @SerializedName("roomCount") val roomCount: Int,
+    @SerializedName("totalRooms") val totalRooms: Int,
     @SerializedName("createdAt") val createdAt: String,
     @SerializedName("updatedAt") val updatedAt: String
 )
