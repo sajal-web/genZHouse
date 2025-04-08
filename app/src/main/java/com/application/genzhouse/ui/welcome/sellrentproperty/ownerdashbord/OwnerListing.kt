@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.application.genzhouse.MyApp
 import com.application.genzhouse.databinding.ActivityOwnerDashBordBinding
+import com.application.genzhouse.ui.dashboard.OwnerDashBoard
 import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
 import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentPropertyForm
 import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.adapter.RoomAdapter
@@ -40,6 +41,11 @@ class OwnerDashBordActivity : AppCompatActivity() {
     }
 
     private fun initOnClick() {
+        binding.ivUserProfile.setOnClickListener{
+            startActivity(Intent(this,OwnerDashBoard::class.java))
+        }
+
+
         // Handle double back press (Toast first, then Dialog)
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
