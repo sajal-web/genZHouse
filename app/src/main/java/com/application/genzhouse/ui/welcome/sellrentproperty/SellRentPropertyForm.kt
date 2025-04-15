@@ -12,13 +12,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.application.genzhouse.MyApp
 import com.application.genzhouse.R
-import com.application.genzhouse.databinding.ActivitySellRentPropertyBinding
+import com.application.genzhouse.databinding.ActivitySellRentPropertyFormBinding
 import com.application.genzhouse.ui.welcome.sellrentproperty.propertydetails.PropertyDetailsForm
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
 class SellRentPropertyForm : AppCompatActivity() {
-    private lateinit var activitySellRentPropertyBinding: ActivitySellRentPropertyBinding
+    private lateinit var activitySellRentPropertyBinding: ActivitySellRentPropertyFormBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var isLocationDialogShown = false
     // Location permission request
@@ -40,7 +40,7 @@ class SellRentPropertyForm : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        activitySellRentPropertyBinding = ActivitySellRentPropertyBinding.inflate(layoutInflater)
+        activitySellRentPropertyBinding = ActivitySellRentPropertyFormBinding.inflate(layoutInflater)
         setContentView(activitySellRentPropertyBinding.root)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)

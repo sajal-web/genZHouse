@@ -7,7 +7,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.application.genzhouse.databinding.ActivityWelcomeBinding
 import com.application.genzhouse.ui.loginregistration.LoginActivity
 import com.application.genzhouse.ui.welcome.homesearch.ChooseCategory
-import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.OwnerDashBordActivity
+import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.OwnerListing
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -58,7 +58,7 @@ class WelcomeActivity : AppCompatActivity() {
                         startActivity(
                             Intent(
                                 this@WelcomeActivity,
-                                OwnerDashBordActivity::class.java
+                                OwnerListing::class.java
                             )
                         )
                     }

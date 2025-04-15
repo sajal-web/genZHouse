@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.application.genzhouse.data.model.AddRoomRequest
 import com.application.genzhouse.databinding.ActivityUploadPropertyBinding
 import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
-import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.OwnerDashBordActivity
+import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.OwnerListing
 import com.application.genzhouse.ui.welcome.sellrentproperty.uploadlisting.adapter.PhotoAdapter
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.AddRoomViewModel
@@ -57,7 +57,7 @@ class UploadProperty : AppCompatActivity() {
                 is Resource.Success -> {
                     progressDialog.dismiss()
                     incrementTotalRooms()
-                    val intent = Intent(this, OwnerDashBordActivity::class.java).apply {
+                    val intent = Intent(this, OwnerListing::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     }
                     startActivity(intent)

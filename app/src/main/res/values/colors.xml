@@ -7,4 +7,47 @@
     <color name="black">#000000</color>
     <color name="grey">#808080</color>
     <color name="red">#FF0000</color>
+
+    <!-- Material 3 Color Palette -->
+    <color name="colorPrimaryDark">#4F378B</color>
+    <color name="colorPrimaryLight">#EADDFF</color>
+    <color name="colorPrimaryContainer">#EADDFF</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnPrimaryContainer">#21005D</color>
+
+    <color name="colorSecondaryContainer">#E8DEF8</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorOnSecondaryContainer">#1D192B</color>
+
+    <color name="colorTertiary">#7D5260</color>
+    <color name="colorTertiaryContainer">#FFD8E4</color>
+    <color name="colorOnTertiary">#FFFFFF</color>
+    <color name="colorOnTertiaryContainer">#31111D</color>
+
+    <color name="colorSurface">#FFFBFE</color>
+    <color name="colorSurfaceVariant">#E7E0EC</color>
+    <color name="colorOnSurface">#1C1B1F</color>
+    <color name="colorOnSurfaceVariant">#49454F</color>
+    <color name="colorSurfaceContainerLowest">#FFFFFF</color>
+    <color name="colorSurfaceContainerLow">#F7F2FA</color>
+    <color name="colorSurfaceContainerHigh">#ECE6F0</color>
+    <color name="colorSurfaceContainerHighest">#E6E0E9</color>
+
+    <color name="colorError">#B3261E</color>
+    <color name="colorErrorContainer">#F9DEDC</color>
+    <color name="colorOnError">#FFFFFF</color>
+    <color name="colorOnErrorContainer">#410E0B</color>
+
+    <color name="colorOutline">#79747E</color>
+    <color name="colorOutlineVariant">#C4C7C5</color>
+
+    <!-- Status Colors -->
+    <color name="status_booked">#4CAF50</color>
+    <color name="status_pending">#FF9800</color>
+    <color name="status_cancelled">#F44336</color>
+    <color name="status_available">#2196F3</color>
+
+    <!-- Chip Background Selector -->
+    <color name="chip_background_selector">#E8E8E8</color>
+
 </resources>

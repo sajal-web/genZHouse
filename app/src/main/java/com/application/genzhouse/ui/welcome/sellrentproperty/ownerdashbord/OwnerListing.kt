@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.application.genzhouse.MyApp
-import com.application.genzhouse.databinding.ActivityOwnerDashBordBinding
+import com.application.genzhouse.databinding.ActivityOwnerListingBinding
 import com.application.genzhouse.ui.dashboard.OwnerDashBoard
 import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
 import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentPropertyForm
@@ -20,15 +20,15 @@ import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.adapt
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.RoomListViewModel
 
-class OwnerDashBordActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityOwnerDashBordBinding
+class OwnerListing : AppCompatActivity() {
+    private lateinit var binding: ActivityOwnerListingBinding
     private lateinit var viewModel: RoomListViewModel
     private lateinit var adapter: RoomAdapter
     private var backPressedOnce = false
     private lateinit var progressDialog: CustomProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityOwnerDashBordBinding.inflate(layoutInflater)
+        binding = ActivityOwnerListingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         progressDialog = CustomProgressDialog(this)
         setupRecyclerView()
@@ -53,7 +53,7 @@ class OwnerDashBordActivity : AppCompatActivity() {
                     showExitConfirmationDialog() // Show confirmation dialog
                 } else {
                     backPressedOnce = true
-                    Toast.makeText(this@OwnerDashBordActivity, "Press again to exit", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@OwnerListing, "Press again to exit", Toast.LENGTH_SHORT).show()
 
                     // Reset `backPressedOnce` after 2 seconds
                     Handler(Looper.getMainLooper()).postDelayed({
@@ -65,7 +65,7 @@ class OwnerDashBordActivity : AppCompatActivity() {
 
         binding.apply {
             fabAddProperty.setOnClickListener {
-                startActivity(Intent(this@OwnerDashBordActivity, SellRentPropertyForm::class.java))
+                startActivity(Intent(this@OwnerListing, SellRentPropertyForm::class.java))
             }
         }
 
@@ -159,8 +159,8 @@ class OwnerDashBordActivity : AppCompatActivity() {
         }
 
         binding.rvProperties.apply {
-            adapter = this@OwnerDashBordActivity.adapter
-            layoutManager = LinearLayoutManager(this@OwnerDashBordActivity)
+            adapter = this@OwnerListing.adapter
+            layoutManager = LinearLayoutManager(this@OwnerListing)
         }
     }
 }
