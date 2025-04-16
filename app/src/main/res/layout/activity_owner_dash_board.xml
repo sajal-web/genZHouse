@@ -1,501 +1,639 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#F5F7FA"
     tools:context=".ui.dashboard.OwnerDashBoard">
 
-    <!-- Main content with CoordinatorLayout for advanced scrolling -->
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <!-- Top App Bar -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:elevation="0dp">
 
-        <!-- App bar with collapse behavior -->
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/topAppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#4285F4"
+            app:title="Dashboard"
+            app:titleTextColor="@android:color/white">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/toolbarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Dashboard"
+                    android:textColor="@android:color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/userProfileImage"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="16dp"
+                    android:padding="1dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_person"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/circleImageView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.MaterialToolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Main Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingTop="?attr/actionBarSize"
+        android:scrollbars="none">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="?attr/colorSurface">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
+            <!-- Stats Cards -->
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
-                app:titleTextColor="@color/white"
-                app:layout_scrollFlags="scroll|enterAlways"
-                app:title="My Dashboard"
-                app:titleCentered="true"
-                app:menu="@menu/dashboard_menu"
-                app:navigationIcon="@drawable/app_logo"/>
+                android:layout_height="wrap_content">
 
-            <!-- Animated header with greeting -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/header_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:cardBackgroundColor="?attr/colorPrimaryContainer"
-                app:cardElevation="0dp"
-                app:shapeAppearance="@style/ShapeAppearance.MediumComponent"
-                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+                <!-- Total Rooms Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/totalRoomsCard"
+                    android:layout_width="0dp"
+                    android:layout_height="160dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toStartOf="@+id/bookedRoomsCard"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="24dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Welcome back!"
-                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"/>
-
-                    <TextView
-                        android:id="@+id/tv_owner_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="John Doe"
-                        android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
-                        android:textColor="?attr/colorOnPrimaryContainer"
-                        android:textStyle="bold"/>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Manage your properties and bookings"
-                        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
-                        android:textColor="?attr/colorOnPrimaryContainer"/>
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <!-- Main scrollable content -->
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_margin="10dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:cardBackgroundColor="?attr/colorSurface"
-            app:cardElevation="0dp">
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:clipToPadding="false">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="5dp">
-
-                    <!-- Stats chip group -->
-                    <com.google.android.material.chip.ChipGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        app:singleSelection="true"
-                        app:selectionRequired="true">
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_today"
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Today"
-                            app:chipBackgroundColor="@color/chip_background_selector"
-                            app:checkedIconVisible="false"/>
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_week"
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="This Week"
-                            app:chipBackgroundColor="@color/chip_background_selector"
-                            app:checkedIconVisible="false"/>
-
-                        <com.google.android.material.chip.Chip
-                            android:id="@+id/chip_month"
-                            style="@style/Widget.Material3.Chip.Filter"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="This Month"
-                            app:chipBackgroundColor="@color/chip_background_selector"
-                            app:checkedIconVisible="false"/>
-                    </com.google.android.material.chip.ChipGroup>
-
-                    <!-- Stats horizontal scroll -->
-                    <HorizontalScrollView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:scrollbars="none">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-
-                            <!-- Active Listings Card -->
-                            <com.google.android.material.card.MaterialCardView
-                                android:layout_width="160dp"
-                                android:layout_height="160dp"
-                                android:layout_marginEnd="12dp"
-                                app:cardBackgroundColor="@color/colorSecondary"
-                                app:cardElevation="1dp"
-                                app:shapeAppearance="@style/ShapeAppearance.MediumComponent">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:padding="16dp">
-
-                                    <ImageView
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
-                                        android:layout_marginBottom="12dp"
-                                        android:src="@drawable/app_logo"/>
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Active"
-                                        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                                        android:textColor="?attr/colorOnPrimaryContainer"/>
-
-                                    <TextView
-                                        android:id="@+id/tv_active_listings"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="4dp"
-                                        android:text="12"
-                                        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
-                                        android:textColor="?attr/colorOnPrimaryContainer"
-                                        android:textStyle="bold"/>
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="4dp"
-                                        android:text="Listings"
-                                        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                                        android:textColor="?attr/colorOnPrimaryContainer"/>
-                                </LinearLayout>
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <!-- Booked Rooms Card -->
-                            <com.google.android.material.card.MaterialCardView
-                                android:layout_width="160dp"
-                                android:layout_height="160dp"
-                                android:layout_marginEnd="12dp"
-                                app:cardBackgroundColor="@color/colorSecondary"
-                                app:cardElevation="1dp"
-                                app:shapeAppearance="@style/ShapeAppearance.MediumComponent">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:padding="16dp">
-
-                                    <ImageView
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
-                                        android:layout_marginBottom="12dp"
-                                        android:src="@drawable/app_logo"/>
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Booked"
-                                        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                                        android:textColor="?attr/colorOnSecondaryContainer"/>
-
-                                    <TextView
-                                        android:id="@+id/tv_booked_rooms"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="4dp"
-                                        android:text="5"
-                                        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
-                                        android:textColor="?attr/colorOnSecondaryContainer"
-                                        android:textStyle="bold"/>
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="4dp"
-                                        android:text="Rooms"
-                                        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                                        android:textColor="?attr/colorOnSecondaryContainer"/>
-                                </LinearLayout>
-                            </com.google.android.material.card.MaterialCardView>
-
-                            <!-- Earnings Card -->
-                            <com.google.android.material.card.MaterialCardView
-                                android:layout_width="160dp"
-                                android:layout_height="160dp"
-                                app:cardBackgroundColor="@color/colorSecondary"
-                                app:cardElevation="1dp"
-                                app:shapeAppearance="@style/ShapeAppearance.MediumComponent">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical"
-                                    android:padding="16dp">
-
-                                    <ImageView
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
-                                        android:layout_marginBottom="12dp"
-                                        android:src="@drawable/app_logo"/>
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:text="Earnings"
-                                        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                                        android:textColor="?attr/colorOnTertiaryContainer"/>
-
-                                    <TextView
-                                        android:id="@+id/tv_total_earnings"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="4dp"
-                                        android:text="$1,250"
-                                        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"
-                                        android:textColor="?attr/colorOnTertiaryContainer"
-                                        android:textStyle="bold"/>
-
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="4dp"
-                                        android:text="This Month"
-                                        android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
-                                        android:textColor="?attr/colorOnTertiaryContainer"/>
-                                </LinearLayout>
-                            </com.google.android.material.card.MaterialCardView>
-                        </LinearLayout>
-                    </HorizontalScrollView>
-
-                    <!-- Quick Actions Title -->
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:text="Quick Actions"
-                        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                        android:textStyle="bold"/>
-
-                    <!-- Quick Actions Grid -->
-                    <GridLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp"
-                        android:columnCount="2"
-                        android:rowCount="2">
-
-                        <!-- Add Room Button -->
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
-                            android:layout_columnWeight="1"
-                            android:layout_marginEnd="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_rowWeight="1"
-                            app:cardBackgroundColor="?attr/colorSecondaryContainer"
-                            app:cardElevation="1dp"
-                            app:shapeAppearance="@style/ShapeAppearance.MediumComponent">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:foreground="?attr/selectableItemBackground">
-
-                                <ImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:src="@drawable/app_logo"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="12dp"
-                                    android:text="Add Room"
-                                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                                    android:textColor="?attr/colorOnSecondaryContainer"/>
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <!-- Manage Listings Button -->
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
-                            android:layout_columnWeight="1"
-                            android:layout_marginBottom="8dp"
-                            android:layout_rowWeight="1"
-                            app:cardBackgroundColor="?attr/colorTertiaryContainer"
-                            app:cardElevation="1dp"
-                            app:shapeAppearance="@style/ShapeAppearance.MediumComponent">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:foreground="?attr/selectableItemBackground">
-
-                                <ImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:src="@drawable/app_logo"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="12dp"
-                                    android:text="Manage Listings"
-                                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                                    android:textColor="?attr/colorOnTertiaryContainer"/>
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <!-- View Bookings Button -->
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
-                            android:layout_columnWeight="1"
-                            android:layout_marginEnd="8dp"
-                            android:layout_rowWeight="1"
-                            app:cardBackgroundColor="?attr/colorPrimaryContainer"
-                            app:cardElevation="1dp"
-                            app:shapeAppearance="@style/ShapeAppearance.MediumComponent">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:foreground="?attr/selectableItemBackground">
-
-                                <ImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:src="@drawable/ic_calender"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="12dp"
-                                    android:text="View Bookings"
-                                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                                    android:textColor="?attr/colorOnPrimaryContainer"/>
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-
-                        <!-- Messages Button -->
-                        <com.google.android.material.card.MaterialCardView
-                            android:layout_width="0dp"
-                            android:layout_height="120dp"
-                            android:layout_columnWeight="1"
-                            android:layout_rowWeight="1"
-                            app:cardBackgroundColor="?attr/colorSurfaceVariant"
-                            app:cardElevation="1dp"
-                            app:shapeAppearance="@style/ShapeAppearance.MediumComponent">
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:gravity="center"
-                                android:clickable="true"
-                                android:focusable="true"
-                                android:foreground="?attr/selectableItemBackground">
-
-                                <ImageView
-                                    android:layout_width="40dp"
-                                    android:layout_height="40dp"
-                                    android:src="@drawable/ic_message"
-                                    app:tint="?attr/colorOnSurfaceVariant"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="12dp"
-                                    android:text="Messages"
-                                    android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                                    android:textColor="?attr/colorOnSurfaceVariant"/>
-                            </LinearLayout>
-                        </com.google.android.material.card.MaterialCardView>
-                    </GridLayout>
-
-                    <!-- Recent Activity Title with View All -->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/totalRoomsValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="12"
+                            android:textColor="#000000"
+                            android:textSize="36sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Recent Activity"
-                            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
-                            android:textStyle="bold"/>
+                            android:text="Total Rooms"
+                            android:textColor="#666666"
+                            android:textSize="18sp"
+                            android:layout_marginTop="4dp"/>
 
-                        <com.google.android.material.button.MaterialButton
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="16dp"
+                            android:gravity="end">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="More info"
+                                android:textColor="#4285F4"
+                                android:textSize="14sp"/>
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginStart="4dp"
+                                android:src="@drawable/ic_chevron_right"
+                                app:tint="#4285F4" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Booked Rooms Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/bookedRoomsCard"
+                    android:layout_width="0dp"
+                    android:layout_height="160dp"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/totalRoomsCard"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/bookedRoomsValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="4"
+                            android:textColor="#000000"
+                            android:textSize="36sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Booked Rooms"
+                            android:textColor="#666666"
+                            android:textSize="18sp"
+                            android:layout_marginTop="4dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="16dp"
+                            android:gravity="end">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="More info"
+                                android:textColor="#4285F4"
+                                android:textSize="14sp"/>
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginStart="4dp"
+                                android:src="@drawable/ic_chevron_right"
+                                app:tint="#4285F4" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Active Rooms Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/activeRoomsCard"
+                    android:layout_width="0dp"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toStartOf="@+id/totalEnquiriesCard"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/totalRoomsCard">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/activeRoomsValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="8"
+                            android:textColor="#000000"
+                            android:textSize="36sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Active Rooms"
+                            android:textColor="#666666"
+                            android:textSize="18sp"
+                            android:layout_marginTop="4dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="16dp"
+                            android:gravity="end">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="More info"
+                                android:textColor="#4285F4"
+                                android:textSize="14sp"/>
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginStart="4dp"
+                                android:src="@drawable/ic_chevron_right"
+                                app:tint="#4285F4" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Total Enquiries Card -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/totalEnquiriesCard"
+                    android:layout_width="0dp"
+                    android:layout_height="160dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/activeRoomsCard"
+                    app:layout_constraintTop_toBottomOf="@+id/bookedRoomsCard">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/totalEnquiriesValue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="3"
+                            android:textColor="#000000"
+                            android:textSize="36sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Enquiries"
+                            android:textColor="#666666"
+                            android:textSize="18sp"
+                            android:layout_marginTop="4dp"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="16dp"
+                            android:gravity="end">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="More info"
+                                android:textColor="#4285F4"
+                                android:textSize="14sp"/>
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_marginStart="4dp"
+                                android:src="@drawable/ic_chevron_right"
+                                app:tint="#4285F4" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Manage Rooms Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="16dp"
+                android:text="Manage Rooms"
+                android:textColor="#333333"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <!-- Add Room Button -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/addRoomCard"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toStartOf="@+id/editRoomCard"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="12dp"
+                            android:src="@drawable/ic_add"
+                            app:tint="#4285F4" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Add Room"
+                            android:textColor="#333333"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Edit Room Button -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/editRoomCard"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/addRoomCard"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="12dp"
+                            android:src="@drawable/ic_edit"
+                            app:tint="#4285F4" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Edit Room"
+                            android:textColor="#333333"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Delete Room Button -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/deleteRoomCard"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toStartOf="@+id/viewAllCard"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/addRoomCard">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="12dp"
+                            android:src="@drawable/ic_delete"
+                            app:tint="#F44336" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Delete Room"
+                            android:textColor="#333333"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- View All Button -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/viewAllCard"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardBackgroundColor="@android:color/white"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/deleteRoomCard"
+                    app:layout_constraintTop_toBottomOf="@+id/editRoomCard">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="12dp"
+                            android:src="@drawable/ic_all"
+                            app:tint="#4285F4" />
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="View All"
-                            style="@style/Widget.Material3.Button.TextButton"
-                            app:icon="@drawable/arrow_back"
-                            app:iconGravity="end"/>
+                            android:textColor="#333333"
+                            android:textSize="16sp" />
                     </LinearLayout>
 
-                    <!-- Recent Activity List -->
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/rv_recent_activity"
-                        android:layout_width="match_parent"
+                </com.google.android.material.card.MaterialCardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Room Item -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/roomItemCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@android:color/white"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <LinearLayout
+                        android:id="@+id/roomInfoLayout"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:clipToPadding="false"
                         android:orientation="vertical"
-                        android:paddingBottom="16dp"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
-                </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
-        </com.google.android.material.card.MaterialCardView>
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/roomActionsLayout"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Floating Action Button -->
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/fab_add_listing"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="16dp"
-            android:text="Add Listing"
-            app:icon="@drawable/ic_upload"
-            app:shapeAppearance="@style/ShapeAppearance.LargeComponent"/>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                        <TextView
+                            android:id="@+id/roomTenantName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rahul"
+                            android:textColor="#333333"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
 
+                        <TextView
+                            android:id="@+id/roomTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cozy Apartment"
+                            android:textColor="#666666"
+                            android:textSize="16sp" />
 
-</RelativeLayout>
+                        <TextView
+                            android:id="@+id/roomPrice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="₹8,500/month"
+                            android:textColor="#4285F4"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/roomActionsLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/chatButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginEnd="8dp"
+                            app:cardBackgroundColor="#4285F4"
+                            app:cardCornerRadius="24dp"
+                            app:cardElevation="0dp">
+
+                            <ImageView
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_chat" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/callButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_marginEnd="8dp"
+                            app:cardBackgroundColor="#4CAF50"
+                            app:cardCornerRadius="24dp"
+                            app:cardElevation="0dp">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_call"
+                                app:tint="@android:color/white" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/nowButton"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            app:cardBackgroundColor="#4285F4"
+                            app:cardCornerRadius="24dp"
+                            app:cardElevation="0dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="NOW"
+                                android:textColor="@android:color/white"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
