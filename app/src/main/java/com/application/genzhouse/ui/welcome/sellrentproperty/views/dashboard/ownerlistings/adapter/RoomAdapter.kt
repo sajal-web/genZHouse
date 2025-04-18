@@ -1,4 +1,4 @@
-package com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.adapter
+package com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ownerlistings.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

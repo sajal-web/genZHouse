@@ -1,4 +1,4 @@
-package com.application.genzhouse.ui.welcome.sellrentproperty.pricedetails
+package com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.pricedetails
 
 import android.app.DatePickerDialog
 import android.content.Intent
@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.application.genzhouse.R
 import com.application.genzhouse.databinding.ActivityPriceDetailsBinding
-import com.application.genzhouse.ui.welcome.sellrentproperty.uploadlisting.UploadProperty
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.uploadphotos.UploadProperty
 import com.google.android.material.card.MaterialCardView
 import java.text.SimpleDateFormat
 import java.util.Calendar

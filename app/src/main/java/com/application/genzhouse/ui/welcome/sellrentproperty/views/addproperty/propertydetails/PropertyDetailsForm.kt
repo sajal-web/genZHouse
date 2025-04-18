@@ -1,4 +1,4 @@
-package com.application.genzhouse.ui.welcome.sellrentproperty.propertydetails
+package com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.propertydetails
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.application.genzhouse.R
 import com.application.genzhouse.databinding.ActivityPropertyDetailsBinding
-import com.application.genzhouse.ui.welcome.sellrentproperty.pricedetails.PriceDetails
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.pricedetails.PriceDetails
 import com.google.android.material.card.MaterialCardView
 
 class PropertyDetailsForm : AppCompatActivity() {

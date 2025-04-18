@@ -1,4 +1,4 @@
-package com.application.genzhouse.ui.welcome.sellrentproperty
+package com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty
 
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -13,7 +13,7 @@ import androidx.core.app.ActivityCompat
 import com.application.genzhouse.MyApp
 import com.application.genzhouse.R
 import com.application.genzhouse.databinding.ActivitySellRentPropertyFormBinding
-import com.application.genzhouse.ui.welcome.sellrentproperty.propertydetails.PropertyDetailsForm
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.propertydetails.PropertyDetailsForm
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 

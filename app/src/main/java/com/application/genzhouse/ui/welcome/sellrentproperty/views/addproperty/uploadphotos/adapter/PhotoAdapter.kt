@@ -1,4 +1,4 @@
-package com.application.genzhouse.ui.welcome.sellrentproperty.uploadlisting.adapter
+package com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.uploadphotos.adapter
 
 import android.content.Context
 import android.net.Uri
@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.application.genzhouse.R
-import com.application.genzhouse.ui.welcome.sellrentproperty.uploadlisting.UploadProperty
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.uploadphotos.UploadProperty
 
 class PhotoAdapter(
     private val context: Context,

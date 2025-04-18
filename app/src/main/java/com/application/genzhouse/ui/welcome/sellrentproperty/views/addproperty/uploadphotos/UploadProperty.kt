@@ -1,4 +1,4 @@
-package com.application.genzhouse.ui.welcome.sellrentproperty.uploadlisting
+package com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.uploadphotos
 
 import android.content.Context
 import android.content.Intent
@@ -13,8 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.application.genzhouse.data.model.AddRoomRequest
 import com.application.genzhouse.databinding.ActivityUploadPropertyBinding
 import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
-import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.OwnerListing
-import com.application.genzhouse.ui.welcome.sellrentproperty.uploadlisting.adapter.PhotoAdapter
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ownerlistings.OwnerListing
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.uploadphotos.adapter.PhotoAdapter
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.OwnerDashBoard
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.AddRoomViewModel
 import com.google.firebase.storage.FirebaseStorage
@@ -57,7 +58,7 @@ class UploadProperty : AppCompatActivity() {
                 is Resource.Success -> {
                     progressDialog.dismiss()
                     incrementTotalRooms()
-                    val intent = Intent(this, OwnerListing::class.java).apply {
+                    val intent = Intent(this, OwnerDashBoard::class.java).apply {
                         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     }
                     startActivity(intent)

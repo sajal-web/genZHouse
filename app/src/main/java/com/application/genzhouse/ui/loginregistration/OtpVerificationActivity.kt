@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.application.genzhouse.R
 import com.application.genzhouse.data.model.UserRequest
 import com.application.genzhouse.databinding.ActivityOtpVerificationBinding
-import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentPropertyForm
-import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.OwnerListing
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.OwnerDashBoard
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.CreateUserViewModel
 import com.google.firebase.FirebaseException
@@ -142,7 +142,7 @@ class OtpVerificationActivity : AppCompatActivity() {
                     val intent = Intent(
                         this@OtpVerificationActivity,
                         if (result.data.data.totalRooms == 0) SellRentPropertyForm::class.java
-                        else OwnerListing::class.java
+                        else OwnerDashBoard::class.java
                     ).apply {
                         putExtra("phoneNumber", phoneNumber)
                         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)

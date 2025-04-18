@@ -18,7 +18,10 @@
         android:theme="@style/Base.Theme.GenZHouse"
         tools:targetApi="31">
         <activity
-            android:name=".ui.dashboard.OwnerDashBoard"
+            android:name=".ui.welcome.sellrentproperty.views.dashboard.ownerprofile.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.welcome.sellrentproperty.views.dashboard.OwnerDashBoard"
             android:exported="false" />
         <activity
             android:name=".ui.loginregistration.OtpVerificationActivity"
@@ -33,10 +36,10 @@
             android:name=".ui.userhomepage.RoomListing"
             android:exported="false" />
         <activity
-            android:name=".ui.welcome.sellrentproperty.ownerdashbord.OwnerListing"
+            android:name=".ui.welcome.sellrentproperty.views.dashboard.ownerlistings.OwnerListing"
             android:exported="false" />
         <activity
-            android:name=".ui.welcome.sellrentproperty.uploadlisting.UploadProperty"
+            android:name=".ui.welcome.sellrentproperty.views.addproperty.uploadphotos.UploadProperty"
             android:exported="false" />
         <activity
             android:name=".ui.welcome.homesearch.CitySelection"
@@ -45,19 +48,19 @@
             android:name=".ui.welcome.homesearch.ChooseCategory"
             android:exported="false" />
         <activity
-            android:name=".ui.welcome.sellrentproperty.pricedetails.PriceDetails"
+            android:name=".ui.welcome.sellrentproperty.views.addproperty.pricedetails.PriceDetails"
             android:exported="false" />
         <activity
-            android:name=".ui.welcome.sellrentproperty.propertydetails.PropertyDetailsForm"
+            android:name=".ui.welcome.sellrentproperty.views.addproperty.propertydetails.PropertyDetailsForm"
             android:exported="false" />
         <activity
-            android:name=".ui.welcome.sellrentproperty.SellRentPropertyForm"
+            android:name=".ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.welcome.WelcomeActivity"
+            android:name=".WelcomeActivity"
             android:exported="true"
             android:theme="@style/Theme.App.SplashScreen">
             <intent-filter>

@@ -14,7 +14,7 @@ class ChooseCategory : AppCompatActivity() {
         setContentView(binding.root)
         initToolbar()
         binding.pgCard.setOnClickListener{
-            startActivity(Intent(this,RoomDetails::class.java))
+            startActivity(Intent(this,CitySelection::class.java))
         }
         binding.rentCard.setOnClickListener{
             startActivity(Intent(this,CitySelection::class.java))

@@ -1,4 +1,4 @@
-package com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord
+package com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ownerlistings
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -13,10 +13,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.application.genzhouse.MyApp
 import com.application.genzhouse.databinding.ActivityOwnerListingBinding
-import com.application.genzhouse.ui.dashboard.OwnerDashBoard
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.OwnerDashBoard
 import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
-import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentPropertyForm
-import com.application.genzhouse.ui.welcome.sellrentproperty.ownerdashbord.adapter.RoomAdapter
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ownerlistings.adapter.RoomAdapter
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.RoomListViewModel
 
@@ -24,13 +24,13 @@ class OwnerListing : AppCompatActivity() {
     private lateinit var binding: ActivityOwnerListingBinding
     private lateinit var viewModel: RoomListViewModel
     private lateinit var adapter: RoomAdapter
-    private var backPressedOnce = false
     private lateinit var progressDialog: CustomProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOwnerListingBinding.inflate(layoutInflater)
         setContentView(binding.root)
         progressDialog = CustomProgressDialog(this)
+        initToolbar()
         setupRecyclerView()
         setupViewModel()
         setupSwipeRefresh()
@@ -41,27 +41,6 @@ class OwnerListing : AppCompatActivity() {
     }
 
     private fun initOnClick() {
-        binding.ivUserProfile.setOnClickListener{
-            startActivity(Intent(this,OwnerDashBoard::class.java))
-        }
-
-
-        // Handle double back press (Toast first, then Dialog)
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (backPressedOnce) {
-                    showExitConfirmationDialog() // Show confirmation dialog
-                } else {
-                    backPressedOnce = true
-                    Toast.makeText(this@OwnerListing, "Press again to exit", Toast.LENGTH_SHORT).show()
-
-                    // Reset `backPressedOnce` after 2 seconds
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        backPressedOnce = false
-                    }, 2000)
-                }
-            }
-        })
 
         binding.apply {
             fabAddProperty.setOnClickListener {
@@ -79,19 +58,6 @@ class OwnerListing : AppCompatActivity() {
         return Pair(userId,phoneNumber)
     }
 
-    private fun showExitConfirmationDialog() {
-        AlertDialog.Builder(this)
-            .setTitle("Exit Application")
-            .setMessage("Are you sure you want to exit?")
-            .setPositiveButton("Yes") { dialog, _ ->
-                dialog.dismiss()
-                finishAffinity() // Clears the entire activity stack and exits the app
-            }
-            .setNegativeButton("No") { dialog, _ ->
-                dialog.dismiss()
-            }
-            .show()
-    }
 
     private fun fetchRooms() {
         (application as MyApp).getCurrentToken { token ->
@@ -161,6 +127,11 @@ class OwnerListing : AppCompatActivity() {
         binding.rvProperties.apply {
             adapter = this@OwnerListing.adapter
             layoutManager = LinearLayoutManager(this@OwnerListing)
+        }
+    }
+    private fun initToolbar() {
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 }

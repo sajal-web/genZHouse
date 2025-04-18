@@ -6,7 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.application.genzhouse.databinding.ActivityLoginBinding
-import com.application.genzhouse.ui.welcome.sellrentproperty.SellRentPropertyForm
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
