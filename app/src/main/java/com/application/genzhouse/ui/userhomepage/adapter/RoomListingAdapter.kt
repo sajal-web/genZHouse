@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.application.genzhouse.data.model.Room
+import com.application.genzhouse.data.remote.model.Room
 import com.application.genzhouse.databinding.PropertyRoomItemBinding
 
 class RoomListingAdapter(

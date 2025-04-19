@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.genzhouse.R
-import com.application.genzhouse.data.model.UserRequest
+import com.application.genzhouse.data.remote.model.UserRequest
 import com.application.genzhouse.databinding.ActivityOtpVerificationBinding
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.OwnerDashBoard
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
@@ -137,7 +137,7 @@ class OtpVerificationActivity : AppCompatActivity() {
             when (result) {
                 is Resource.Success -> {
                     Log.d("TAG", "User registered successfully")
-                    saveUserDetails(result.data.data.userId, result.data.data.name, result.data.data.phoneNumber,result.data.data.totalRooms)
+                    saveUserDetails(result.data.data.userId, result.data.data.name, result.data.data.phoneNumber,result.data.data.totalRooms, result.data.data.createdAt)
                     Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(
                         this@OtpVerificationActivity,
@@ -162,13 +162,14 @@ class OtpVerificationActivity : AppCompatActivity() {
         })
     }
 
-    private fun saveUserDetails(user_id: Int, name: String, phoneNumber: String, totalRooms: Int) {
+    private fun saveUserDetails(user_id: Int, name: String, phoneNumber: String, totalRooms: Int, joinedDate: String) {
         val sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("name", name)
         editor.putString("phoneNumber", phoneNumber)
         editor.putInt("user_id", user_id)
         editor.putInt("total_rooms",totalRooms)
+        editor.putString("joinedDate",joinedDate)
         editor.apply()
     }
 

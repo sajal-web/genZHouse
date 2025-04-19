@@ -1,4 +1,4 @@
-package com.application.genzhouse.data.model
+package com.application.genzhouse.data.remote.model
 
 import com.google.gson.annotations.SerializedName
 

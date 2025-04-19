@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.genzhouse.R
-import com.application.genzhouse.data.model.Room
+import com.application.genzhouse.data.remote.model.Room
 import com.application.genzhouse.databinding.RoomListedItemBinding
 import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat

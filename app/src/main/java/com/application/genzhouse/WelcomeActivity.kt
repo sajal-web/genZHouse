@@ -22,20 +22,22 @@ class WelcomeActivity : AppCompatActivity() {
     private val auth = FirebaseAuth.getInstance()
     private var backPressedOnce = false
     override fun onCreate(savedInstanceState: Bundle?) {
+        val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
-        welcomeBinding = ActivityWelcomeBinding.inflate(layoutInflater)
-        installSplashScreen().apply {
-            setKeepOnScreenCondition {
-                runBlocking {
-                    delay(1000)
-                    false
-                }
-            }
+
+        splashScreen.setKeepOnScreenCondition {
+            false // Let it proceed immediately
         }
+
+        welcomeBinding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(welcomeBinding.root)
-        initUI()
-        initObserver()
-        onClick()
+
+        // Delay anything you want after layout is set — like showing content, animation, etc.
+        Handler(Looper.getMainLooper()).postDelayed({
+            initUI()
+            initObserver()
+            onClick()
+        }, 1000) // Optional: keep delay only if needed for visuals
     }
 
     private fun initUI() {

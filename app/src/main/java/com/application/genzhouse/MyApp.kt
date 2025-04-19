@@ -2,25 +2,22 @@ package com.application.genzhouse
 
 import android.app.Application
 import android.content.Context
-import android.os.CountDownTimer
 import android.util.Log
 import androidx.work.*
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthException
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
+import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 import java.util.concurrent.TimeUnit
 
 class MyApp : Application() {
     private lateinit var auth: FirebaseAuth
-    private var tokenRefreshTimer: CountDownTimer? = null
     private val appScope = CoroutineScope(Dispatchers.Default + SupervisorJob())
+    private var isInitializedForUser = false
+    private var tokenRefreshJob: Job? = null
+    @Volatile private var isRefreshingToken = false
 
     companion object {
         private const val TAG = "TokenManager"
@@ -30,6 +27,8 @@ class MyApp : Application() {
         private const val PREFS_NAME = "AppPrefs"
         private const val KEY_FIREBASE_TOKEN = "firebase_token"
         private const val KEY_TOKEN_TIMESTAMP = "token_timestamp"
+
+        fun get(context: Context): MyApp = context.applicationContext as MyApp
     }
 
     override fun onCreate() {
@@ -40,53 +39,67 @@ class MyApp : Application() {
     }
 
     override fun onTerminate() {
-        stopTokenRefreshSystem()
+        cleanupForLogout()
         appScope.cancel()
         super.onTerminate()
     }
 
     private fun setupAuthStateListener() {
         auth.addAuthStateListener { firebaseAuth ->
-            if (firebaseAuth.currentUser != null) {
-                startTokenRefreshSystem()
-            } else {
-                stopTokenRefreshSystem()
+            firebaseAuth.currentUser?.let { user ->
+                if (!isInitializedForUser) {
+                    initializeForUser(user)
+                }
+            } ?: run {
+                if (isInitializedForUser) {
+                    cleanupForLogout()
+                }
             }
         }
     }
 
-    private fun startTokenRefreshSystem() {
-        stopTokenRefreshSystem()
-
-        // Immediate refresh
-        refreshFirebaseToken()
-
-        // Setup periodic refresh with CountDownTimer (more efficient than Handler)
-        tokenRefreshTimer = object : CountDownTimer(TOKEN_REFRESH_INTERVAL, TOKEN_REFRESH_INTERVAL) {
-            override fun onTick(millisUntilFinished: Long) { /* Not used */ }
-
-            override fun onFinish() {
-                if (auth.currentUser != null) {
-                    refreshFirebaseToken()
-                    this.start() // Restart timer for next interval
-                }
-            }
-        }.start()
-
-        // Setup WorkManager as backup for when app is in background
+    private fun initializeForUser(user: FirebaseUser) {
+        Log.d(TAG, "Initializing for user: ${user.uid}")
+        isInitializedForUser = true
+        startTokenRefreshSystem()
         TokenRefreshWorker.scheduleRefresh(this)
     }
 
+    private fun cleanupForLogout() {
+        Log.d(TAG, "Cleaning up for logout")
+        isInitializedForUser = false
+        stopTokenRefreshSystem()
+        cancelTokenRefreshWork()
+        clearAllSharedPreferences()
+    }
+
+    private fun startTokenRefreshSystem() {
+        if (!isInitializedForUser) return
+
+        stopTokenRefreshSystem() // cancel any existing job
+
+        refreshFirebaseToken()
+
+        tokenRefreshJob = appScope.launch {
+            while (isActive && isInitializedForUser) {
+                delay(TOKEN_REFRESH_INTERVAL)
+                refreshFirebaseToken()
+            }
+        }
+    }
+
     private fun stopTokenRefreshSystem() {
-        tokenRefreshTimer?.cancel()
-        tokenRefreshTimer = null
+        tokenRefreshJob?.cancel()
+        tokenRefreshJob = null
     }
 
     private fun refreshFirebaseToken() {
-        val user = auth.currentUser ?: return
+        if (!isInitializedForUser || isRefreshingToken) return
 
         appScope.launch {
+            isRefreshingToken = true
             try {
+                val user = auth.currentUser ?: return@launch
                 val result = user.getIdToken(true).await()
                 result.token?.let { token ->
                     storeFirebaseToken(token)
@@ -100,13 +113,14 @@ class MyApp : Application() {
             } catch (e: Exception) {
                 Log.e(TAG, "Token refresh failed", e)
                 scheduleRetryRefresh()
+            } finally {
+                isRefreshingToken = false
             }
         }
     }
 
     private fun handleFirebaseAuthError(exception: FirebaseAuthException) {
         Log.e(TAG, "Auth error: ${exception.errorCode}", exception)
-
         when (exception.errorCode) {
             "ERROR_INVALID_CREDENTIAL" -> {
                 Log.w(TAG, "Invalid credentials - forcing logout")
@@ -117,16 +131,12 @@ class MyApp : Application() {
     }
 
     private fun scheduleRetryRefresh() {
+        if (!isInitializedForUser) return
+
         appScope.launch {
-            withContext(Dispatchers.IO) {
-                try {
-                    Thread.sleep(RETRY_INTERVAL)
-                    if (auth.currentUser != null) {
-                        refreshFirebaseToken()
-                    }
-                } catch (e: InterruptedException) {
-                    // Timer was canceled
-                }
+            delay(RETRY_INTERVAL)
+            if (isInitializedForUser) {
+                refreshFirebaseToken()
             }
         }
     }
@@ -139,7 +149,20 @@ class MyApp : Application() {
         }
     }
 
+    private fun clearAllSharedPreferences() {
+        getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit().clear().apply()
+    }
+
+    private fun cancelTokenRefreshWork() {
+        WorkManager.getInstance(this).cancelUniqueWork(TokenRefreshWorker.WORK_NAME)
+    }
+
     fun getCurrentToken(callback: (String?) -> Unit) {
+        if (!isInitializedForUser) {
+            callback(null)
+            return
+        }
+
         val prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val storedToken = prefs.getString(KEY_FIREBASE_TOKEN, null)
         val tokenTimestamp = prefs.getLong(KEY_TOKEN_TIMESTAMP, 0)
@@ -150,7 +173,6 @@ class MyApp : Application() {
             return
         }
 
-        // Force refresh if token is expired or missing
         appScope.launch {
             try {
                 val user = auth.currentUser
@@ -162,17 +184,17 @@ class MyApp : Application() {
                             callback(token)
                         }
                     } ?: withContext(Dispatchers.Main) {
-                        callback(storedToken) // Fallback to stored token
+                        callback(storedToken)
                     }
                 } else {
                     withContext(Dispatchers.Main) {
-                        callback(null) // No user logged in
+                        callback(null)
                     }
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "Error getting token", e)
                 withContext(Dispatchers.Main) {
-                    callback(storedToken) // Fallback to stored token on error
+                    callback(storedToken)
                 }
             }
         }
@@ -185,13 +207,12 @@ class MyApp : Application() {
 
         override suspend fun doWork(): Result {
             val auth = FirebaseAuth.getInstance()
-            val user = auth.currentUser ?: return Result.success() // No user to refresh
+            val user = auth.currentUser ?: return Result.success()
 
             return try {
                 val token = user.getIdToken(true).await().token
 
                 if (token != null) {
-                    // Store token in SharedPreferences
                     applicationContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit().apply {
                         putString(KEY_FIREBASE_TOKEN, token)
                         putLong(KEY_TOKEN_TIMESTAMP, System.currentTimeMillis())
@@ -204,7 +225,7 @@ class MyApp : Application() {
             } catch (e: FirebaseAuthException) {
                 if (e.errorCode == "ERROR_INVALID_CREDENTIAL") {
                     auth.signOut()
-                    Result.success() // No need to retry after logout
+                    Result.success()
                 } else {
                     Result.retry()
                 }
@@ -214,10 +235,7 @@ class MyApp : Application() {
         }
 
         companion object {
-            private const val PREFS_NAME = "AppPrefs"
-            private const val KEY_FIREBASE_TOKEN = "firebase_token"
-            private const val KEY_TOKEN_TIMESTAMP = "token_timestamp"
-            private const val WORK_NAME = "TokenRefresh"
+            const val WORK_NAME = "TokenRefresh"
 
             fun scheduleRefresh(context: Context) {
                 val constraints = Constraints.Builder()
@@ -241,5 +259,9 @@ class MyApp : Application() {
                 )
             }
         }
+    }
+
+    fun logout() {
+        auth.signOut()
     }
 }

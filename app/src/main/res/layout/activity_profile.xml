@@ -86,27 +86,27 @@
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvUserEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="johndoe@example.com"
-                        android:textColor="#5F6368"
-                        android:textSize="16sp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/tvUserEmail"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginTop="4dp"-->
+<!--                        android:text="johndoe@example.com"-->
+<!--                        android:textColor="#5F6368"-->
+<!--                        android:textSize="16sp" />-->
 
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnEditProfile"
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="16dp"
-                        android:backgroundTint="#4285F4"
-                        android:paddingStart="24dp"
-                        android:paddingEnd="24dp"
-                        android:text="Edit Profile"
-                        android:textAllCaps="false"
-                        android:textColor="@android:color/white"
-                        app:cornerRadius="24dp" />
+<!--                    <com.google.android.material.button.MaterialButton-->
+<!--                        android:id="@+id/btnEditProfile"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="48dp"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:backgroundTint="#4285F4"-->
+<!--                        android:paddingStart="24dp"-->
+<!--                        android:paddingEnd="24dp"-->
+<!--                        android:text="Edit Profile"-->
+<!--                        android:textAllCaps="false"-->
+<!--                        android:textColor="@android:color/white"-->
+<!--                        app:cornerRadius="24dp" />-->
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -189,7 +189,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="123 Main Street, Apartment 4B, Mumbai, Maharashtra, 400001"
+                        android:text="----------"
                         android:textColor="#202124"
                         android:textSize="16sp"
                         android:textStyle="bold" />

@@ -1,10 +1,11 @@
 package com.application.genzhouse.data.repository
 
-import com.application.genzhouse.data.api.RetrofitClient
-import com.application.genzhouse.data.model.AddRoomRequest
-import com.application.genzhouse.data.model.AddRoomResponse
-import com.application.genzhouse.data.model.ErrorResponse
-import com.application.genzhouse.data.model.Room
+import com.application.genzhouse.data.remote.api.RetrofitClient
+import com.application.genzhouse.data.remote.model.AddRoomRequest
+import com.application.genzhouse.data.remote.model.AddRoomResponse
+import com.application.genzhouse.data.remote.model.ErrorResponse
+import com.application.genzhouse.data.remote.model.Room
+import com.application.genzhouse.data.remote.model.TotalRoomCount
 import com.application.genzhouse.utils.Resource
 import com.google.gson.Gson
 
@@ -47,7 +48,7 @@ class RoomRepository {
                 val errorResponse = try {
                     Gson().fromJson(errorBody, ErrorResponse::class.java)
                 } catch (e: Exception) {
-                    ErrorResponse(false, "Unknown error occurred")
+                    ErrorResponse(false, "Unknown error occurred: $e")
                 }
 
                 when (response.code()) {
@@ -71,10 +72,34 @@ class RoomRepository {
                 val errorResponse = try {
                     Gson().fromJson(errorBody, ErrorResponse::class.java)
                 } catch (e: Exception) {
-                    ErrorResponse(false, "Unknown error occurred")
+                    ErrorResponse(false, "Unknown error occurred:$e")
                 }
 
                 when (response.code()) {
+                    401 -> Resource.Error("Unauthorized: ${errorResponse.message}")
+                    else -> Resource.Error("Error: ${errorResponse.message}")
+                }
+            }
+        } catch (e: Exception) {
+            Resource.Error("Network Error: ${e.message ?: "Unknown error occurred"}")
+        }
+    }
+
+    suspend fun getDashBoardData(userId: Int, token: String): Resource<TotalRoomCount> {
+        return  try {
+            val response = apiService.getDashboardData(userId, "Bearer $token")
+            if (response.isSuccessful) {
+                Resource.Success(response.body()!!)
+            } else {
+                // parse error response
+                val errorBody = response.errorBody()?.string()
+                val errorResponse = try {
+                    Gson().fromJson(errorBody, ErrorResponse::class.java)
+                } catch (e: Exception) {
+                    ErrorResponse(false, "Unknown error occurred : $e")
+                }
+
+                when(response.code()) {
                     401 -> Resource.Error("Unauthorized: ${errorResponse.message}")
                     else -> Resource.Error("Error: ${errorResponse.message}")
                 }

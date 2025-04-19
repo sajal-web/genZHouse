@@ -1,9 +1,9 @@
 package com.application.genzhouse.data.repository
 
-import com.application.genzhouse.data.api.RetrofitClient
-import com.application.genzhouse.data.model.ErrorResponse
-import com.application.genzhouse.data.model.UserRequest
-import com.application.genzhouse.data.model.UserResponse
+import com.application.genzhouse.data.remote.api.RetrofitClient
+import com.application.genzhouse.data.remote.model.ErrorResponse
+import com.application.genzhouse.data.remote.model.UserRequest
+import com.application.genzhouse.data.remote.model.UserResponse
 import com.application.genzhouse.utils.Resource
 import com.google.gson.Gson
 

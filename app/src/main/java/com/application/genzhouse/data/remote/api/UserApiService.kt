@@ -1,7 +1,7 @@
-package com.application.genzhouse.data.api
+package com.application.genzhouse.data.remote.api
 
-import com.application.genzhouse.data.model.UserRequest
-import com.application.genzhouse.data.model.UserResponse
+import com.application.genzhouse.data.remote.model.UserRequest
+import com.application.genzhouse.data.remote.model.UserResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.POST

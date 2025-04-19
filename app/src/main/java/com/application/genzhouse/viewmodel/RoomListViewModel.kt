@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.application.genzhouse.data.model.Room
+import com.application.genzhouse.data.remote.model.Room
 import com.application.genzhouse.data.repository.RoomRepository
 import com.application.genzhouse.utils.Resource
 import kotlinx.coroutines.launch

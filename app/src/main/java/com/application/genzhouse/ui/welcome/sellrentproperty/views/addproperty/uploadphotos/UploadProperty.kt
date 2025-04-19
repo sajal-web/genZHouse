@@ -10,10 +10,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.application.genzhouse.data.model.AddRoomRequest
+import com.application.genzhouse.data.remote.model.AddRoomRequest
 import com.application.genzhouse.databinding.ActivityUploadPropertyBinding
 import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
-import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ownerlistings.OwnerListing
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.uploadphotos.adapter.PhotoAdapter
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.OwnerDashBoard
 import com.application.genzhouse.utils.Resource

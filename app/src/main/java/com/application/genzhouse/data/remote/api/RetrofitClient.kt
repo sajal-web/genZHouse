@@ -1,4 +1,4 @@
-package com.application.genzhouse.data.api
+package com.application.genzhouse.data.remote.api
 
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient

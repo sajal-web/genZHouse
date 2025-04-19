@@ -117,7 +117,7 @@
                             android:id="@+id/totalRoomsValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="12"
+                            android:text="--"
                             android:textColor="#1A73E8"
                             android:textSize="36sp"
                             android:textStyle="bold" />
@@ -183,7 +183,7 @@
                             android:id="@+id/bookedRoomsValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="4"
+                            android:text="--"
                             android:textColor="#EA4335"
                             android:textSize="36sp"
                             android:textStyle="bold" />
@@ -250,7 +250,7 @@
                             android:id="@+id/activeRoomsValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="8"
+                            android:text="--"
                             android:textColor="#34A853"
                             android:textSize="36sp"
                             android:textStyle="bold" />
@@ -317,7 +317,7 @@
                             android:id="@+id/totalEnquiriesValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="3"
+                            android:text="--"
                             android:textColor="#FBBC04"
                             android:textSize="36sp"
                             android:textStyle="bold" />

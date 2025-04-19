@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.application.genzhouse.data.model.UserRequest
-import com.application.genzhouse.data.model.UserResponse
+import com.application.genzhouse.data.remote.model.UserRequest
+import com.application.genzhouse.data.remote.model.UserResponse
 import com.application.genzhouse.data.repository.UserRepository
 import com.application.genzhouse.utils.Resource
 import kotlinx.coroutines.launch

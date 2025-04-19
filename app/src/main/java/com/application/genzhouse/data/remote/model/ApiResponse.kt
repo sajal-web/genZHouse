@@ -1,4 +1,4 @@
-package com.application.genzhouse.data.model
+package com.application.genzhouse.data.remote.model
 
 // Add Room Request model
 data class AddRoomRequest(
@@ -64,10 +64,15 @@ data class OwnerRoomData(
     val counts: Counts
 )
 
+data class TotalRoomCount(
+    val success: Boolean,
+    val data : Counts
+)
+
 data class Counts(
-    val total: Int,
-    val booked: Int,
-    val active: Int
+    val totalRooms: Int,
+    val bookedRooms: Int,
+    val activeRooms: Int
 )
 
 // 1.All Room Data Models
