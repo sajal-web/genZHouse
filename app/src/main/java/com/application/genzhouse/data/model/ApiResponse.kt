@@ -52,10 +52,26 @@ data class ErrorResponse(
 )
 
 
-// List owner room model
-
-// 1. Data Models
+// List all & owner room model
+// 1.Owner Rooms Data Models
 data class RoomListResponse(
+    val success: Boolean,
+    val data: OwnerRoomData
+)
+
+data class OwnerRoomData(
+    val rooms: List<Room>,
+    val counts: Counts
+)
+
+data class Counts(
+    val total: Int,
+    val booked: Int,
+    val active: Int
+)
+
+// 1.All Room Data Models
+data class AllRoomListResponse(
     val success: Boolean,
     val data: List<Room>
 )

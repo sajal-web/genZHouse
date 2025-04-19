@@ -64,7 +64,7 @@ class RoomRepository {
         return try {
             val response = apiService.getUserRooms(user_id,"Bearer $token")
             if (response.isSuccessful && response.body()?.success == true) {
-                Resource.Success(response.body()?.data ?: emptyList())
+                Resource.Success(response.body()?.data?.rooms ?: emptyList())
             } else {
                 // Parse error response
                 val errorBody = response.errorBody()?.string()

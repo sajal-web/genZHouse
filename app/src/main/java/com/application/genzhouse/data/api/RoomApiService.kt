@@ -2,6 +2,7 @@ package com.application.genzhouse.data.api
 
 import com.application.genzhouse.data.model.AddRoomRequest
 import com.application.genzhouse.data.model.AddRoomResponse
+import com.application.genzhouse.data.model.AllRoomListResponse
 import com.application.genzhouse.data.model.RoomListResponse
 import retrofit2.Response
 import retrofit2.http.Body
@@ -17,7 +18,7 @@ interface RoomApiService {
     ): Response<AddRoomResponse>
 
     @GET("api/rooms")
-    suspend fun getRooms(@Header("Authorization") token: String): Response<RoomListResponse>
+    suspend fun getRooms(@Header("Authorization") token: String): Response<AllRoomListResponse>
 
     @GET("api/user-rooms")
     suspend fun getUserRooms(
