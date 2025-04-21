@@ -125,7 +125,7 @@ class OtpVerificationActivity : AppCompatActivity() {
     }
 
     private fun registerUserInBackend(name: String, phoneNumber: String) {
-        progressDialog.setMessage("Registering user...")
+        progressDialog.setMessage("Login user...")
         progressDialog.show()
 
         val request = UserRequest(name = name, phoneNumber = phoneNumber)
@@ -136,9 +136,8 @@ class OtpVerificationActivity : AppCompatActivity() {
             progressDialog.dismiss()
             when (result) {
                 is Resource.Success -> {
-                    Log.d("TAG", "User registered successfully")
                     saveUserDetails(result.data.data.userId, result.data.data.name, result.data.data.phoneNumber,result.data.data.totalRooms, result.data.data.createdAt)
-                    Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "User login successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(
                         this@OtpVerificationActivity,
                         if (result.data.data.totalRooms == 0) SellRentPropertyForm::class.java
@@ -151,8 +150,7 @@ class OtpVerificationActivity : AppCompatActivity() {
                     finish()
                 }
                 is Resource.Error -> {
-                    Log.e("TAG", "Error: ${result.message}")
-                    Toast.makeText(this, "Failed to register user: ${result.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, result.message , Toast.LENGTH_SHORT).show()
                 }
                 is Resource.Loading -> {
                     progressDialog.setMessage("Registering user...")

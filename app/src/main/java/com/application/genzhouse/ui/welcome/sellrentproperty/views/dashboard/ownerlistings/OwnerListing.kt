@@ -101,7 +101,7 @@ class OwnerListing : AppCompatActivity() {
                     } else {
                         binding.tvEmptyState.visibility = View.GONE
                         binding.tvEmptyState.visibility = View.VISIBLE
-                        binding.tvEmptyState.text = "No rooms available"
+                        binding.tvEmptyState.text = "No rooms available!"
                     }
                 }
                 is Resource.Error -> {
@@ -109,6 +109,7 @@ class OwnerListing : AppCompatActivity() {
                     binding.rvProperties.visibility = View.GONE
                     binding.tvEmptyState.visibility = View.VISIBLE
                     binding.tvEmptyState.text = result.message
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

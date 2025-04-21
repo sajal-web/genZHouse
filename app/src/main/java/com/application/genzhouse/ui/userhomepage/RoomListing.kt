@@ -74,6 +74,7 @@ class RoomListing : AppCompatActivity() {
                     progressDialog.dismiss()
                     binding.propertyRecyclerView.visibility = View.GONE
                     binding.emptyStateView.visibility = View.VISIBLE
+                    binding.emptyStateTitle.visibility = View.GONE
                     binding.emptyStateSubtitle.text = result.message
                 }
             }

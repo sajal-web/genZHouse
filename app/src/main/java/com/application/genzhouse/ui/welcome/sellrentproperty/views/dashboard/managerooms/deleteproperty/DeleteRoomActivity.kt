@@ -49,6 +49,7 @@ class DeleteRoomActivity : AppCompatActivity() {
                 }
                 is Resource.Error -> {
                     progressDialog.dismiss()
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -102,14 +103,6 @@ class DeleteRoomActivity : AppCompatActivity() {
     }
 
     private fun deleteRoom(room : RoomItem) {
-        // 1. Remove from DataHolder
-
-
-        // 2. Update adapter
-//        adapter.updateList(DataHolder.roomItems ?: emptyList())
-
-        // 3. In real app: Make API call to delete from server
-        // viewModel.deleteRoom(room.id)
         (application as MyApp).getCurrentToken { token ->
             val userId = getUserDetails().first
             if (!token.isNullOrEmpty()) {

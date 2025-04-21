@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -16,7 +16,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.GenZHouse"
-        tools:targetApi="31">
+        tools:targetApi="31" >
+        <activity
+            android:name=".ui.loginregistration.LoginActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.welcome.sellrentproperty.views.dashboard.managerooms.deleteproperty.DeleteRoomActivity"
             android:exported="false" />
@@ -30,7 +33,7 @@
             android:name=".ui.loginregistration.OtpVerificationActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.loginregistration.LoginActivity"
+            android:name=".ui.loginregistration.SignupActivity"
             android:exported="false" />
         <activity
             android:name=".ui.userhomepage.RoomDetails"
@@ -65,7 +68,7 @@
         <activity
             android:name=".WelcomeActivity"
             android:exported="true"
-            android:theme="@style/Theme.App.SplashScreen">
+            android:theme="@style/Theme.App.SplashScreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

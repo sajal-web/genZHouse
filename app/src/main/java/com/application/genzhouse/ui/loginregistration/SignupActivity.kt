@@ -4,15 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.application.genzhouse.R
 import com.application.genzhouse.data.remote.model.UserRequest
-import com.application.genzhouse.databinding.ActivityLoginBinding
 import com.application.genzhouse.databinding.ActivitySignupBinding
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
 import com.application.genzhouse.utils.Resource
@@ -24,23 +19,36 @@ import com.google.firebase.auth.PhoneAuthProvider.ForceResendingToken
 import com.google.firebase.auth.PhoneAuthProvider.OnVerificationStateChangedCallbacks
 import java.util.concurrent.TimeUnit
 
-class LoginActivity : AppCompatActivity() {
+class SignupActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding
+    // View Binding
+    private lateinit var binding: ActivitySignupBinding
+
+    // Firebase Authentication
     private val auth = FirebaseAuth.getInstance()
+
+    // ViewModel
     private lateinit var viewModel: CreateUserViewModel
+
+    // UI Components
     private lateinit var progressDialog: CustomProgressDialog
+
+    // Data fields
     private lateinit var phNumber: String
     private lateinit var name: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
         initializeViews()
         setupViewModel()
         setupClickListeners()
         checkCurrentUser()
+    }
+
+    private fun initializeViews() {
+        binding = ActivitySignupBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        progressDialog = CustomProgressDialog(this)
     }
 
     private fun setupViewModel() {
@@ -48,32 +56,16 @@ class LoginActivity : AppCompatActivity() {
         observeViewModel()
     }
 
-    private fun setupClickListeners() {
-        binding.apply {
-            sendOtpBtn.setOnClickListener { validateAndProceed() }
-//            loginRedirectText.setOnClickListener { navigateToLogin() }
-        }
-    }
-
-    private fun validateAndProceed() {
-        val number = binding.phoneNumberInput.text.toString().trim()
-        when {
-//            name.isEmpty() -> showToast("Please enter your name!")
-            number.isEmpty() || number.length != 10 -> showToast("Please enter a valid 10-digit phone number!")
-            else -> viewModel.checkUser(UserRequest(name = name, phoneNumber = "+91$number"))
-        }
-    }
-
     private fun observeViewModel() {
         viewModel.createUserResult.observe(this, Observer { result ->
             when (result) {
                 is Resource.Success -> {
                     if (result.data.data != null) {
-                        name = result.data.data.name
-                        sendOtp("+91${binding.phoneNumberInput.text.toString().trim()}")
-                    } else {
                         Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
+                        navigateToLogin()
                         progressDialog.dismiss()
+                    } else {
+                        sendOtp("+91${binding.phoneNumberInput.text.toString().trim()}")
                     }
                 }
                 is Resource.Error -> {
@@ -83,6 +75,25 @@ class LoginActivity : AppCompatActivity() {
                 is Resource.Loading -> progressDialog.show()
             }
         })
+    }
+
+
+    private fun setupClickListeners() {
+        binding.apply {
+            sendOtpBtn.setOnClickListener { validateAndProceed() }
+            loginRedirectText.setOnClickListener { navigateToLogin() }
+        }
+    }
+
+    private fun validateAndProceed() {
+        val number = binding.phoneNumberInput.text.toString().trim()
+        name = binding.nameInput.text.toString().trim()
+
+        when {
+            name.isEmpty() -> showToast("Please enter your name!")
+            number.isEmpty() || number.length != 10 -> showToast("Please enter a valid 10-digit phone number!")
+            else -> viewModel.checkUser(UserRequest(name = name, phoneNumber = "+91$number"))
+        }
     }
 
     private fun sendOtp(phoneNumber: String) {
@@ -121,16 +132,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToOtpVerification(verificationId: String, token: ForceResendingToken) {
-        Intent(this, OtpVerificationActivity::class.java).apply {
-            putExtra("OTP", verificationId)
-            putExtra("resendToken", token)
-            putExtra("phoneNumber", phNumber)
-            putExtra("name", name)
-            startActivity(this)
-        }
-    }
-
     private fun getErrorMessage(e: FirebaseException): String = when (e) {
         is FirebaseAuthInvalidCredentialsException -> e.message ?: "Invalid credentials"
         is FirebaseTooManyRequestsException -> e.message ?: "Too many requests"
@@ -151,31 +152,38 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToPropertyForm() {
-        startActivity(Intent(this, SellRentPropertyForm::class.java))
-        finish()
-    }
-
     private fun getAuthErrorMessage(exception: Exception?): String = when (exception) {
         is FirebaseAuthInvalidCredentialsException -> "Invalid Credential. Please try again."
         else -> "Authentication failed. Please try again."
     }
 
-    private fun initializeViews() {
-        binding = ActivityLoginBinding.inflate(layoutInflater)
-        name = "Sajal"
-        setContentView(binding.root)
-        progressDialog = CustomProgressDialog(this)
-
+    private fun navigateToOtpVerification(verificationId: String, token: ForceResendingToken) {
+        Intent(this, OtpVerificationActivity::class.java).apply {
+            putExtra("OTP", verificationId)
+            putExtra("resendToken", token)
+            putExtra("phoneNumber", phNumber)
+            putExtra("name", name)
+            startActivity(this)
+        }
     }
 
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    private fun navigateToPropertyForm() {
+        startActivity(Intent(this, SellRentPropertyForm::class.java))
+        finish()
     }
+
+    private fun navigateToLogin() {
+        startActivity(Intent(this, LoginActivity::class.java))
+    }
+
     private fun checkCurrentUser() {
         if (auth.currentUser != null) {
             navigateToPropertyForm()
         }
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     override fun onStart() {

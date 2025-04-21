@@ -23,4 +23,12 @@ class CreateUserViewModel (
             _createUserResult.value = result
         }
     }
+
+    fun checkUser(request: UserRequest) {
+        viewModelScope.launch {
+            _createUserResult.value = Resource.Loading
+            val result = repository.checkUser(request)
+            _createUserResult.value = result
+        }
+    }
 }

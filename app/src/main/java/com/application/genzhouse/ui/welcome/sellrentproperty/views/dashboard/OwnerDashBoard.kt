@@ -76,6 +76,7 @@ class OwnerDashBoard : AppCompatActivity() {
                 }
                 is Resource.Error -> {
                     progressDialog.dismiss()
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                 }
             }
         }

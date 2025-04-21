@@ -5,32 +5,34 @@ import com.application.genzhouse.data.remote.model.ErrorResponse
 import com.application.genzhouse.data.remote.model.UserRequest
 import com.application.genzhouse.data.remote.model.UserResponse
 import com.application.genzhouse.utils.Resource
+import com.application.genzhouse.utils.safeApiCall
 import com.google.gson.Gson
 
 class UserRepository {
     private val apiService = RetrofitClient.userApiService
-    suspend fun createUser(request: UserRequest): Resource<UserResponse> {
-        return try {
-            val response = apiService.createUser(request)
-            if (response.isSuccessful) {
-                Resource.Success(response.body()!!)
-            } else {
-                // Parse error response
-                val errorBody = response.errorBody()?.string()
-                val errorResponse = try {
-                    Gson().fromJson(errorBody, ErrorResponse::class.java)
-                } catch (e: Exception) {
-                    ErrorResponse(false, "Unknown error occurred")
-                }
 
-                when (response.code()) {
-                    401 -> Resource.Error("Unauthorized: ${errorResponse.message}")
-                    422 -> Resource.Error("Validation Error: ${errorResponse.error ?: errorResponse.message}")
-                    else -> Resource.Error("Error: ${errorResponse.message}")
-                }
+    suspend fun createUser(request: UserRequest): Resource<UserResponse> {
+        return safeApiCall {
+            apiService.createUser(request)
+        }.let { result ->
+            when (result) {
+                is Resource.Success -> Resource.Success(result.data)
+                is Resource.Error -> result
+                Resource.Loading -> Resource.Loading
             }
-        } catch (e: Exception) {
-            Resource.Error("Network Error: ${e.message ?: "Unknown error occurred"}")
         }
     }
+
+    suspend fun checkUser(request: UserRequest): Resource<UserResponse> {
+        return safeApiCall {
+            apiService.checkUser(request)
+        }.let { result ->
+            when (result) {
+                is Resource.Success -> Resource.Success(result.data)
+                is Resource.Error -> result
+                Resource.Loading -> Resource.Loading
+            }
+        }
+    }
+
 }

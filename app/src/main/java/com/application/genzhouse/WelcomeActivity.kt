@@ -11,11 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.application.genzhouse.databinding.ActivityWelcomeBinding
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.OwnerDashBoard
-import com.application.genzhouse.ui.loginregistration.LoginActivity
+import com.application.genzhouse.ui.loginregistration.SignupActivity
 import com.application.genzhouse.ui.welcome.homesearch.ChooseCategory
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
 
 class WelcomeActivity : AppCompatActivity() {
     private lateinit var welcomeBinding: ActivityWelcomeBinding
@@ -76,7 +74,7 @@ class WelcomeActivity : AppCompatActivity() {
                         startActivity(
                             Intent(
                                 this@WelcomeActivity,
-                                LoginActivity::class.java
+                                SignupActivity::class.java
                             )
                         )
                     } else {
@@ -92,7 +90,7 @@ class WelcomeActivity : AppCompatActivity() {
                     startActivity(
                         Intent(
                             this@WelcomeActivity,
-                            LoginActivity::class.java
+                            SignupActivity::class.java
                         )
                     )
                 }
