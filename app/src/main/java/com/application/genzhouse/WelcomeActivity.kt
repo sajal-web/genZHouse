@@ -86,6 +86,7 @@ class WelcomeActivity : AppCompatActivity() {
                                 OwnerDashBoard::class.java
                             )
                         )
+                        finish()
                     }
                 } else {
                     startActivity(

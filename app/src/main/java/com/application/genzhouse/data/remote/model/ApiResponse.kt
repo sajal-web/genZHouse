@@ -25,6 +25,12 @@ data class AddRoomResponse(
     val data: RoomData?
 )
 
+data class DeleteRoomResponse(
+    val success: Boolean,
+    val message: String?,
+    val deletedRoom : Room
+)
+
 data class RoomData(
     val room_id: Int,
     val user_id: Int,

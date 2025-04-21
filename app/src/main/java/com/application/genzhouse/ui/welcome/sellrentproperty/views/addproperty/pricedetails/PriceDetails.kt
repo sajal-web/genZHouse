@@ -174,7 +174,9 @@ class PriceDetails : AppCompatActivity() {
     }
 
     private fun updateDateInView() {
+        val dateFormatter = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
         binding.availableFromEditText.setText(dateFormatter.format(calendar.time))
+
     }
     private fun initToolbar() {
         binding.toolbar.setNavigationOnClickListener {

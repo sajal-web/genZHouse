@@ -12,12 +12,37 @@ object RetrofitClient {
 
     private val gson = GsonBuilder()
         .setLenient()
+        .setPrettyPrinting() // Makes JSON more readable when printed
         .create()
 
+    // Custom logger to format JSON responses
+    private val logger = HttpLoggingInterceptor.Logger { message ->
+        when {
+            message.startsWith("{") || message.startsWith("[") -> {
+                // Pretty print JSON
+                try {
+                    val prettyJson = gson.toJson(gson.fromJson(message, Any::class.java))
+                    println("\n╔═══════════════════════════════════════════════════")
+                    println("║ JSON Response")
+                    println("╠═══════════════════════════════════════════════════")
+                    println(prettyJson)
+                    println("╚═══════════════════════════════════════════════════\n")
+                } catch (e: Exception) {
+                    println("║ $message")
+                }
+            }
+            else -> {
+                println("║ $message")
+            }
+        }
+    }
+
+    private val loggingInterceptor = HttpLoggingInterceptor(logger).apply {
+        level = HttpLoggingInterceptor.Level.BODY
+    }
+
     private val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor(HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        })
+        .addInterceptor(loggingInterceptor)
         .connectTimeout(30, TimeUnit.SECONDS)
         .readTimeout(30, TimeUnit.SECONDS)
         .writeTimeout(30, TimeUnit.SECONDS)

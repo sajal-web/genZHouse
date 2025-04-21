@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.PersistableBundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -14,6 +15,8 @@ import com.application.genzhouse.WelcomeActivity
 import com.application.genzhouse.databinding.ActivityOwnerDashBoardBinding
 import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.deleteproperty.DeleteRoomActivity
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.deleteproperty.dataholder.DataHolder
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ownerlistings.OwnerListing
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ownerprofile.ProfileActivity
 import com.application.genzhouse.utils.Resource
@@ -65,9 +68,10 @@ class OwnerDashBoard : AppCompatActivity() {
                     progressDialog.show()
                 }
                 is Resource.Success -> {
-                    binding.totalRoomsValue.text = result.data.data.totalRooms.toString()
-                    binding.bookedRoomsValue.text = result.data.data.bookedRooms.toString()
-                    binding.activeRoomsValue.text = result.data.data.activeRooms.toString()
+                    binding.totalRoomsValue.text = result.data.counts.totalRooms.toString()
+                    binding.bookedRoomsValue.text = result.data.counts.bookedRooms.toString()
+                    binding.activeRoomsValue.text = result.data.counts.activeRooms.toString()
+                    DataHolder.roomItems = result.data.rooms.all
                     progressDialog.dismiss()
                 }
                 is Resource.Error -> {
@@ -95,7 +99,17 @@ class OwnerDashBoard : AppCompatActivity() {
             ownerAddRoom.setOnClickListener {
                 startActivity(Intent(this@OwnerDashBoard,SellRentPropertyForm::class.java))
             }
+
+            deleteRoomCard.setOnClickListener {
+                startActivity(Intent(this@OwnerDashBoard, DeleteRoomActivity::class.java))
+            }
+
         }
 
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        getDashboardData()
     }
 }

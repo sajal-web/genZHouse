@@ -44,10 +44,15 @@
     <!-- Status Colors -->
     <color name="status_booked">#4CAF50</color>
     <color name="status_pending">#FF9800</color>
-    <color name="status_cancelled">#F44336</color>
+    <color name="status_confirmed">#43A047</color>
+    <color name="status_rejected">#F44336</color>
     <color name="status_available">#2196F3</color>
 
     <!-- Chip Background Selector -->
     <color name="chip_background_selector">#E8E8E8</color>
+
+    <!-- Switch colors -->
+    <color name="switch_track">#E0E0E0</color>
+    <color name="switch_track_color">@color/colorPrimary</color>
 
 </resources>

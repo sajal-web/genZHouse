@@ -18,6 +18,9 @@
         android:theme="@style/Base.Theme.GenZHouse"
         tools:targetApi="31">
         <activity
+            android:name=".ui.welcome.sellrentproperty.views.dashboard.managerooms.deleteproperty.DeleteRoomActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.welcome.sellrentproperty.views.dashboard.ownerprofile.ProfileActivity"
             android:exported="false" />
         <activity

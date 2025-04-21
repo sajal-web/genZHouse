@@ -26,11 +26,13 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:clipToPadding="false"
         android:overScrollMode="never"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -44,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
                 app:strokeColor="#E1E3E6"
                 app:strokeWidth="1dp">
@@ -52,15 +54,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="24dp">
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/profileImageCard"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        app:cardCornerRadius="60dp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        app:cardCornerRadius="40dp"
                         app:cardElevation="0dp"
                         app:strokeColor="#D0E1FD"
                         app:strokeWidth="2dp">
@@ -73,41 +75,53 @@
                             android:padding="24dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_person" />
-
                     </com.google.android.material.card.MaterialCardView>
 
-                    <TextView
-                        android:id="@+id/tvUserName"
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvUserName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="John Doe"
+                            android:textColor="#202124"
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvPhoneNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="+91 98765 43210"
+                            android:textColor="#202124"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEditProfile"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
-                        android:text="John Doe"
-                        android:textColor="#202124"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/tvUserEmail"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginTop="4dp"-->
-<!--                        android:text="johndoe@example.com"-->
-<!--                        android:textColor="#5F6368"-->
-<!--                        android:textSize="16sp" />-->
-
-<!--                    <com.google.android.material.button.MaterialButton-->
-<!--                        android:id="@+id/btnEditProfile"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="48dp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:backgroundTint="#4285F4"-->
-<!--                        android:paddingStart="24dp"-->
-<!--                        android:paddingEnd="24dp"-->
-<!--                        android:text="Edit Profile"-->
-<!--                        android:textAllCaps="false"-->
-<!--                        android:textColor="@android:color/white"-->
-<!--                        app:cornerRadius="24dp" />-->
-
+                        android:layout_marginStart="16dp"
+                        android:minWidth="0dp"
+                        android:insetTop="0dp"
+                        android:insetBottom="0dp"
+                        android:paddingHorizontal="16dp"
+                        android:text="Edit"
+                        android:textAllCaps="false"
+                        android:textColor="#4285F4"
+                        app:icon="@drawable/ic_edit"
+                        app:iconTint="#4285F4"
+                        app:iconPadding="4dp"
+                        app:strokeColor="#4285F4"
+                        app:strokeWidth="1dp"
+                        app:cornerRadius="8dp"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -115,49 +129,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="12dp"
                 android:text="Account Information"
                 android:textColor="#202124"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
-
-            <!-- Phone Number Card -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/phoneNumberCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:strokeColor="#E1E3E6"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Phone Number"
-                        android:textColor="#5F6368"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/tvPhoneNumber"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="+91 98765 43210"
-                        android:textColor="#202124"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
 
             <!-- Address Card -->
             <com.google.android.material.card.MaterialCardView
@@ -166,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
                 app:strokeColor="#E1E3E6"
                 app:strokeWidth="1dp">
@@ -202,7 +179,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@android:color/white"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
                 app:strokeColor="#E1E3E6"
                 app:strokeWidth="1dp">
@@ -232,29 +209,27 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Settings Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="12dp"
-                android:text="Settings"
+                android:text="Chats"
                 android:textColor="#202124"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <!-- Notification Settings -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/notificationSettingsCard"
+                android:id="@+id/myChatCard"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/white"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardBackgroundColor="#E8F0FE"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
-                app:rippleColor="#BBDEFB"
                 app:strokeColor="#D0E1FD"
                 app:strokeWidth="1dp">
 
@@ -269,7 +244,8 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/ic_notifications"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_chat"
                         app:tint="#1A73E8" />
 
                     <TextView
@@ -277,7 +253,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Notification Settings"
+                        android:text="My Chats"
                         android:textColor="#202124"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -286,23 +262,32 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#5F6368" />
+                        app:tint="@color/colorPrimary" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Security Settings -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="12dp"
+                android:text="Customer Support"
+                android:textColor="#202124"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!-- Call Us -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/securitySettingsCard"
+                android:id="@+id/callUsCard"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginBottom="8dp"
+                app:cardBackgroundColor="@color/white"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardBackgroundColor="#E6F4EA"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
-                app:rippleColor="#A7E8B5"
-                app:strokeColor="#CEEAD6"
+                app:strokeColor="#D0E1FD"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -316,15 +301,16 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/ic_notifications"
-                        app:tint="#34A853" />
+                        android:scaleType="center"
+                        android:src="@drawable/ic_call"
+                        app:tint="#1A73E8" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Security Settings"
+                        android:text="Call Us"
                         android:textColor="#202124"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -333,23 +319,22 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#5F6368" />
+                        app:tint="@color/colorPrimary" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Help & Support -->
+            <!-- Email Us -->
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/helpSupportCard"
+                android:id="@+id/emailUsCard"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginBottom="8dp"
                 android:clickable="true"
                 android:focusable="true"
-                app:cardBackgroundColor="#FEF7E0"
-                app:cardCornerRadius="16dp"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
-                app:rippleColor="#FEE7A0"
-                app:strokeColor="#FDE293"
+                app:strokeColor="#D0E1FD"
                 app:strokeWidth="1dp">
 
                 <LinearLayout
@@ -363,15 +348,16 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/ic_notifications"
-                        app:tint="#FBBC04" />
+                        android:scaleType="center"
+                        android:src="@drawable/ic_email"
+                        app:tint="#1A73E8" />
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Help &amp; Support"
+                        android:text="Email Us"
                         android:textColor="#202124"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -380,9 +366,215 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_chevron_right"
-                        app:tint="#5F6368" />
+                        app:tint="@color/colorPrimary" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+
+            <!-- Settings Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="12dp"
+                android:text="Settings"
+                android:textColor="#202124"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!-- Notification Settings -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/notificationSettingsCard"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#D0E1FD"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="12dp">
+
+                    <!-- Notification icon -->
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_notifications"
+                        app:tint="#1A73E8" />
+
+                    <!-- Title -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Push Notifications"
+                        android:textColor="#202124"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- Material switch -->
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/notificationToggle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:checked="true"
+                        app:trackTint="@color/switch_track"
+                        app:trackColor="@color/switch_track_color"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Terms and conditions -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/termsConditionsCard"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#D0E1FD"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_terms_conditions"
+                        app:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Terms and Conditions"
+                        android:textColor="#202124"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right"
+                        app:tint="@color/colorPrimary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Privacy policy -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/privacyPolicyCard"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#D0E1FD"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_privacy_policy"
+                        app:tint="@color/colorPrimary" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="Privacy Policy"
+                        android:textColor="#202124"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right"
+                        app:tint="@color/colorPrimary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- About Us -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/aboutUsCard"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:layout_marginBottom="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#D0E1FD"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_about_us" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:text="About Us"
+                        android:textColor="#202124"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right"
+                        app:tint="@color/colorPrimary" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+
 
             <!-- Logout -->
             <com.google.android.material.card.MaterialCardView
@@ -393,7 +585,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 app:cardBackgroundColor="#FFECEB"
-                app:cardCornerRadius="16dp"
+                app:cardCornerRadius="8dp"
                 app:cardElevation="0dp"
                 app:rippleColor="#FFBEBE"
                 app:strokeColor="#FFD6D6"
@@ -410,7 +602,8 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:src="@drawable/ic_notifications"
+                        android:scaleType="center"
+                        android:src="@drawable/ic_log_out"
                         app:tint="#EA4335" />
 
                     <TextView
@@ -422,6 +615,11 @@
                         android:textColor="#202124"
                         android:textSize="16sp"
                         android:textStyle="bold" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_chevron_right"
+                        app:tint="#EA4335" />
 
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

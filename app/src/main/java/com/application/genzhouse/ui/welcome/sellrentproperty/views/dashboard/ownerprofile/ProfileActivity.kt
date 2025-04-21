@@ -12,6 +12,9 @@ import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import java.io.File
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.TimeZone
 
 class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
@@ -57,7 +60,10 @@ class ProfileActivity : AppCompatActivity() {
         binding.apply {
             tvUserName.text = getUserDetails().third.toString()
             tvPhoneNumber.text = getUserDetails().second.toString()
-            tvJoinedDate.text = getUserDetails().first
+            tvJoinedDate.text = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault())
+                .format(SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+                    .apply { timeZone = TimeZone.getTimeZone("UTC") }
+                    .parse(getUserDetails().first)!!)
         }
     }
 
