@@ -28,7 +28,7 @@
                 android:layout_marginTop="24dp"
                 android:text="Hey there,"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_body_large_14"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +39,7 @@
                 android:layout_marginStart="24dp"
                 android:text="Welcome to\nGenZHouse!"
                 android:textColor="@android:color/black"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_headline_medium_22"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/welcomeSmallText" />
@@ -96,7 +96,7 @@
                         android:layout_marginTop="24dp"
                         android:text="What are you looking up for?"
                         android:textColor="@android:color/black"
-                        android:textSize="18sp"
+                        android:textSize="@dimen/text_title_large_18"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -109,7 +109,7 @@
                         android:layout_marginTop="4dp"
                         android:text="Start with this search, can be changed later"
                         android:textColor="@android:color/darker_gray"
-                        android:textSize="14sp"
+                        android:textSize="@dimen/text_label_large_14"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/questionText" />
 
@@ -146,7 +146,7 @@
                                 android:layout_marginStart="16dp"
                                 android:text="Home Search"
                                 android:textColor="@android:color/black"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/text_body_medium_13"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toEndOf="@id/homeSearchIcon"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -158,7 +158,7 @@
                                 android:layout_marginStart="16dp"
                                 android:text="Buy, Rent, PG &amp; Commercial"
                                 android:textColor="@android:color/darker_gray"
-                                android:textSize="13sp"
+                                android:textSize="@dimen/text_body_small_12"
                                 app:layout_constraintStart_toEndOf="@id/homeSearchIcon"
                                 app:layout_constraintTop_toBottomOf="@id/homeSearchTitle" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -253,7 +253,7 @@
                                 android:layout_marginStart="16dp"
                                 android:text="Sell / Rent your Property"
                                 android:textColor="@android:color/black"
-                                android:textSize="12sp"
+                                android:textSize="@dimen/text_body_medium_13"
                                 android:textStyle="bold"
                                 app:layout_constraintStart_toEndOf="@id/sellRentIcon"
                                 app:layout_constraintTop_toTopOf="parent" />
@@ -283,7 +283,7 @@
                                 android:layout_marginStart="16dp"
                                 android:text="Get verified enquiries in 24 hours"
                                 android:textColor="@android:color/darker_gray"
-                                android:textSize="13sp"
+                                android:textSize="@dimen/text_body_small_12"
                                 app:layout_constraintStart_toEndOf="@id/sellRentIcon"
                                 app:layout_constraintTop_toBottomOf="@id/sellRentTitle" />
                         </androidx.constraintlayout.widget.ConstraintLayout>

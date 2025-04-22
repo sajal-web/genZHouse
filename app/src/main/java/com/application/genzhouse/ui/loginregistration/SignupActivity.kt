@@ -64,13 +64,12 @@ class SignupActivity : AppCompatActivity() {
                 is Resource.Success -> {
                     if (result.data.statusCode == 200) {
                         AlertDialog.Builder(this)
-                            .setTitle("Account Already Exists")
-                            .setMessage(result.data.message) // Or use a custom message like "This number is already registered. Please log in."
+                            .setTitle("Account Already Exists!")
+                            .setMessage(result.data.message)
                             .setCancelable(false)
                             .setPositiveButton("OK") { dialog, _ ->
                                 dialog.dismiss()
-                                startActivity(Intent(this, LoginActivity::class.java))
-                                finish()
+                                navigateToLogin()
                             }
                             .show()
                         progressDialog.dismiss()
@@ -185,6 +184,7 @@ class SignupActivity : AppCompatActivity() {
 
     private fun navigateToLogin() {
         startActivity(Intent(this, LoginActivity::class.java))
+        finish()
     }
 
     private fun checkCurrentUser() {

@@ -37,7 +37,7 @@
                 android:text="@string/new_to_housing_log_in_to_add_your_property_free"
                 android:textColor="#000000"
                 android:textStyle="bold"
-                android:textSize="16sp" />
+                android:textSize="@dimen/text_title_large_18" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/an_otp_message_sms_will_be_sent_to_your_entered_mobile_number_for_verification"
                 android:textColor="#757575"
-                android:textSize="14sp" />
+                android:textSize="@dimen/text_label_large_14" />
 
 
 
@@ -207,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:text="Already have an account?"
                     android:textColor="#757575"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/text_label_large_14" />
 
                 <TextView
                     android:id="@+id/loginRedirectText"
@@ -216,7 +216,7 @@
                     android:layout_marginStart="4dp"
                     android:text="Log in"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/text_label_large_14"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -242,7 +242,7 @@
                     android:layout_marginStart="8dp"
                     android:text="Call on +91 8509957714 to get help with your property listing"
                     android:textColor="#000000"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/text_label_large_14" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

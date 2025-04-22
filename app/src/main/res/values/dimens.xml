@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Display & Headings -->
+    <dimen name="text_display_large_34">34sp</dimen>
+    <dimen name="text_headline_large_28">28sp</dimen>
+    <dimen name="text_headline_medium_22">22sp</dimen>
+
+    <!-- Titles -->
+    <dimen name="text_title_large_18">18sp</dimen>
+    <dimen name="text_title_medium_16">16sp</dimen>
+
+    <!-- Body Text -->
+    <dimen name="text_body_large_14">14sp</dimen>
+    <dimen name="text_body_medium_13">13sp</dimen>
+    <dimen name="text_body_small_12">12sp</dimen>
+
+    <!-- Micro Text -->
+    <dimen name="text_label_small_10">10sp</dimen>
+
+    <!-- Button Text -->
+    <dimen name="text_label_large_14">14sp</dimen>
+
+</resources>

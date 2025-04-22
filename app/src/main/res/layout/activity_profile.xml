@@ -90,7 +90,7 @@
                             android:layout_height="wrap_content"
                             android:text="John Doe"
                             android:textColor="#202124"
-                            android:textSize="18sp"
+                            android:textSize="@dimen/text_title_large_18"
                             android:textStyle="bold" />
 
                         <TextView
@@ -100,7 +100,7 @@
                             android:layout_marginTop="4dp"
                             android:text="+91 98765 43210"
                             android:textColor="#202124"
-                            android:textSize="14sp" />
+                            android:textSize="@dimen/text_label_large_14" />
                     </LinearLayout>
 
                     <com.google.android.material.button.MaterialButton
@@ -133,7 +133,7 @@
                 android:layout_marginBottom="12dp"
                 android:text="Account Information"
                 android:textColor="#202124"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_title_large_18"
                 android:textStyle="bold" />
 
             <!-- Address Card -->
@@ -159,7 +159,7 @@
                         android:layout_height="wrap_content"
                         android:text="Address"
                         android:textColor="#5F6368"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/text_body_small_12" />
 
                     <TextView
                         android:id="@+id/tvAddress"
@@ -168,7 +168,7 @@
                         android:layout_marginTop="4dp"
                         android:text="----------"
                         android:textColor="#202124"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_label_large_14"
                         android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -195,7 +195,7 @@
                         android:layout_height="wrap_content"
                         android:text="Member Since"
                         android:textColor="#5F6368"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/text_body_small_12" />
 
                     <TextView
                         android:id="@+id/tvJoinedDate"
@@ -204,7 +204,7 @@
                         android:layout_marginTop="4dp"
                         android:text="January 15, 2023"
                         android:textColor="#202124"
-                        android:textSize="16sp"
+                        android:textSize="@dimen/text_label_large_14"
                         android:textStyle="bold" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -216,7 +216,7 @@
                 android:layout_marginBottom="12dp"
                 android:text="Chats"
                 android:textColor="#202124"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_title_large_18"
                 android:textStyle="bold" />
 
             <!-- Notification Settings -->
@@ -255,8 +255,7 @@
                         android:layout_weight="1"
                         android:text="My Chats"
                         android:textColor="#202124"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_label_large_14" />
 
                     <ImageView
                         android:layout_width="24dp"
@@ -273,7 +272,7 @@
                 android:layout_marginBottom="12dp"
                 android:text="Customer Support"
                 android:textColor="#202124"
-                android:textSize="18sp"
+                android:textSize="@dimen/text_title_large_18"
                 android:textStyle="bold" />
 
             <!-- Call Us -->
@@ -312,8 +311,7 @@
                         android:layout_weight="1"
                         android:text="Call Us"
                         android:textColor="#202124"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_label_large_14" />
 
                     <ImageView
                         android:layout_width="24dp"
@@ -359,8 +357,7 @@
                         android:layout_weight="1"
                         android:text="Email Us"
                         android:textColor="#202124"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_label_large_14" />
 
                     <ImageView
                         android:layout_width="24dp"
@@ -378,7 +375,7 @@
                 android:layout_marginBottom="12dp"
                 android:text="Settings"
                 android:textColor="#202124"
-                android:textSize="20sp"
+                android:textSize="@dimen/text_title_large_18"
                 android:textStyle="bold" />
 
             <!-- Notification Settings -->
@@ -407,9 +404,9 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
+                        app:tint="@color/colorPrimary"
                         android:scaleType="center"
-                        android:src="@drawable/ic_notifications"
-                        app:tint="#1A73E8" />
+                        android:src="@drawable/ic_push_notification" />
 
                     <!-- Title -->
                     <TextView
@@ -419,8 +416,7 @@
                         android:layout_weight="1"
                         android:text="Push Notifications"
                         android:textColor="#202124"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_label_large_14" />
 
                     <!-- Material switch -->
                     <com.google.android.material.switchmaterial.SwitchMaterial
@@ -460,7 +456,7 @@
                         android:layout_width="28dp"
                         android:layout_height="28dp"
                         android:scaleType="center"
-                        android:src="@drawable/ic_terms_conditions"
+                        android:src="@drawable/ic_terms_condition"
                         app:tint="@color/colorPrimary" />
 
                     <TextView
@@ -470,8 +466,7 @@
                         android:layout_weight="1"
                         android:text="Terms and Conditions"
                         android:textColor="#202124"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_label_large_14" />
 
                     <ImageView
                         android:layout_width="24dp"
@@ -506,7 +501,7 @@
                     <ImageView
                         android:layout_width="28dp"
                         android:layout_height="28dp"
-                        android:scaleType="centerCrop"
+                        android:scaleType="center"
                         android:src="@drawable/ic_privacy_policy"
                         app:tint="@color/colorPrimary" />
 
@@ -517,8 +512,7 @@
                         android:layout_weight="1"
                         android:text="Privacy Policy"
                         android:textColor="#202124"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_label_large_14" />
 
                     <ImageView
                         android:layout_width="24dp"
@@ -563,8 +557,7 @@
                         android:layout_weight="1"
                         android:text="About Us"
                         android:textColor="#202124"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textSize="@dimen/text_label_large_14" />
 
                     <ImageView
                         android:layout_width="24dp"
@@ -612,9 +605,8 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="Logout"
-                        android:textColor="#202124"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
+                        android:textColor="#EA4335"
+                        android:textSize="@dimen/text_label_large_14" />
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
@@ -634,7 +626,7 @@
                 android:gravity="center"
                 android:text="App Version 1.0.0"
                 android:textColor="#5F6368"
-                android:textSize="14sp" />
+                android:textSize="@dimen/text_body_small_12" />
 
         </LinearLayout>
 

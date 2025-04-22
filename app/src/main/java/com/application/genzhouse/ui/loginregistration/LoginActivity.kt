@@ -76,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         progressDialog.dismiss()
                         AlertDialog.Builder(this)
-                            .setTitle("User Not Found")
+                            .setTitle("User Not Found!")
                             .setMessage(result.data.message) // Or a custom message like "No account found with this number. Please sign up."
                             .setCancelable(false)
                             .setPositiveButton("OK") { dialog, _ ->
