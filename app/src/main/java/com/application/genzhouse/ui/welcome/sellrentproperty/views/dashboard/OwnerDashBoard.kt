@@ -97,6 +97,10 @@ class OwnerDashBoard : AppCompatActivity() {
                 startActivity(Intent(this@OwnerDashBoard,OwnerListing::class.java))
             }
 
+            totalRoomsCard.setOnClickListener {
+                startActivity(Intent(this@OwnerDashBoard,OwnerListing::class.java))
+            }
+
             ownerAddRoom.setOnClickListener {
                 startActivity(Intent(this@OwnerDashBoard,SellRentPropertyForm::class.java))
             }

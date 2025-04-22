@@ -40,6 +40,7 @@ class SignupActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initializeViews()
+        initToolBar()
         setupViewModel()
         setupClickListeners()
         checkCurrentUser()
@@ -186,6 +187,11 @@ class SignupActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
+    private fun initToolBar() {
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
+        }
+    }
     override fun onStart() {
         super.onStart()
         checkCurrentUser()

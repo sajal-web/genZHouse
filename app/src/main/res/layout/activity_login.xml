@@ -12,6 +12,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="@drawable/arrow_back"
         android:background="?attr/colorPrimary"
         app:title="Log In"
         app:titleTextColor="@android:color/white"

@@ -131,6 +131,7 @@ class OwnerListing : AppCompatActivity() {
         }
     }
     private fun initToolbar() {
+        binding.toolbar.setTitle("Total Rooms")
         binding.toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }

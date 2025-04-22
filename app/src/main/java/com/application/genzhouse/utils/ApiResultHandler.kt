@@ -36,7 +36,7 @@ suspend fun <T> safeApiCall(apiCall: suspend () -> Response<T>): Resource<T> {
             }
         }
     } catch (e: IOException) {
-        Resource.Error("No internet! Please check your internet connection & try again.")
+        Resource.Error(e.toString())
     } catch (e: Exception) {
         Resource.Error("Unexpected error: ${e.localizedMessage ?: "Unknown error occurred"}")
     }

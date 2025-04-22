@@ -38,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initializeViews()
+        initToolBar()
         setupViewModel()
         setupClickListeners()
         checkCurrentUser()
@@ -175,6 +176,11 @@ class LoginActivity : AppCompatActivity() {
     private fun checkCurrentUser() {
         if (auth.currentUser != null) {
             navigateToPropertyForm()
+        }
+    }
+    private fun initToolBar() {
+        binding.toolbar.setNavigationOnClickListener {
+            onBackPressedDispatcher.onBackPressed()
         }
     }
 
