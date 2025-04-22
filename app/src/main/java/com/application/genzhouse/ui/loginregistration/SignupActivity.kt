@@ -1,5 +1,6 @@
 package com.application.genzhouse.ui.loginregistration
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -61,13 +62,22 @@ class SignupActivity : AppCompatActivity() {
         viewModel.createUserResult.observe(this, Observer { result ->
             when (result) {
                 is Resource.Success -> {
-                    if (result.data.data != null) {
-                        Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
-                        navigateToLogin()
+                    if (result.data.statusCode == 200) {
+                        AlertDialog.Builder(this)
+                            .setTitle("Account Already Exists")
+                            .setMessage(result.data.message) // Or use a custom message like "This number is already registered. Please log in."
+                            .setCancelable(false)
+                            .setPositiveButton("OK") { dialog, _ ->
+                                dialog.dismiss()
+                                startActivity(Intent(this, LoginActivity::class.java))
+                                finish()
+                            }
+                            .show()
                         progressDialog.dismiss()
                     } else {
-                        sendOtp("+91${binding.phoneNumberInput.text.toString().trim()}")
+                        sendOtp("${binding.countryCodeButton.text.toString().trim()}${binding.phoneNumberInput.text.toString().trim()}")
                     }
+
                 }
                 is Resource.Error -> {
                     progressDialog.dismiss()

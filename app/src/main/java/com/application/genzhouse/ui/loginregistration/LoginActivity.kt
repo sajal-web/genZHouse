@@ -1,5 +1,6 @@
 package com.application.genzhouse.ui.loginregistration
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -69,12 +70,21 @@ class LoginActivity : AppCompatActivity() {
         viewModel.createUserResult.observe(this, Observer { result ->
             when (result) {
                 is Resource.Success -> {
-                    if (result.data.data != null) {
+                    if (result.data.statusCode == 200) {
                         name = result.data.data.name
-                        sendOtp("+91${binding.phoneNumberInput.text.toString().trim()}")
+                        sendOtp("${binding.countryCodeButton.text.toString().trim()}${binding.phoneNumberInput.text.toString().trim()}")
                     } else {
-                        Toast.makeText(this, result.data.message, Toast.LENGTH_SHORT).show()
                         progressDialog.dismiss()
+                        AlertDialog.Builder(this)
+                            .setTitle("User Not Found")
+                            .setMessage(result.data.message) // Or a custom message like "No account found with this number. Please sign up."
+                            .setCancelable(false)
+                            .setPositiveButton("OK") { dialog, _ ->
+                                dialog.dismiss()
+                                startActivity(Intent(this,SignupActivity::class.java))
+                                finish()
+                            }
+                            .show()
                     }
                 }
                 is Resource.Error -> {

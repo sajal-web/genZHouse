@@ -8,6 +8,7 @@ data class UserRequest(
 )
 
 data class UserResponse(
+    @SerializedName("statusCode") val statusCode: Int,
     @SerializedName("message") val message: String,
     @SerializedName("data") val data: UserData
 )
