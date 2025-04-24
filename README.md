@@ -70,5 +70,5 @@ The **Room Rent Service Application** is a platform that connects room owners, b
 This project is licensed under the MIT License.
 
 ## Contact
-For any inquiries, feel free to reach out to [your email or GitHub profile].
+For any inquiries, feel free to reach out to mahatosajal65@gmail.com
 
