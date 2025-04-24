@@ -8,13 +8,13 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.genzhouse.R
 import com.application.genzhouse.data.remote.model.UserRequest
 import com.application.genzhouse.databinding.ActivityOtpVerificationBinding
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.OwnerDashBoard
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
+import com.application.genzhouse.utils.CustomProgressDialog
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.CreateUserViewModel
 import com.google.firebase.FirebaseException
@@ -26,14 +26,15 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 
+
 class OtpVerificationActivity : AppCompatActivity() {
 
     private lateinit var activityOtpVerificationBinding: ActivityOtpVerificationBinding
     private lateinit var progressDialog: CustomProgressDialog
     private val auth = FirebaseAuth.getInstance()
-    private lateinit var OTP: String
+    private lateinit var otpStr: String
     private lateinit var name : String
-    private lateinit var resendToken: PhoneAuthProvider.ForceResendingToken
+    private  var resendToken: PhoneAuthProvider.ForceResendingToken? =null
     private lateinit var phoneNumber: String
     private lateinit var viewmodel: CreateUserViewModel
 
@@ -51,9 +52,9 @@ class OtpVerificationActivity : AppCompatActivity() {
 
     private fun initUI() {
         // Get OTP, resend token, and phone number from intent
-        OTP = intent.getStringExtra("OTP").toString()
+        otpStr = intent.getStringExtra("OTP").toString()
 
-        resendToken = intent.getParcelableExtra("resendToken")!!
+        resendToken = intent.getParcelableExtraCompat("resendToken", PhoneAuthProvider.ForceResendingToken::class.java)
         name = intent.getStringExtra("name")!!
         phoneNumber = intent.getStringExtra("phoneNumber")!!
 
@@ -71,6 +72,15 @@ class OtpVerificationActivity : AppCompatActivity() {
         }
     }
 
+    private fun <T> Intent.getParcelableExtraCompat(key: String, clazz: Class<T>): T? {
+        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            getParcelableExtra(key, clazz)
+        } else {
+            @Suppress("DEPRECATION")
+            getParcelableExtra(key) as? T
+        }
+    }
+
     private fun onClick() {
         activityOtpVerificationBinding.apply {
             verifyOtpBtn.setOnClickListener {
@@ -82,7 +92,7 @@ class OtpVerificationActivity : AppCompatActivity() {
                     progressDialog.setMessage("Verifying OTP...")
                     progressDialog.show()
 
-                    val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(OTP, typedOtp)
+                    val credential: PhoneAuthCredential = PhoneAuthProvider.getCredential(otpStr, typedOtp)
                     signInWithPhoneAuthCredential(credential)
                 } else {
                     Toast.makeText(
@@ -132,11 +142,17 @@ class OtpVerificationActivity : AppCompatActivity() {
 
         viewmodel.createUser(request)
 
-        viewmodel.createUserResult.observe(this, Observer { result ->
+        viewmodel.createUserResult.observe(this) { result ->
             progressDialog.dismiss()
             when (result) {
                 is Resource.Success -> {
-                    saveUserDetails(result.data.data.userId, result.data.data.name, result.data.data.phoneNumber,result.data.data.totalRooms, result.data.data.createdAt)
+                    saveUserDetails(
+                        result.data.data.userId,
+                        result.data.data.name,
+                        result.data.data.phoneNumber,
+                        result.data.data.totalRooms,
+                        result.data.data.createdAt
+                    )
                     Toast.makeText(this, "User login successfully", Toast.LENGTH_SHORT).show()
                     val intent = Intent(
                         this@OtpVerificationActivity,
@@ -149,23 +165,25 @@ class OtpVerificationActivity : AppCompatActivity() {
                     startActivity(intent)
                     finish()
                 }
+
                 is Resource.Error -> {
-                    Toast.makeText(this, result.message , Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                 }
+
                 is Resource.Loading -> {
                     progressDialog.setMessage("Registering user...")
                     progressDialog.show()
                 }
             }
-        })
+        }
     }
 
-    private fun saveUserDetails(user_id: Int, name: String, phoneNumber: String, totalRooms: Int, joinedDate: String) {
+    private fun saveUserDetails(userId: Int, name: String, phoneNumber: String, totalRooms: Int, joinedDate: String) {
         val sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("name", name)
         editor.putString("phoneNumber", phoneNumber)
-        editor.putInt("user_id", user_id)
+        editor.putInt("user_id", userId)
         editor.putInt("total_rooms",totalRooms)
         editor.putString("joinedDate",joinedDate)
         editor.apply()
@@ -178,15 +196,17 @@ class OtpVerificationActivity : AppCompatActivity() {
         progressDialog.setMessage("Resending OTP...")
         progressDialog.show()
 
-        val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phoneNumber) // Phone number to resend OTP to
-            .setTimeout(60L, TimeUnit.SECONDS) // Timeout duration
-            .setActivity(this) // Activity for callback binding
-            .setCallbacks(callbacks) // Callbacks for verification state changes
-            .setForceResendingToken(resendToken) // Resend token from previous attempt
-            .build()
+        resendToken?.let {
+            val options = PhoneAuthOptions.newBuilder(auth)
+                .setPhoneNumber(phoneNumber) // Phone number to resend OTP to
+                .setTimeout(60L, TimeUnit.SECONDS) // Timeout duration
+                .setActivity(this) // Activity for callback binding
+                .setCallbacks(callbacks) // Callbacks for verification state changes
+                .setForceResendingToken(it) // Resend token from previous attempt
+                .build()
 
-        PhoneAuthProvider.verifyPhoneNumber(options)
+            PhoneAuthProvider.verifyPhoneNumber(options)
+        }
     }
 
     private val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
@@ -214,7 +234,7 @@ class OtpVerificationActivity : AppCompatActivity() {
             Toast.makeText(this@OtpVerificationActivity, "OTP resent successfully", Toast.LENGTH_SHORT).show()
 
             // Update the OTP and resend token
-            OTP = verificationId
+            otpStr = verificationId
             resendToken = token
         }
     }

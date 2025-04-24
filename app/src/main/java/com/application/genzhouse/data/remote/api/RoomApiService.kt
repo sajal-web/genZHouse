@@ -5,7 +5,6 @@ import com.application.genzhouse.data.remote.model.AddRoomResponse
 import com.application.genzhouse.data.remote.model.AllRoomListResponse
 import com.application.genzhouse.data.remote.model.DeleteRoomResponse
 import com.application.genzhouse.data.remote.model.RoomListResponse
-import com.application.genzhouse.data.remote.model.TotalRoomCount
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.RoomResponse
 import retrofit2.Response
 import retrofit2.http.Body

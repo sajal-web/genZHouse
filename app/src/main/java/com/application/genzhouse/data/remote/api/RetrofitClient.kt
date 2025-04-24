@@ -1,6 +1,5 @@
 package com.application.genzhouse.data.remote.api
 
-import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,36 +7,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object RetrofitClient {
-    private const val BASE_URL = "https://witch-bibliographic-fcc-mexican.trycloudflare.com/"
+    private const val BASE_URL = "https://thumbnails-employed-pants-paths.trycloudflare.com/"
 
-    private val gson = GsonBuilder()
-        .setLenient()
-        .setPrettyPrinting() // Makes JSON more readable when printed
-        .create()
-
-    // Custom logger to format JSON responses
-    private val logger = HttpLoggingInterceptor.Logger { message ->
-        when {
-            message.startsWith("{") || message.startsWith("[") -> {
-                // Pretty print JSON
-                try {
-                    val prettyJson = gson.toJson(gson.fromJson(message, Any::class.java))
-                    println("\n╔═══════════════════════════════════════════════════")
-                    println("║ JSON Response")
-                    println("╠═══════════════════════════════════════════════════")
-                    println(prettyJson)
-                    println("╚═══════════════════════════════════════════════════\n")
-                } catch (e: Exception) {
-                    println("║ $message")
-                }
-            }
-            else -> {
-                println("║ $message")
-            }
-        }
-    }
-
-    private val loggingInterceptor = HttpLoggingInterceptor(logger).apply {
+    private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
@@ -51,7 +23,7 @@ object RetrofitClient {
     private val retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
         .client(okHttpClient)
-        .addConverterFactory(GsonConverterFactory.create(gson))
+        .addConverterFactory(GsonConverterFactory.create())
         .build()
 
     val roomApiService: RoomApiService = retrofit.create(RoomApiService::class.java)

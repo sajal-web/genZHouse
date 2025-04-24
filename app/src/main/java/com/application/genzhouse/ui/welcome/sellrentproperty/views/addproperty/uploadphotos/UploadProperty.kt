@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.application.genzhouse.data.remote.model.AddRoomRequest
 import com.application.genzhouse.databinding.ActivityUploadPropertyBinding
-import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
+import com.application.genzhouse.utils.CustomProgressDialog
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.uploadphotos.adapter.PhotoAdapter
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.OwnerDashBoard
 import com.application.genzhouse.utils.Resource
@@ -180,26 +180,26 @@ class UploadProperty : AppCompatActivity() {
         val securityDeposit = intent.getDoubleExtra("SECURITY_DEPOSIT", 0.0)
 
         return AddRoomRequest(
-            user_id = getSharedPreferences("UserProfile", MODE_PRIVATE).getInt("user_id",0),
-            room_type = roomType,
-            owner_name = name,
-            owner_mobile = number,
+            userId = getSharedPreferences("UserProfile", MODE_PRIVATE).getInt("user_id",0),
+            roomType = roomType,
+            ownerName = name,
+            ownerMobile = number,
             location = "$building, $locality, $location",
-            property_type = propertyType,
-            society_building_project = building,
+            propertyType = propertyType,
+            societyBuildingProject = building,
             locality = locality,
             bhk = bhk,
             area = area,
-            furnished_type = furnishedType,
-            monthly_rent = monthlyRent,
-            available_from = availableFrom,
-            security_deposit = securityDeposit,
-            room_images = imageUrls // Store Firebase URLs instead of local URIs
+            furnishedType = furnishedType,
+            monthlyRent = monthlyRent,
+            availableFrom = availableFrom,
+            securityDeposit = securityDeposit,
+            roomImages = imageUrls // Store Firebase URLs instead of local URIs
         )
     }
 
 
-    fun getStoredFirebaseToken(): String? {
+    private fun getStoredFirebaseToken(): String? {
         val sharedPref = getSharedPreferences("AppPrefs", Context.MODE_PRIVATE)
         return sharedPref.getString("firebase_token", null)
     }
@@ -249,7 +249,7 @@ class UploadProperty : AppCompatActivity() {
         return try {
             context.contentResolver.openInputStream(imageUri)?.use { inputStream ->
                 val options = BitmapFactory.Options().apply {
-                    inSampleSize = 2 // Downsample by factor of 2
+                    inSampleSize = 2
                 }
 
                 val bitmap = BitmapFactory.decodeStream(inputStream, null, options)

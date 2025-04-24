@@ -1,4 +1,4 @@
-package com.application.genzhouse.ui.loginregistration
+package com.application.genzhouse.utils
 
 import android.app.Dialog
 import android.content.Context

@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.application.genzhouse.MyApp
 import com.application.genzhouse.databinding.ActivityRoomListingBinding
-import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
+import com.application.genzhouse.utils.CustomProgressDialog
 import com.application.genzhouse.ui.userhomepage.adapter.RoomListingAdapter
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.RoomListViewModel
@@ -34,10 +34,10 @@ class RoomListing : AppCompatActivity() {
     }
     private fun setupRecyclerView() {
         adapter = RoomListingAdapter { room ->
-            Toast.makeText(this,"${room.room_type} clicked!", Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"${room.roomType} clicked!", Toast.LENGTH_LONG).show()
             // Handle room item click
             val intent = Intent(this, RoomDetails::class.java).apply {
-                putExtra("ROOM_ID", room.room_id)
+                putExtra("ROOM_ID", room.roomId)
             }
             startActivity(intent)
         }
@@ -67,7 +67,7 @@ class RoomListing : AppCompatActivity() {
                         adapter.updateRooms(result.data)
                     } else {
                         binding.emptyStateView.visibility = View.VISIBLE
-                        binding.emptyStateTitle.text = "No rooms available"
+                        binding.emptyStateTitle.text = "No rooms available."
                     }
                 }
                 is Resource.Error -> {
@@ -89,7 +89,7 @@ class RoomListing : AppCompatActivity() {
     }
 
     private fun fetchRooms() {
-        (application as MyApp).getCurrentToken { token ->
+        (application as MyApp).getCurrentToken {
             (application as MyApp).getCurrentToken { token ->
                 viewModel.loadRooms(token.toString())
             }

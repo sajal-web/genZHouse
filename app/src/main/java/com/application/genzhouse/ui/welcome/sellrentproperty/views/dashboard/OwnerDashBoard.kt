@@ -2,10 +2,6 @@ package com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.PersistableBundle
-import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
@@ -13,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.application.genzhouse.MyApp
 import com.application.genzhouse.WelcomeActivity
 import com.application.genzhouse.databinding.ActivityOwnerDashBoardBinding
-import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
+import com.application.genzhouse.utils.CustomProgressDialog
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.deleteproperty.DeleteRoomActivity
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.deleteproperty.dataholder.DataHolder
@@ -21,7 +17,6 @@ import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.own
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ownerprofile.ProfileActivity
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.DashboardViewModel
-import com.application.genzhouse.viewmodel.RoomListViewModel
 
 class OwnerDashBoard : AppCompatActivity() {
     private lateinit var binding: ActivityOwnerDashBoardBinding

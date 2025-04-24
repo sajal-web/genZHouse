@@ -19,7 +19,6 @@ class PriceDetails : AppCompatActivity() {
 
     private lateinit var binding: ActivityPriceDetailsBinding
     private val calendar = Calendar.getInstance()
-    private val dateFormatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     private var selectedCard: MaterialCardView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,11 +41,11 @@ class PriceDetails : AppCompatActivity() {
             val monthlyRent = monthlyRentText.toDoubleOrNull() ?: 0.0
 
             // Determine security deposit value as Double
-            val securityDeposit = when {
-                selectedCard == binding.noneDepositCard -> 0.0
-                selectedCard == binding.oneMonthDepositCard -> monthlyRent // 1 month rent
-                selectedCard == binding.towMonthDepositCard -> monthlyRent * 2 // 2 months rent
-                selectedCard == binding.customDepositCard -> binding.customRent.text.toString().trim().toDoubleOrNull() ?: 0.0
+            val securityDeposit = when (selectedCard) {
+                binding.noneDepositCard -> 0.0
+                binding.oneMonthDepositCard -> monthlyRent // 1 month rent
+                binding.towMonthDepositCard -> monthlyRent * 2 // 2 months rent
+                binding.customDepositCard -> binding.customRent.text.toString().trim().toDoubleOrNull() ?: 0.0
                 else -> 0.0 // Default case
             }
 

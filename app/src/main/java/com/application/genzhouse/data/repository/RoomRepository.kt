@@ -29,7 +29,7 @@ class RoomRepository {
                 is Resource.Success -> {
                     val body = result.data
                     if (body.success) {
-                        Resource.Success(body.data ?: emptyList())
+                        Resource.Success(body.data)
                     } else {
                         Resource.Error("Unknown API error")
                     }
@@ -40,15 +40,15 @@ class RoomRepository {
         }
     }
 
-    suspend fun getUserRooms(user_id: Int, token: String): Resource<List<Room>> {
+    suspend fun getUserRooms(userId: Int, token: String): Resource<List<Room>> {
         return safeApiCall {
-            apiService.getUserRooms(user_id, "Bearer $token")
+            apiService.getUserRooms(userId, "Bearer $token")
         }.let { result ->
             when (result) {
                 is Resource.Success -> {
                     val body = result.data
                     if (body.success) {
-                        Resource.Success(body.data.rooms ?: emptyList())
+                        Resource.Success(body.data.rooms)
                     } else {
                         Resource.Error("Unknown API error")
                     }

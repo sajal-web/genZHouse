@@ -5,17 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.application.genzhouse.R
 import com.application.genzhouse.data.remote.model.UserRequest
 import com.application.genzhouse.databinding.ActivityLoginBinding
-import com.application.genzhouse.databinding.ActivitySignupBinding
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
+import com.application.genzhouse.utils.CustomProgressDialog
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.CreateUserViewModel
 import com.google.firebase.FirebaseException
@@ -67,12 +62,16 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.createUserResult.observe(this, Observer { result ->
+        viewModel.createUserResult.observe(this) { result ->
             when (result) {
                 is Resource.Success -> {
                     if (result.data.statusCode == 200) {
                         name = result.data.data.name
-                        sendOtp("${binding.countryCodeButton.text.toString().trim()}${binding.phoneNumberInput.text.toString().trim()}")
+                        sendOtp(
+                            "${
+                                binding.countryCodeButton.text.toString().trim()
+                            }${binding.phoneNumberInput.text.toString().trim()}"
+                        )
                     } else {
                         progressDialog.dismiss()
                         AlertDialog.Builder(this)
@@ -81,19 +80,21 @@ class LoginActivity : AppCompatActivity() {
                             .setCancelable(false)
                             .setPositiveButton("OK") { dialog, _ ->
                                 dialog.dismiss()
-                                startActivity(Intent(this,SignupActivity::class.java))
+                                startActivity(Intent(this, SignupActivity::class.java))
                                 finish()
                             }
                             .show()
                     }
                 }
+
                 is Resource.Error -> {
                     progressDialog.dismiss()
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                 }
+
                 is Resource.Loading -> progressDialog.show()
             }
-        })
+        }
     }
 
     private fun sendOtp(phoneNumber: String) {
@@ -174,7 +175,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initializeViews() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        name = "Sajal"
+        name = ""
         setContentView(binding.root)
         progressDialog = CustomProgressDialog(this)
 

@@ -30,12 +30,12 @@ class RoomAdapter(
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
         val room = rooms[position]
         with(holder.binding) {
-            tvRoomId.text = "id: ${room.room_id}"
-            tvRent.text = "₹${room.monthly_rent}/month"
+            tvRoomId.text = "id: ${room.roomId}"
+            tvRent.text = "₹${room.monthlyRent}/month"
             tvActiveStatus.text = room.status
-            tvRoomType.text = room.room_type
+            tvRoomType.text = room.roomType
             tvArea.text = "${room.area}sq. ft."
-            tvFurnished.text = "${room.furnished_type}"
+            tvFurnished.text = "${room.furnishedType}"
             tvLocation.text = room.location
 
             // Format available date
@@ -44,22 +44,22 @@ class RoomAdapter(
             val outputFormat = SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
 
             try {
-                val availableDate = inputFormat.parse(room.available_from)
+                val availableDate = inputFormat.parse(room.availableFrom)
                 val addedDate = inputFormat.parse(room.createdAt)
                 val expiringDate = inputFormat.parse(room.updatedAt)
                 tvAvailableDate.text = "Available from: ${outputFormat.format(availableDate)}"
                 tvDateAdded.text = outputFormat.format(addedDate)
                 tvDateExpiring.text = outputFormat.format(expiringDate)
             } catch (e: Exception) {
-                tvAvailableDate.text = "Available from: ${room.available_from}"
+                tvAvailableDate.text = "Available from: ${room.availableFrom}"
                 tvDateAdded.text = room.createdAt
                 tvDateExpiring.text = room.updatedAt
             }
 
             // Load first image if available
-            if (room.room_images.isNotEmpty() && room.room_images[0].startsWith("http")) {
+            if (room.roomImages.isNotEmpty() && room.roomImages[0].startsWith("http")) {
                 Glide.with(ivRoomImage.context)
-                    .load(room.room_images[0])
+                    .load(room.roomImages[0])
                     .placeholder(R.drawable.ic_house)
                     .error(R.drawable.ic_house)
                     .centerCrop()

@@ -12,7 +12,7 @@ class UploadPhoto : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentUploadPhotoBinding.inflate(layoutInflater)
         return binding.root
     }

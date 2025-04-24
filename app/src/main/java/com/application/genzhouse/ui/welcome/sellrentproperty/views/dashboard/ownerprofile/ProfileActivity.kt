@@ -5,12 +5,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.application.genzhouse.MyApp
-import com.application.genzhouse.R
 import com.application.genzhouse.WelcomeActivity
 import com.application.genzhouse.databinding.ActivityProfileBinding
-import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+import com.application.genzhouse.utils.CustomProgressDialog
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Locale

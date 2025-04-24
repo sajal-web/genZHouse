@@ -1,20 +1,15 @@
 package com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ownerlistings
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.application.genzhouse.MyApp
 import com.application.genzhouse.databinding.ActivityOwnerListingBinding
-import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.OwnerDashBoard
-import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
+import com.application.genzhouse.utils.CustomProgressDialog
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ownerlistings.adapter.RoomAdapter
 import com.application.genzhouse.utils.Resource
@@ -52,7 +47,6 @@ class OwnerListing : AppCompatActivity() {
 
     private fun getUserDetails(): Pair<Int?, String?> {
         val sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
-        val name = sharedPreferences.getString("name", null)
         val phoneNumber = sharedPreferences.getString("phoneNumber", null)
         val userId = sharedPreferences.getInt("user_id",0)
         return Pair(userId,phoneNumber)
@@ -117,7 +111,7 @@ class OwnerListing : AppCompatActivity() {
 
     private fun setupRecyclerView() {
         adapter = RoomAdapter { room ->
-            Toast.makeText(this,"${room.room_type} clicked!", Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"${room.roomType} clicked!", Toast.LENGTH_LONG).show()
             // Handle room item click
 //            val intent = Intent(this, RoomDetails::class.java).apply {
 //                putExtra("ROOM_ID", room.room_id)

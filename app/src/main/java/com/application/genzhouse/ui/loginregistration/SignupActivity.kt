@@ -6,11 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.application.genzhouse.data.remote.model.UserRequest
 import com.application.genzhouse.databinding.ActivitySignupBinding
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
+import com.application.genzhouse.utils.CustomProgressDialog
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.viewmodel.CreateUserViewModel
 import com.google.firebase.FirebaseException
@@ -59,7 +59,7 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        viewModel.createUserResult.observe(this, Observer { result ->
+        viewModel.createUserResult.observe(this) { result ->
             when (result) {
                 is Resource.Success -> {
                     if (result.data.statusCode == 200) {
@@ -74,17 +74,23 @@ class SignupActivity : AppCompatActivity() {
                             .show()
                         progressDialog.dismiss()
                     } else {
-                        sendOtp("${binding.countryCodeButton.text.toString().trim()}${binding.phoneNumberInput.text.toString().trim()}")
+                        sendOtp(
+                            "${
+                                binding.countryCodeButton.text.toString().trim()
+                            }${binding.phoneNumberInput.text.toString().trim()}"
+                        )
                     }
 
                 }
+
                 is Resource.Error -> {
                     progressDialog.dismiss()
                     Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
                 }
+
                 is Resource.Loading -> progressDialog.show()
             }
-        })
+        }
     }
 
 

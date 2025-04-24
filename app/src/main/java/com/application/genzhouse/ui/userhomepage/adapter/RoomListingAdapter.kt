@@ -57,41 +57,41 @@ class RoomListingAdapter(
             holder.stopAutoScroll()
 
             // Basic room info
-            tvRent.text = "₹${room.monthly_rent}/month"
-            tvRoomType.text = room.room_type
+            tvRent.text = "₹${room.monthlyRent}/month"
+            tvRoomType.text = room.roomType
             tvArea.text = "${room.area} sq. ft."
-            tvFurnished.text = room.furnished_type
+            tvFurnished.text = room.furnishedType
             tvLocation.text = room.location
-            tvOwnerName.text = room.owner_name
+            tvOwnerName.text = room.ownerName
 
             // Show/hide featured badge
 //            featuredBadge.visibility = if (room.isFeatured == true) View.VISIBLE else View.GONE
 
             // Setup ViewPager for images
-            if (room.room_images.isNullOrEmpty()) {
+            if (room.roomImages.isEmpty()) {
                 // If no images, show a placeholder
                 val adapter = RoomImageAdapter(listOf("")) // Empty string will show placeholder
                 imageViewPager.adapter = adapter
                 pageIndicator.visibility = View.GONE
             } else {
                 // Set up ViewPager with images
-                val adapter = RoomImageAdapter(room.room_images)
+                val adapter = RoomImageAdapter(room.roomImages)
                 imageViewPager.adapter = adapter
 
                 // Set up page indicator
                 pageIndicator.visibility = View.VISIBLE
-                pageIndicator.text = "1/${room.room_images.size}"
+                pageIndicator.text = "1/${room.roomImages.size}"
 
                 // Auto-scroll every 3 seconds if more than one image
-                if (room.room_images.size > 1) {
-                    holder.setupAutoScroll(imageViewPager, room.room_images.size)
+                if (room.roomImages.size > 1) {
+                    holder.setupAutoScroll(imageViewPager, room.roomImages.size)
                 }
 
                 // Update page indicator when page changes
                 imageViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                     override fun onPageSelected(position: Int) {
                         super.onPageSelected(position)
-                        pageIndicator.text = "${position + 1}/${room.room_images.size}"
+                        pageIndicator.text = "${position + 1}/${room.roomImages.size}"
                     }
                 })
             }

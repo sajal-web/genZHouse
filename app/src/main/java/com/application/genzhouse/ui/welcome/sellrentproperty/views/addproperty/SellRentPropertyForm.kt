@@ -194,7 +194,7 @@ class SellRentPropertyForm : AppCompatActivity() {
         val geocoder = android.location.Geocoder(this, java.util.Locale.getDefault())
         try {
             val addresses = geocoder.getFromLocation(latitude, longitude, 1)
-            if (addresses != null && addresses.isNotEmpty()) {
+            if (!addresses.isNullOrEmpty()) {
                 val cityName = addresses[0].locality
                 activitySellRentPropertyBinding.locationTextView.text = cityName ?: "......"
             }

@@ -7,9 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.application.genzhouse.MyApp
-import com.application.genzhouse.R
 import com.application.genzhouse.databinding.ActivityDeleteRoomBinding
-import com.application.genzhouse.ui.loginregistration.CustomProgressDialog
+import com.application.genzhouse.utils.CustomProgressDialog
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.RoomItem
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.deleteproperty.adapter.RoomAdapter
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.deleteproperty.dataholder.DataHolder
@@ -41,7 +40,7 @@ class DeleteRoomActivity : AppCompatActivity() {
                     progressDialog.show()
                 }
                 is Resource.Success -> {
-                    DataHolder.roomItems = DataHolder.roomItems?.filter { it.id != result.data.deletedRoom.room_id }
+                    DataHolder.roomItems = DataHolder.roomItems?.filter { it.id != result.data.deletedRoom.roomId }
                     initializeRecyclerView()
                     decrementTotalRooms()
                     Toast.makeText(this, result.data.message.toString(), Toast.LENGTH_SHORT).show()
@@ -61,7 +60,7 @@ class DeleteRoomActivity : AppCompatActivity() {
             title = "Delete Rooms"
             setDisplayHomeAsUpEnabled(true)
         }
-        binding.toolbar.setNavigationOnClickListener { onBackPressed() }
+        binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
     }
 
     private fun initializeRecyclerView() {
@@ -116,7 +115,6 @@ class DeleteRoomActivity : AppCompatActivity() {
     }
     private fun getUserDetails(): Pair<Int?, String?> {
         val sharedPreferences = getSharedPreferences("UserProfile", MODE_PRIVATE)
-        val name = sharedPreferences.getString("name", null)
         val phoneNumber = sharedPreferences.getString("phoneNumber", null)
         val userId = sharedPreferences.getInt("user_id",0)
         return Pair(userId,phoneNumber)
