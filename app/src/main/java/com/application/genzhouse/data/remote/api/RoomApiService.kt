@@ -6,12 +6,15 @@ import com.application.genzhouse.data.remote.model.AllRoomListResponse
 import com.application.genzhouse.data.remote.model.DeleteRoomResponse
 import com.application.genzhouse.data.remote.model.RoomListResponse
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.RoomResponse
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.editproperty.EditRoomRequest
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.editproperty.EditRoomResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 interface RoomApiService {
@@ -20,6 +23,13 @@ interface RoomApiService {
         @Header("Authorization") token: String,
         @Body request: AddRoomRequest
     ): Response<AddRoomResponse>
+
+    @PUT("api/editRoom/{roomId}")
+    suspend fun editRoom(
+        @Path("roomId") roomId: Int,
+        @Header("Authorization") token: String,
+        @Body roomData: EditRoomRequest
+    ): Response<EditRoomResponse>
 
     @GET("api/rooms")
     suspend fun getRooms(@Header("Authorization") token: String): Response<AllRoomListResponse>

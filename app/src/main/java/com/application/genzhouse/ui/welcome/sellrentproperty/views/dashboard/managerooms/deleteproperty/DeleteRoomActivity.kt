@@ -40,7 +40,7 @@ class DeleteRoomActivity : AppCompatActivity() {
                     progressDialog.show()
                 }
                 is Resource.Success -> {
-                    DataHolder.roomItems = DataHolder.roomItems?.filter { it.id != result.data.deletedRoom.roomId }
+                    DataHolder.ownerRooms = DataHolder.ownerRooms?.filter { it.id != result.data.deletedRoom.roomId }
                     initializeRecyclerView()
                     decrementTotalRooms()
                     Toast.makeText(this, result.data.message.toString(), Toast.LENGTH_SHORT).show()
@@ -64,7 +64,7 @@ class DeleteRoomActivity : AppCompatActivity() {
     }
 
     private fun initializeRecyclerView() {
-        val roomList = DataHolder.roomItems ?: emptyList()
+        val roomList = DataHolder.ownerRooms ?: emptyList()
         adapter = RoomAdapter(roomList) { room ->
             showDeleteConfirmationDialog(room)
         }

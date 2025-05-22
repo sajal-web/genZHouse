@@ -3,5 +3,5 @@ package com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ma
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.RoomItem
 
 object DataHolder {
-    var roomItems: List<RoomItem>? = null
+    var ownerRooms: List<RoomItem>? = null
 }

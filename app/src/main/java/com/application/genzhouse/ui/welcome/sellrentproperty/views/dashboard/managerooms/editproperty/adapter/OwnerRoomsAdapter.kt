@@ -1,4 +1,4 @@
-package com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.deleteproperty.adapter
+package com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.editproperty.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,10 +9,10 @@ import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.Roo
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 
-class RoomAdapter(
+class OwnerRoomsAdapter(
     private val roomList: List<RoomItem>,
-    private val onDeleteClick: (RoomItem) -> Unit
-) : RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
+    private val onRoomClick: (RoomItem) -> Unit
+) : RecyclerView.Adapter<OwnerRoomsAdapter.RoomViewHolder>() {
 
     inner class RoomViewHolder(private val binding: DeleteRoomItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -28,7 +28,7 @@ class RoomAdapter(
 
             // Set basic info
             binding.tvRoomType.text = room.details.bhk
-            binding.tvRent.text =room.financial.rent.toString()
+            binding.tvRent.text = room.financial.rent.toString()
             binding.tvPropertyType.text = room.details.propertyType
             binding.tvLocation.text = room.details.location
             binding.tvFurnished.text = room.details.furnished
@@ -40,12 +40,15 @@ class RoomAdapter(
             setStatusBackground(room.availability.status, binding.tvActiveStatus)
 
             // Set delete button click
-            binding.btnDelete.setOnClickListener {
-                onDeleteClick(room)
+            binding.roomItem.setOnClickListener {
+                onRoomClick(room)
             }
 
         }
 
+//        private fun formatPrice(amount: Double): String {
+//            return "₹${String.format("%,d", amount)}"
+//        }
 
         private fun setStatusBackground(status: String, chip: Chip) {
             when (status.lowercase()) {

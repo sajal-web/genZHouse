@@ -16,6 +16,7 @@ import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.Own
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
 import com.application.genzhouse.utils.CustomProgressDialog
 import com.application.genzhouse.utils.Resource
+import com.application.genzhouse.utils.getParcelableExtraCompat
 import com.application.genzhouse.viewmodel.CreateUserViewModel
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -72,14 +73,6 @@ class OtpVerificationActivity : AppCompatActivity() {
         }
     }
 
-    private fun <T> Intent.getParcelableExtraCompat(key: String, clazz: Class<T>): T? {
-        return if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            getParcelableExtra(key, clazz)
-        } else {
-            @Suppress("DEPRECATION")
-            getParcelableExtra(key) as? T
-        }
-    }
 
     private fun onClick() {
         activityOtpVerificationBinding.apply {

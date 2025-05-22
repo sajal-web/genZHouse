@@ -214,9 +214,8 @@
                     android:minWidth="0dp"
                     android:minHeight="0dp"
                     android:visibility="visible"
-                    app:icon="@drawable/ic_delete"
-                    app:iconTint="@color/colorError"
-                    app:rippleColor="@color/status_rejected"/>
+                    app:icon="@drawable/ic_edit"
+                    app:rippleColor="@color/status_confirmed"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

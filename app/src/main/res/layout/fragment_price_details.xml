@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.welcome.sellrentproperty.views.dashboard.managerooms.editproperty.fragments.PriceDetailsFragment">
+
+        <!-- Toolbar -->
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:navigationIcon="@drawable/arrow_back"
+            app:title="Price Details"
+            app:titleTextColor="@android:color/white"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:layout_constraintTop_toTopOf="parent" >
+
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+        <!-- Main Content Card -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/mainCardView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardElevation="4dp"
+            app:cardCornerRadius="16dp"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintBottom_toTopOf="@id/btnUpdateProperty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Monthly Rent -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monthly Rent"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/monthlyRentEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter monthly rent"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!-- Available From -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Available From"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/availableFromLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/availableFromEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Select date"
+                        android:inputType="none"
+                        android:focusable="false"
+                        android:longClickable="false"
+                        android:drawableEnd="@drawable/ic_calender"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <!-- Security Deposit -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="Security Deposit"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:useDefaultMargins="true"
+                    android:columnCount="2"
+                    android:rowCount="2">
+
+                    <!-- None -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/noneDepositCard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        app:cardCornerRadius="8dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        app:strokeWidth="0dp"
+                        app:cardElevation="0dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:gravity="center"
+                            android:text="None"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"/>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 1 Month -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/oneMonthDepositCard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        app:cardCornerRadius="8dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        app:strokeWidth="0dp"
+                        app:cardElevation="0dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:gravity="center"
+                            android:text="1 Month"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"/>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- 2 Months -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/towMonthDepositCard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        app:cardCornerRadius="8dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        app:strokeWidth="0dp"
+                        app:cardElevation="0dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:gravity="center"
+                            android:text="2 Months"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"/>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Custom -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/customDepositCard"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_rowWeight="1"
+                        app:cardCornerRadius="8dp"
+                        android:backgroundTint="@color/colorSecondary"
+                        android:background="@drawable/card_selected_background"
+                        app:strokeWidth="0dp"
+                        app:cardElevation="0dp"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp"
+                            android:gravity="center"
+                            android:text="Custom"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"/>
+                    </com.google.android.material.card.MaterialCardView>
+                </GridLayout>
+
+                <!-- Custom Deposit Amount (Initially Hidden) -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/customAmountEdittext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="8dp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/customRent"
+                        android:hint="Enter custom amount"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Post Property Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUpdateProperty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Post Property"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            app:cornerRadius="8dp"
+            app:backgroundTint="?attr/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

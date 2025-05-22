@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.application.genzhouse.R
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.uploadphotos.UploadProperty
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.editproperty.fragments.UploadPhotoFragment
 
 class PhotoAdapter(
     private val context: Context,
-    private val photos: MutableList<Uri>
+    private val photos: MutableList<Uri>,
+    private val listener: OnAddPhotoClickListener
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -39,14 +41,12 @@ class PhotoAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder) {
             is AddMoreViewHolder -> {
-                // Handle "Add More" button click
                 holder.itemView.setOnClickListener {
-                    // Open gallery or camera to add a photo
-                    (context as? UploadProperty)?.openImagePicker()
+                    listener.onAddPhotoClicked()
                 }
             }
             is PhotoViewHolder -> {
-                val photoUri = photos[position - 1] // Adjust position for "Add More" button
+                val photoUri = photos[position - 1] // Adjusted for "Add More"
                 holder.bind(photoUri)
             }
         }
@@ -81,4 +81,8 @@ class PhotoAdapter(
             }
         }
     }
+}
+
+interface OnAddPhotoClickListener {
+    fun onAddPhotoClicked()
 }

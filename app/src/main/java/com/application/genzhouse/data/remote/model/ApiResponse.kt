@@ -4,9 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 // Add Room Request model
 data class AddRoomRequest(
-    @SerializedName("userId") val userId: Int,
-    @SerializedName("ownerName") val ownerName: String,
-    @SerializedName("ownerMobile") val ownerMobile: String,
+    @SerializedName("user_id") val userId: Int,
+    @SerializedName("owner_name") val ownerName: String,
+    @SerializedName("owner_mobile") val ownerMobile: String,
     @SerializedName("room_type") val roomType: String,
     @SerializedName("location") val location: String,
     @SerializedName("property_type") val propertyType: String,
@@ -80,8 +80,8 @@ data class Counts(
 
 // 1.All Room Data Models
 data class AllRoomListResponse(
-    @SerializedName("room_type") val success: Boolean,
-    @SerializedName("room_type") val data: List<Room>
+    @SerializedName("success") val success: Boolean,
+    @SerializedName("data") val data: List<Room>
 )
 
 data class Room(

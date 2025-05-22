@@ -13,6 +13,7 @@ import com.application.genzhouse.utils.CustomProgressDialog
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.SellRentPropertyForm
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.deleteproperty.DeleteRoomActivity
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.deleteproperty.dataholder.DataHolder
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.editproperty.EditPropertyActivity
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ownerlistings.OwnerListing
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.ownerprofile.ProfileActivity
 import com.application.genzhouse.utils.Resource
@@ -66,7 +67,7 @@ class OwnerDashBoard : AppCompatActivity() {
                     binding.totalRoomsValue.text = result.data.counts.totalRooms.toString()
                     binding.bookedRoomsValue.text = result.data.counts.bookedRooms.toString()
                     binding.activeRoomsValue.text = result.data.counts.activeRooms.toString()
-                    DataHolder.roomItems = result.data.rooms.all
+                    DataHolder.ownerRooms = result.data.rooms.all
                     progressDialog.dismiss()
                 }
                 is Resource.Error -> {
@@ -102,6 +103,10 @@ class OwnerDashBoard : AppCompatActivity() {
 
             deleteRoomCard.setOnClickListener {
                 startActivity(Intent(this@OwnerDashBoard, DeleteRoomActivity::class.java))
+            }
+
+            editRoomCard.setOnClickListener {
+                startActivity(Intent(this@OwnerDashBoard, EditPropertyActivity::class.java))
             }
 
         }

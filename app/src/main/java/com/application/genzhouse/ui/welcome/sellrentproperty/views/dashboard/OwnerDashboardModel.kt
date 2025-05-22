@@ -62,8 +62,8 @@ data class RoomDetails(
 
 @Parcelize
 data class RoomFinancial(
-    val rent: Int,
-    val deposit: Int
+    val rent: Double,
+    val deposit: Double
 ) : Parcelable
 
 @Parcelize

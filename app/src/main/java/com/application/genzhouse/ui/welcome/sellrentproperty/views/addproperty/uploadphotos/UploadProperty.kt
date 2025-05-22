@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.application.genzhouse.data.remote.model.AddRoomRequest
 import com.application.genzhouse.databinding.ActivityUploadPropertyBinding
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.uploadphotos.adapter.OnAddPhotoClickListener
 import com.application.genzhouse.utils.CustomProgressDialog
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.addproperty.uploadphotos.adapter.PhotoAdapter
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.OwnerDashBoard
@@ -25,7 +26,7 @@ import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 
-class UploadProperty : AppCompatActivity() {
+class UploadProperty : AppCompatActivity(), OnAddPhotoClickListener {
     private lateinit var photosGridRecyclerView: RecyclerView
     private lateinit var progressDialog: CustomProgressDialog
     private lateinit var viewModel: AddRoomViewModel
@@ -43,7 +44,7 @@ class UploadProperty : AppCompatActivity() {
         progressDialog = CustomProgressDialog(this)
         viewModel = ViewModelProvider(this)[AddRoomViewModel::class.java]
         // Initialize RecyclerView
-        photoAdapter = PhotoAdapter(this, photos)
+        photoAdapter = PhotoAdapter(this, photos,this)
         binding.photosGridRecyclerView.adapter = photoAdapter
         // Observe results
         viewModel.addRoomResult.observe(this) { result ->
@@ -80,6 +81,9 @@ class UploadProperty : AppCompatActivity() {
         binding.toolbar.setNavigationOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
+    }
+    override fun onAddPhotoClicked() {
+        openImagePicker()
     }
 
     private fun initOnClick() {

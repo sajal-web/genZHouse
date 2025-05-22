@@ -1,20 +1,21 @@
-package com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.deleteproperty.adapter
+package com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.editproperty.adapter
+
+import com.application.genzhouse.databinding.EditRoomItemBinding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.application.genzhouse.R
-import com.application.genzhouse.databinding.DeleteRoomItemBinding
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.RoomItem
 import com.bumptech.glide.Glide
 import com.google.android.material.chip.Chip
 
-class RoomAdapter(
+class EditRoomAdapter(
     private val roomList: List<RoomItem>,
-    private val onDeleteClick: (RoomItem) -> Unit
-) : RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
+    private val onRoomClick: (RoomItem) -> Unit
+) : RecyclerView.Adapter<EditRoomAdapter.RoomViewHolder>() {
 
-    inner class RoomViewHolder(private val binding: DeleteRoomItemBinding) :
+    inner class RoomViewHolder(private val binding: EditRoomItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(room: RoomItem) {
@@ -28,7 +29,7 @@ class RoomAdapter(
 
             // Set basic info
             binding.tvRoomType.text = room.details.bhk
-            binding.tvRent.text =room.financial.rent.toString()
+            binding.tvRent.text = room.financial.rent.toString()
             binding.tvPropertyType.text = room.details.propertyType
             binding.tvLocation.text = room.details.location
             binding.tvFurnished.text = room.details.furnished
@@ -40,12 +41,15 @@ class RoomAdapter(
             setStatusBackground(room.availability.status, binding.tvActiveStatus)
 
             // Set delete button click
-            binding.btnDelete.setOnClickListener {
-                onDeleteClick(room)
+            binding.roomItem.setOnClickListener {
+                onRoomClick(room)
             }
 
         }
 
+//        private fun formatPrice(amount: Double): String {
+//            return "₹${String.format("%,d", amount)}"
+//        }
 
         private fun setStatusBackground(status: String, chip: Chip) {
             when (status.lowercase()) {
@@ -58,7 +62,7 @@ class RoomAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
-        val binding = DeleteRoomItemBinding.inflate(
+        val binding = EditRoomItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

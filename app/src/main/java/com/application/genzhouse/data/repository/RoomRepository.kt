@@ -3,6 +3,8 @@ package com.application.genzhouse.data.repository
 import com.application.genzhouse.data.remote.api.RetrofitClient
 import com.application.genzhouse.data.remote.model.*
 import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.RoomData
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.editproperty.EditRoomRequest
+import com.application.genzhouse.ui.welcome.sellrentproperty.views.dashboard.managerooms.editproperty.EditRoomResponse
 import com.application.genzhouse.utils.Resource
 import com.application.genzhouse.utils.safeApiCall
 
@@ -14,6 +16,18 @@ class RoomRepository {
             apiService.addRoom("Bearer $token", request)
         }.let { result ->
             when (result) {
+                is Resource.Success -> Resource.Success(result.data)
+                is Resource.Error -> result
+                Resource.Loading -> Resource.Loading
+            }
+        }
+    }
+
+    suspend fun editRoom(roomId: Int,token: String, request: EditRoomRequest) : Resource<EditRoomResponse> {
+        return safeApiCall {
+            apiService.editRoom(roomId,"Bearer $token",request)
+        }.let { result ->
+            when(result) {
                 is Resource.Success -> Resource.Success(result.data)
                 is Resource.Error -> result
                 Resource.Loading -> Resource.Loading
